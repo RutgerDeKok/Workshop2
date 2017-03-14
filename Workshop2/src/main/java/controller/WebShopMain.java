@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.Expression;
+
 
 import Model.Adress;
 import Model.Cart;
@@ -13,6 +15,7 @@ import Model.ProductCategory;
 import Model.SubOrder;
 import Model.UserAccount;
 import Model.UserType;
+import Model.Sale;
 
 
 public class WebShopMain {
@@ -84,6 +87,23 @@ public class WebShopMain {
 		cart2.addSubOrder(subOrder3);
 		cart2.setDeliveryAdress(factAdress);
 		
+		Sale order1 = new Sale() {
+			
+			public Sale reverse() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			public boolean isAscending() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			public Expression<?> getExpression() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+		};
 		
 		
 // Start Entity Manager		
