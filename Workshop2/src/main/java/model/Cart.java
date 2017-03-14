@@ -1,6 +1,5 @@
-package main.java.Model;
+package main.java.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,26 +8,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+
 @Entity
-public class Sale {
+public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@ManyToOne
+	@OneToOne
 	private UserAccount user;
 	@OneToOne
 	private Adress deliveryAdress;
 	@OneToMany
-	@JoinColumn(name = "Sale_id")
+	@JoinColumn(name = "cart_id")
 	private List<SubOrder> subOrders = new ArrayList<SubOrder>();
-	private LocalDate saledate;
+
+	public Cart() {
+	}
 	
-	public Sale(){
+	//GETTERS AND SETTERS
+	
+
+	public UserAccount getUser() {
+		return user;
 	}
 
 	public long getId() {
@@ -37,10 +42,6 @@ public class Sale {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public UserAccount getUser() {
-		return user;
 	}
 
 	public void setUser(UserAccount user) {
@@ -55,21 +56,13 @@ public class Sale {
 		this.deliveryAdress = deliveryAdress;
 	}
 
-	public List<SubOrder> getSubOrders() {
-		return subOrders;
-	}
-
 	public void addSubOrder(SubOrder subOrder) {
 		subOrders.add(subOrder);
 	}
 
-	public LocalDate getSaledate() {
-		return saledate;
-	}
-
-	public void setSaledate(LocalDate saledate) {
-		this.saledate = saledate;
+	public void setSubOrders(List<SubOrder> subOrders) {
+		this.subOrders = subOrders;
 	}
 	
-
+	
 }
