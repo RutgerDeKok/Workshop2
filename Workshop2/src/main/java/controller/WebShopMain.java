@@ -143,7 +143,9 @@ public class WebShopMain {
 				// Close manager and factory
 				em.close();
 				emFactory.close();
-
+                                
+                                
+             System.exit(0);
 	}
 
 }
