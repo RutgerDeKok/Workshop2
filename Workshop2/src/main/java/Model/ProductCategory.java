@@ -1,4 +1,4 @@
-package Model;
+package main.java.Model;
 
 public enum ProductCategory {
 	MEDIUM_HARD, SOFT_MOLD, BLUE, CREAM, GOAT;

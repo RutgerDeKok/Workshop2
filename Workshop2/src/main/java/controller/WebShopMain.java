@@ -1,4 +1,4 @@
-package controller;
+package main.java.controller;
 
 import java.math.BigDecimal;
 
@@ -8,14 +8,14 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.Expression;
 
 
-import Model.Adress;
-import Model.Cart;
-import Model.Product;
-import Model.ProductCategory;
-import Model.SubOrder;
-import Model.UserAccount;
-import Model.UserType;
-import Model.Sale;
+import main.java.Model.Adress;
+import main.java.Model.Cart;
+import main.java.Model.Product;
+import main.java.Model.ProductCategory;
+import main.java.Model.SubOrder;
+import main.java.Model.UserAccount;
+import main.java.Model.UserType;
+import main.java.Model.Sale;
 
 
 public class WebShopMain {
@@ -50,12 +50,12 @@ public class WebShopMain {
 		}
 		
 		UserAccount user2 = new UserAccount();
-		user1.setEmail("efg@rsvier.com");
-		user1.setUserType(UserType.EMPLOYEE);
-		user1.setBillingAdress(factAdress);
-		char[] pass1 = {1,1,1,1};
+		user2.setEmail("efg@rsvier.com");
+		user2.setUserType(UserType.EMPLOYEE);
+		user2.setBillingAdress(factAdress);
+		char[] pass1 = {2,2,2,2};
 		try {
-			user1.setPassHash(Password.getSaltedHash(pass1));
+			user2.setPassHash(Password.getSaltedHash(pass1));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
