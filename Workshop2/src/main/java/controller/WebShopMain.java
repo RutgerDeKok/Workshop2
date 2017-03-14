@@ -2,12 +2,11 @@ package main.java.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Month;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.Expression;
 
 import main.java.model.Adress;
 import main.java.model.Cart;
@@ -143,8 +142,6 @@ public class WebShopMain {
 				// Close manager and factory
 				em.close();
 				emFactory.close();
-                                
-                                
              System.exit(0);
 	}
 
