@@ -16,13 +16,17 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@Column(length = 50, nullable = false)
 	private String name;
+	@Column(length = 50)
 	private String brand;
-	@Column(name = "category")
+	@Column(name = "category",length = 50,nullable = false)
 	@Enumerated(EnumType.STRING) // komt in de tabel als string, alternatief is ORDINAL, komt als index (int)
 	private ProductCategory Category;  //Enum
 	private String info;
+	@Column(length = 10,nullable = false)
 	private BigDecimal price;
+	@Column(length = 10,nullable = false)
 	private int stockCount;
 	
 	public Product(){

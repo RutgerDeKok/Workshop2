@@ -36,6 +36,8 @@ public class WebShopMain {
 
 				Adress factAdress = new Adress();
 				factAdress.setFirstName("Piet");
+				factAdress.setInsertion("de");
+				factAdress.setFamilyName("Boer");
 				factAdress.setCity("Stremselgat");
 				factAdress.setStreet("Kaasweg");
 				factAdress.setNumber(12);
@@ -84,17 +86,20 @@ public class WebShopMain {
 				cart1.addSubOrder(subOrder1);
 				cart1.addSubOrder(subOrder2);
 				cart1.setDeliveryAdress(factAdress);
+				cart1.setTotalPrice(new BigDecimal("99.99"));
 
 				Cart cart2 = new Cart();
 				cart2.setUser(user2);
 				cart2.addSubOrder(subOrder3);
 				cart2.setDeliveryAdress(factAdress);
+				cart2.setTotalPrice(new BigDecimal("99.99"));
 
 				Sale order1 = new Sale();
 				order1.setUser(user2);
 				order1.addSubOrder(subOrder3);
 				order1.setDeliveryAdress(factAdress);
 				order1.setSaledate(LocalDate.now());
+				order1.setTotalPrice(new BigDecimal("99.99"));
 				
 				Sale order2 = new Sale();
 				order2.setUser(user2);
@@ -102,6 +107,7 @@ public class WebShopMain {
 				order2.addSubOrder(subOrder2);
 				order2.setDeliveryAdress(factAdress);
 				order2.setSaledate(LocalDate.now());
+				order2.setTotalPrice(new BigDecimal("99.99"));
 
 				// Start Entity Manager
 

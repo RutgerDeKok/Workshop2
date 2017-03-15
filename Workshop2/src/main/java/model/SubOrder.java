@@ -18,7 +18,7 @@ public class SubOrder {
 	@OneToOne
 	private Product product;
 	private int Quantity;
-	private BigDecimal totalPrice;
+	private BigDecimal totalSubPrice;
 	
 	
 	
@@ -52,11 +52,11 @@ public class SubOrder {
 	}
 
 	public BigDecimal getTotalPrice() {
-		return totalPrice;
+		return totalSubPrice;
 	}
 
 	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+		this.totalSubPrice = totalPrice;
 	}
 
 

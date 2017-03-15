@@ -1,5 +1,6 @@
 package main.java.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,13 +13,21 @@ public class Adress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	@Column(length = 50, nullable = false)
 	private String firstName;
+	@Column(length = 50)
 	private String insertion;
+	@Column(length = 10, nullable = false)
 	private String familyName;
+	@Column(length = 50, nullable = false)
 	private String street;
+	@Column(length = 5)
 	private int number;
+	@Column(length = 10)
 	private String numAddition;
+	@Column(length = 10)
 	private String zipCode;
+	@Column(length = 50, nullable = false)
 	private String city;
 
 	public Adress(){
