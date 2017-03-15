@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -8,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import main.java.daos.GenericDao;
+import main.java.daos.GenericDaoJpaImpl;
 import main.java.model.Adress;
 import main.java.model.Cart;
 import main.java.model.Product;
@@ -108,6 +111,9 @@ public class WebShopMain {
 				order2.setDeliveryAdress(factAdress);
 				order2.setSaledate(LocalDate.now());
 				order2.setTotalPrice(new BigDecimal("99.99"));
+				
+				
+				
 
 				// Start Entity Manager
 
@@ -118,6 +124,12 @@ public class WebShopMain {
 																									// !
 
 				EntityManager em = emFactory.createEntityManager();
+				
+// create concrete Dao
+				
+				GenericDao<UserAccount, Long> userDao = new GenericDaoJpaImpl<UserAccount, Long>(UserAccount.class, em);
+				
+				
 
 				// Persist Objects
 
@@ -134,8 +146,11 @@ public class WebShopMain {
 				em.persist(order1);
 				em.persist(order2);
 				em.getTransaction().commit();
-
 				em.clear();
+				
+				userDao.delete(user2);
+				System.out.println(userDao.read(1L).getBillingAdress().getFamilyName());
+					
 
 				// Some test operations
 
