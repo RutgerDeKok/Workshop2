@@ -2,27 +2,32 @@ package main.java.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 @Entity
-public class SubOrder {
+@Table(name = "cart_suborders")
+public class CartSubOrder {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@OneToOne
 	private Product product;
+	@Column(length = 10, nullable = false)
 	private int Quantity;
-	private BigDecimal totalSubPrice;
+	@Column(length = 10, nullable = false)
+	private BigDecimal subTotal;
 	
 	
 	
-	public SubOrder(){
+	public CartSubOrder(){
 	}
 	
 	//GETTERS AND SETTERS
@@ -52,11 +57,11 @@ public class SubOrder {
 	}
 
 	public BigDecimal getTotalPrice() {
-		return totalSubPrice;
+		return subTotal;
 	}
 
 	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalSubPrice = totalPrice;
+		this.subTotal = totalPrice;
 	}
 
 

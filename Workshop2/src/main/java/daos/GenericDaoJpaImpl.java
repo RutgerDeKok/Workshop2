@@ -22,19 +22,6 @@ public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao
 	    }
 
 
-//	@SuppressWarnings("unchecked")
-//	public GenericDaoJpaImpl() {
-//		
-////		ParameterizedType genericSuperclass =  (ParameterizedType) getClass().getGenericSuperclass();
-////		this.entityClass = (Class<T>) genericSuperclass.getActualTypeArguments()[0];
-//		
-//		Type sooper = T.getClass();
-//		System.out.println(sooper);
-//		this.entityClass = (Class<T>)((ParameterizedType) sooper).getActualTypeArguments()[ 0 ];
-//		
-////		Type mySuperclass = myFoo.getClass().getGenericSuperclass();
-////		Type tType = ((ParameterizedType)mySuperclass).getActualTypeArguments()[0];
-//	}
 	
 	public T create(T t) {
 		this.entityManager.persist(t);

@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name = "carts")
 public class Cart {
 	
 	@Id
@@ -26,7 +28,7 @@ public class Cart {
 	private Adress deliveryAdress;
 	@OneToMany
 	@JoinColumn(name = "cart_id")
-	private List<SubOrder> subOrders = new ArrayList<SubOrder>();
+	private List<CartSubOrder> subOrders = new ArrayList<CartSubOrder>();
 	@Column(length = 10, nullable = false)
 	private BigDecimal totalPrice;
 
@@ -60,11 +62,11 @@ public class Cart {
 		this.deliveryAdress = deliveryAdress;
 	}
 
-	public void addSubOrder(SubOrder subOrder) {
+	public void addSubOrder(CartSubOrder subOrder) {
 		subOrders.add(subOrder);
 	}
 
-	public void setSubOrders(List<SubOrder> subOrders) {
+	public void setSubOrders(List<CartSubOrder> subOrders) {
 		this.subOrders = subOrders;
 	}
 

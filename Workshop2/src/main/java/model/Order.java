@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,29 +13,61 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-import org.hibernate.engine.internal.NonNullableTransientDependencies;
 
 @Entity
-public class Sale {
+@Table(name = "orders")
+public class Order {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@ManyToOne
 	private UserAccount user;
-	@OneToOne
-	private Adress deliveryAdress;
 	@OneToMany
-	@JoinColumn(name = "Sale_id")
-	private List<SubOrder> subOrders = new ArrayList<SubOrder>();
-	private LocalDate saledate;
+	@JoinColumn(name = "order_id")
+	private List<FinalSubOrder> subOrders = new ArrayList<FinalSubOrder>();
+	private LocalDate orderDate;
 	@Column(length = 10, nullable = false)
 	private BigDecimal totalPrice;
 	
-	public Sale(){
+	// adress fields
+	private String firstName;
+	@Column(length = 50)
+	private String insertion;
+	@Column(length = 10, nullable = false)
+	private String familyName;
+	@Column(length = 50, nullable = false)
+	private String street;
+	@Column(length = 5)
+	private int number;
+	@Column(length = 10)
+	private String numAddition;
+	@Column(length = 10)
+	private String zipCode;
+	@Column(length = 50, nullable = false)
+	private String city;
+	
+	
+	
+	
+	public Order(){
 	}
+	
+	public void setDeliveryAdress(Adress adress){
+		
+		firstName = adress.getFirstName();
+		insertion = adress.getInsertion();
+		familyName = adress.getFamilyName();
+		street = adress.getStreet();
+		number = adress.getNumber();
+		numAddition = adress.getNumAddition();
+		zipCode = adress.getZipCode();
+		city =  adress.getCity();
+		
+	}
+	
 
 	public long getId() {
 		return id;
@@ -54,28 +85,20 @@ public class Sale {
 		this.user = user;
 	}
 
-	public Adress getDeliveryAdress() {
-		return deliveryAdress;
-	}
-
-	public void setDeliveryAdress(Adress deliveryAdress) {
-		this.deliveryAdress = deliveryAdress;
-	}
-
-	public List<SubOrder> getSubOrders() {
+	public List<FinalSubOrder> getSubOrders() {
 		return subOrders;
 	}
 
-	public void addSubOrder(SubOrder subOrder) {
+	public void addSubOrder(FinalSubOrder subOrder) {
 		subOrders.add(subOrder);
 	}
 
 	public LocalDate getSaledate() {
-		return saledate;
+		return orderDate;
 	}
 
 	public void setSaledate(LocalDate saledate) {
-		this.saledate = saledate;
+		this.orderDate = saledate;
 	}
 	
 	public BigDecimal getTotalPrice() {
