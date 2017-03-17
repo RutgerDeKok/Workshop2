@@ -24,15 +24,19 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@ManyToOne
-	private UserAccount user;
+	private /* @Jurjen final */ UserAccount user;
 	@OneToMany
 	@JoinColumn(name = "order_id")
-	private List<FinalSubOrder> subOrders = new ArrayList<FinalSubOrder>();
-	private LocalDate orderDate;
+	private /* @Jurjen final */ List<FinalSubOrder> subOrders = new ArrayList<>();
+	private /* @Jurjen final */ LocalDate orderDate;
 	@Column(length = 10, nullable = false)
-	private BigDecimal totalPrice;
+	private /* @Jurjen final */ BigDecimal totalPrice;
 	
 	// adress fields
+        /* @Jurjen
+        Is dit niet makkelijker op te lossen door:
+        final Adress adress;
+        */
 	private String firstName;
 	@Column(length = 50)
 	private String insertion;
@@ -49,9 +53,6 @@ public class Order {
 	@Column(length = 50, nullable = false)
 	private String city;
 	
-	
-	
-	
 	public Order(){
 	}
 	
@@ -65,6 +66,11 @@ public class Order {
 		numAddition = adress.getNumAddition();
 		zipCode = adress.getZipCode();
 		city =  adress.getCity();
+                
+                /* @Jurjen
+                dit zou dan worden:
+                this.Adress = adress;
+                */
 		
 	}
 	
@@ -73,7 +79,10 @@ public class Order {
 		return id;
 	}
 
-	public void setId(long id) {
+	/* @Jurjen
+        Overbodig, doet Hibernate al
+        */
+        public void setId(long id) {
 		this.id = id;
 	}
 
@@ -88,6 +97,13 @@ public class Order {
 	public List<FinalSubOrder> getSubOrders() {
 		return subOrders;
 	}
+        
+        /* @Jurjen
+        ipv addSubOrder de functie om SubOrders toe te voegen.
+        Je hoeft toch niet de SubOrders 1 voor 1 toe te voegen aan de final Order?
+        public void addSubOrders(List<FinalSubOrder> subOrders){
+            this.subOrders = subOrders;
+        */
 
 	public void addSubOrder(FinalSubOrder subOrder) {
 		subOrders.add(subOrder);
@@ -96,7 +112,12 @@ public class Order {
 	public LocalDate getSaledate() {
 		return orderDate;
 	}
-
+        
+        /* @Jurjen
+        volgens mij is setSaleDate niet nodig omdat je niet wilt dat het nog veranderd kan worden
+        Maar ik weet niet zeker of een final field + setter kan.
+        Anders zou de datum in de constructor worden meegegeven (of Spring injectie?)
+        */
 	public void setSaledate(LocalDate saledate) {
 		this.orderDate = saledate;
 	}
@@ -104,7 +125,10 @@ public class Order {
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
-
+        
+        /* @Jurjen
+        Niet nodig, totaalprijs kan berekend of doorgegeven worden ipv handmatige setTotalPrice
+        */
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}

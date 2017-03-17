@@ -9,16 +9,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Adresses")
-public class Adress {
-	// dit is een comment
+public class Adress /* @Jurjen implements Serializable */{
+	// dit is een comment /* @Jurjen: en kan dus weg? */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long id; 
+        /* @Jurjen misschien een idee om alle id's de Wrapperclass Long te geven, 
+        zodat het makkelijker te gebruiken is bij de genericDAO? 
+        Of zou casten voor gebruik van de DAO makkelijker zijn? */
 	@Column(length = 50, nullable = false)
 	private String firstName;
 	@Column(length = 50)
-	private String insertion;
+	private String insertion; 
+        /* @Jurjen misschien insertion scharen onder familyName, 
+        bijv: "van der Plas" ? Dan hoef je ook niet moeilijk te doen met kijken of een naam 
+        een tussenvoegsel bevat bij het printen */
 	@Column(length = 10, nullable = false)
 	private String familyName;
 	@Column(length = 50, nullable = false)
@@ -35,18 +41,18 @@ public class Adress {
 	public Adress(){
 	}
 	
-
-	public long getId() {
+        public long getId() {
 		return id;
 	}
-
-
-	public void setId(long id) {
+        
+        /* @Jurjen
+        Overbodig, doet Hibernate al
+        */
+        public void setId(long id) {
 		this.id = id;
 	}
 
-
-	public String getFirstName() {
+        public String getFirstName() {
 		return firstName;
 	}
 
@@ -109,7 +115,6 @@ public class Adress {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
-	
+
 }
 

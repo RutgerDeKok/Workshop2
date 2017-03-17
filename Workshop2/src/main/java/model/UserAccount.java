@@ -29,16 +29,14 @@ public class UserAccount {
 	public UserAccount() {
 	}
 	
-
-	//GETTERS AND SETTERS
-
-
-	public long getId() {
+        public long getId() {
 		return id;
 	}
-
-
-	public void setId(long id) {
+        
+        /* @Jurjen
+        Overbodig, doet Hibernate al
+        */
+        public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -46,11 +44,14 @@ public class UserAccount {
 		return email;
 	}
 
-
-	public void setEmail(String email) {
+        public void setEmail(String email) {
 		this.email = email;
 	}
 
+        /* @Jurjen
+        get en set PassHash: vraag me af of dit nodig is
+        wordt toch afgehandeld door PassHasher.java?
+        */
 	public String getPassHash() {
 		return passHash;
 	}
@@ -62,7 +63,11 @@ public class UserAccount {
 	public UserType getUserType() {
 		return UserType;
 	}
-
+        
+        /* @Jurjen
+        deze functie misschien alleen door Admin te laten doen
+        bijv: class Admin extends UserAccount
+        */
 	public void setUserType(UserType userType) {
 		UserType = userType;
 	}

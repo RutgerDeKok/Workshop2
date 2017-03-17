@@ -21,22 +21,27 @@ public class CartSubOrder {
 	@OneToOne
 	private Product product;
 	@Column(length = 10, nullable = false)
-	private int Quantity;
+	private int quantity;
 	@Column(length = 10, nullable = false)
 	private BigDecimal subTotal;
-	
-	
+        /* @Jurjen
+        CartSubOrder heeft een referentie naar Cart nodig toch?
+        @OneToOne
+        @Column(name = "cart_id", nullable = false)
+        private Cart cart;
+        */
 	
 	public CartSubOrder(){
 	}
-	
-	//GETTERS AND SETTERS
 	
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	/* @Jurjen
+        Overbodig, doet Hibernate al
+        */
+        public void setId(long id) {
 		this.id = id;
 	}
 	
@@ -49,20 +54,31 @@ public class CartSubOrder {
 	}
 
 	public int getQuantity() {
-		return Quantity;
+		return quantity;
 	}
 
 	public void setQuantity(int quantity) {
-		Quantity = quantity;
+		this.quantity = quantity;
 	}
 
 	public BigDecimal getTotalPrice() {
 		return subTotal;
 	}
 
-	public void setTotalPrice(BigDecimal totalPrice) {
+        /* @Jurjen
+        Volgens mij is setTotalPrice niet nodig, maar kan het beter vervangen
+        worden door een functie die de totaalprijs berekent
+        */
+	public void setTotalPrice(BigDecimal totalPrice) { /* @Jurjen setSubTotal(BigDecimal subTotal) */
 		this.subTotal = totalPrice;
 	}
+        
+        /* @Jurjen
+        Functie om suborder aan cart toe te voegen
+        public void addToCart() {
+            Cart.addSubOrder(this);
+        }
+        */
 
 
 }

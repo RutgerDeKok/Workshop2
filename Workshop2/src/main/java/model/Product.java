@@ -24,26 +24,27 @@ public class Product {
 	private String brand;
 	@Column(name = "category",length = 50,nullable = false)
 	@Enumerated(EnumType.STRING) // komt in de tabel als string, alternatief is ORDINAL, komt als index (int)
-	private ProductCategory Category;  //Enum
-	private String info;
+	private ProductCategory category;  //Enum
+	private String info; /* @Jurjen wat voor info? */
 	@Column(length = 10,nullable = false)
 	private BigDecimal price;
 	@Column(length = 10,nullable = false)
 	private int stockCount;
+        
 	
 	public Product(){
 	}
-
 	
 	public long getId() {
 		return id;
 	}
 
-
+        /* @Jurjen
+        Overbodig, doet Hibernate al
+        */
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
@@ -62,11 +63,11 @@ public class Product {
 	}
 
 	public ProductCategory getCategory() {
-		return Category;
+		return category;
 	}
 
 	public void setCategory(ProductCategory category) {
-		Category = category;
+		this.category = category;
 	}
 
 	public String getInfo() {
@@ -93,5 +94,4 @@ public class Product {
 		this.stockCount = stockCount;
 	}
 
-	
 }
