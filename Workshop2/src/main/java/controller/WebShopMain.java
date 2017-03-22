@@ -140,6 +140,7 @@ public class WebShopMain {
 		em.persist(finalSub3);
 		em.persist(user1);
 		em.persist(user2);
+		
 		em.persist(cart1);
 		em.persist(cart2);
 		em.persist(order1);
@@ -151,7 +152,9 @@ public class WebShopMain {
 		System.out.println(userDao.read(1L).getBillingAdress().getFamilyName());
 
 		// Some test operations
-
+		
+		UserAccount ua= em.find(UserAccount.class, 1L);
+		System.out.println(ua.getEmail());
 		// Baas zoekBaas = em.find(Baas.class, 2L);
 		// Hond dbHond = em.find(Hond.class, 2L); //find(Class<Hond>
 		// entityClass, Object primaryKey)

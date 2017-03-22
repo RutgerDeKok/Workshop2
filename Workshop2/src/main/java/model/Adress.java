@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Adresses")
 public class Adress /* @Jurjen implements Serializable */{
-	// dit is een comment /* @Jurjen: en kan dus weg? */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
