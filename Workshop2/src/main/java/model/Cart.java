@@ -28,12 +28,9 @@ public class Cart {
 	private Adress deliveryAdress;
 	@OneToMany
 	@JoinColumn(name = "cart_id")
-	private List<CartSubOrder> subOrders = new ArrayList<>(); /* @Jurjen diamond operator gebruikt en project source naar 1.8 geupdate */
+	private List<CartSubOrder> subOrders = new ArrayList<>();
 	@Column(length = 10, nullable = false)
 	private BigDecimal totalPrice;
-        /* @Jurjen willen we dat je in Cart de hoeveelheid nog aan kan passen?
-        Zo ja, misschien Map gebruiken met (subOrder, hoeveelheid)
-        */
 
 	public Cart() {
 	}
