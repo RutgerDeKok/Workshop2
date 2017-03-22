@@ -690,7 +690,7 @@ public class TextIO {
         	i++;
             ch = readChar();
         }
-        char[] returnArray = new char[i-1];
+        char[] returnArray = new char[i];
         for(int  j=0; j<returnArray.length;j++){
         	returnArray[j]=tempCharArray[j];
         }
