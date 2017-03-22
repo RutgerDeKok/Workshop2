@@ -681,6 +681,22 @@ public class TextIO {
         return s.toString();
     }
     
+    public static char[] getlnChars() {
+    	char[] tempCharArray = new char[20];
+        char ch = readChar();
+        int i=0;
+        while (ch != '\n') {
+        	tempCharArray[i]=ch;
+        	i++;
+            ch = readChar();
+        }
+        char[] returnArray = new char[i-1];
+        for(int  j=0; j<returnArray.length;j++){
+        	returnArray[j]=tempCharArray[j];
+        }
+        return returnArray;
+    }
+    
     /**
      * Skips whitespace characters and then reads a value of type byte from input.  Any additional characters on
      * the current line of input are retained, and will be read by the next input operation.  When using standard IO,
