@@ -1,5 +1,5 @@
-package main.java.model;
+package main.java.service;
 
-public class dummy {
+public class dummy3 {
 
 }

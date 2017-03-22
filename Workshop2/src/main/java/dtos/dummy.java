@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.dtos;
 
 public class dummy {
 
