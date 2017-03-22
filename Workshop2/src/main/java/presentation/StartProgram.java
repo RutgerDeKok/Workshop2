@@ -12,7 +12,7 @@ public class StartProgram {
         //System.out.println("Eerst inloggen");
         
         PresentationConsoleMenu inlogmenu= new PresentationConsoleMenu();
-               inlogmenu.runPresentationConsoleMenu();
+               inlogmenu.runPresentationConsoleInlogMenu();
        
        
         System.out.println("Einde programma");

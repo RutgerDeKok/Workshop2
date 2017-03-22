@@ -15,7 +15,7 @@ public class PresentationConsoleMenu {
     
     //niks (ding)
     
-   public void runPresentationConsoleMenu(){
+   public void runPresentationConsoleInlogMenu(){
     
     int cijfer;
       
@@ -36,7 +36,7 @@ public class PresentationConsoleMenu {
         case 0: System.out.println(" sluit af "); break;
         case 1: System.out.println("U gaat inloggen."); inlogControle();      break;
         case 2: System.out.println("U gaat een Account aanmaken"); inlogAccountAanmaken(); break; 
-        default: System.out.println("Ongeldige invoer, probeer opnieuw."); runPresentationConsoleMenu();
+        default: System.out.println("Ongeldige invoer, probeer opnieuw."); runPresentationConsoleInlogMenu();
     }
 
   }
