@@ -19,7 +19,7 @@ import main.java.model.Order;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
 
-public class WebShopMain {
+public class TestMain {
 
 	public static void main(String[] args) {
 
