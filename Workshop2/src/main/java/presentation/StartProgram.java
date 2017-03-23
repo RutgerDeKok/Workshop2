@@ -1,18 +1,21 @@
 package main.java.presentation;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class StartProgram {
     
     
     public static void main(String[] args){
-    /*    
-         Logger logger = LogManager.getLogger(StartProgram.class);
-                logger.info("Programma runt ");
-       
-    */
-        //System.out.println("Eerst inloggen");
         
-        PresentationConsoleMenu inlogmenu= new PresentationConsoleMenu();
-               inlogmenu.runPresentationConsoleInlogMenu();
+        
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+    
+        
+        PresentationConsoleMenu pcm = (PresentationConsoleMenu) context.getBean("presentationConsoleMenu");      
+        pcm.runPresentationConsoleInlogMenu();
        
        
         System.out.println("Einde programma");
