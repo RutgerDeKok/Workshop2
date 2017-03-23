@@ -1,5 +1,3 @@
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -8,7 +6,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 
     <bean id = "hoofdMenu" class = "main.java.presentation.HoofdMenu">       
     </bean>
-    <bean id = "presentationConsoleMenu" class ="main.java.presentation.PresentationConsoleMenu">
+    <bean id = "inlogMenu" class ="main.java.presentation.InlogMenu">
     </bean>
 
 

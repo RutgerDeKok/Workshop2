@@ -18,7 +18,7 @@ import main.java.infrastructure.TextIO;
  *
  * @author Frank
  */
-public class PresentationConsoleMenu {
+public class InlogMenu {
 
 	// niks (ding)
 

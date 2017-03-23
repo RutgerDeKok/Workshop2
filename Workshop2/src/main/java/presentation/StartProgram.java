@@ -1,7 +1,6 @@
 package main.java.presentation;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,8 +13,8 @@ public class StartProgram {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
     
         
-        PresentationConsoleMenu pcm = (PresentationConsoleMenu) context.getBean("presentationConsoleMenu");      
-        pcm.runPresentationConsoleInlogMenu();
+        InlogMenu inlogMenu = (InlogMenu) context.getBean("inlogMenu");      
+        inlogMenu.runPresentationConsoleInlogMenu();
        
        
         System.out.println("Einde programma");
