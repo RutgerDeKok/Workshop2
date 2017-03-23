@@ -8,13 +8,13 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
     </bean>
     <bean id = "inlogMenu" class ="main.java.presentation.InlogMenu">
     </bean>
+    <bean id = "accountController" class ="main.java.controller.AccountController"></bean>
+    <bean id = "passHasher" class ="main.java.controller.PassHasher"></bean>
+    <bean id = "textIO" class ="main.java.infrastructure.TextIO"></bean>
+    <bean id = "validator" class ="main.java.infrastructure.Validator"></bean>
+
 
 
 
 </beans>
-
-
-
-
-
 
