@@ -1,28 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package main.java.presentation;
 
-import java.util.Arrays;
+
+import org.springframework.stereotype.Component;
 
 import main.java.infrastructure.Validator;
 import main.java.model.Adress;
-import main.java.model.UserAccount;
 import main.java.controller.AccountController;
 import main.java.controller.PassHasher;
 import main.java.infrastructure.TextIO;
 
-/**
- *
- * @author Frank
- */
-public class InlogMenu {
 
-	// niks (ding)
-
-	public void runPresentationConsoleInlogMenu() {
+@Component
+public class StartMenu {
+	
+	public void runStartMenu() {
 
 		int cijfer;
 
@@ -43,38 +35,21 @@ public class InlogMenu {
 			break;
 		case 1:
 			System.out.println("U gaat inloggen.");
-			inlogControle();
+			// inlogControle();
 			break;
 		case 2:
 			System.out.println("U gaat een Klant Account aanmaken");
-			klantAccountAanmaken();
+			 klantAccountAanmaken();
 			break;
 		default:
 			System.out.println("Ongeldige invoer, probeer opnieuw.");
-			runPresentationConsoleInlogMenu();
+			runStartMenu();
 		}
-
-	}
-
-	public void inlogControle() {
-
-		System.out.print("Voer uw gebruikers email in: ");
-
-		String accountInlogEmail = TextIO.getln();
-
-		System.out.print("Voer uw wachtwoord in: ");
-
-		char[] wachtwoord = TextIO.getlnChars();
-		
-		// TODO moet nog gemaakt worden
-		System.out.println(Arrays.toString(wachtwoord) + "is het wachtwoord");
-		System.out.println(wachtwoord.length);
 
 	}
 
 	public void klantAccountAanmaken() {
 
-		System.out.println("U gaat een klant account aanmaken, ");
 		boolean emailValid = false;
 		String email;
 		do {
@@ -89,7 +64,7 @@ public class InlogMenu {
 		boolean isNewEmail = checkExistanceEmail(email);
 		if (!isNewEmail) {
 			System.out.println("Dit email adres heeft reeds een account");
-			runPresentationConsoleInlogMenu();
+			runStartMenu();
 		}
 		String hash = null;
 		boolean passValid = false;
@@ -162,5 +137,4 @@ public class InlogMenu {
 		// check if email is already linked to an acccount
 		return false;
 	}
-
 }
