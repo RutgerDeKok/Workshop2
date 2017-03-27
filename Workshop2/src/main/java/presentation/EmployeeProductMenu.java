@@ -21,6 +21,8 @@ import main.java.infrastructure.Kleur;
 import main.java.controller.MainController;
 import main.java.controller.ProductController;
 import main.java.infrastructure.TextIO;
+import main.java.model.Product;
+import main.java.model.ProductCategory;
 
 
 @Component
@@ -40,12 +42,11 @@ console.println("hoi",Kleur.CART);
 
 
 
-	@Autowired
-	private ProductController pC;
+	//@Autowired
+	//private ProductController pC;
         @Autowired
         private MainEmployeeMenu mem;
-       // @Autowired
-        //private Product product1;
+        
 	/*
 */
 
@@ -96,12 +97,13 @@ console.println("hoi",Kleur.CART);
                                 categorie = console.printResponseInt("categorie:","",Color.ORANGE);
                                  console.println(""+categorie, Color.yellow);
                                  
-                                 console.println("ëinde he ",Color.orange);
-                                 
+                                                                  
                               
                               console.println("Wat is de informatie   van het nieuwe product?",Color.ORANGE);
                                 info = console.printResponse("info:","",Color.ORANGE);
                                 console.println(info, Color.yellow);
+                                
+                                
                               console.println("wat is de prijs van het product in CENTEN ", Color.RED);
                                 prijs = console.printResponseInt("prijs:","",Color.ORANGE);
                                  console.println(""+prijs, Color.yellow);
@@ -109,12 +111,36 @@ console.println("hoi",Kleur.CART);
                                                               
                                  
                              console.println("wat is de voorraad van het product ", Color.ORANGE);
-                                voorraad = console.printResponseInt("categorie:","",Color.ORANGE);
+                                voorraad = console.printResponseInt("voorraad:","",Color.ORANGE);
                                  console.println(""+voorraad, Color.yellow);
                                
-                             //  pC.createProductWithInputs(naam,merk,info,voorraad,prijs,categorie);
+                                Product productNew = new Product();
+                                 productNew.setInfo(info);
+                                 productNew.setName(naam);
+                                //int in centen moet nog naar BigDecimal.
+                                 productNew.setPrice(BigDecimal.ONE);
+                                 productNew.setStockCount(voorraad);
+                                 
+                                 console.println(productNew.toString()+" einde run",Color.MAGENTA);
+                                 console.println(naam+""+merk+""+info,Color.LIGHT_GRAY);
+                                 console.println(productNew.getName(),Color.LIGHT_GRAY);
+                                 
+                                 
+                              //   switch(categorie){
+                              //     case  1:  productNew.setCategory(ProductCategory.MEDIUM_HARD); break;
+                              //     case  2:  productNew.setCategory(ProductCategory.SOFT_MOLD); break;
+                              //     case  3:  productNew.setCategory(ProductCategory.BLUE); break;
+                              //     case  4:  productNew.setCategory(ProductCategory.CREAM); break;
+                             //      case  5:  productNew.setCategory(ProductCategory.GOAT); break;
+                             //      case  6:  productNew.setCategory(ProductCategory.ALL); break;
+                            //     }
+                                 
+                                 
+                                 
+                           //  pC.createProduct(productNew);
                              
-                               console.println("einde", Color.yellow);
+                             //  console.println("einde", Color.yellow);
+                              // runEmployeeProductMenu();
 				
 				break;
                         case "3":
