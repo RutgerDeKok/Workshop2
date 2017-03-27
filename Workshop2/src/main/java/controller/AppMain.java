@@ -13,7 +13,8 @@ public class AppMain {
 		MainController controller = (MainController) context.getBean(main.java.controller.MainController.class);
 
 		controller.start();
-
+//
+//
 		// System.out.println("Einde programma");
 	}
 
