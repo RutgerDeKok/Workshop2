@@ -38,9 +38,9 @@ public class MainEmployeeMenu {
 				console.println("================================================"+
 				"\n Welkom in het Medewerker Menu"+
 				"\n================================================="+
-				"\n 1: account"+
-				"\n 2: product"+
-				"\n 3: bestelling"+
+				"\n 1: account(aanpassen/toevoegen/verwijderen/overzicht)"+
+				"\n 2: product(aanpassen/toevoegen/verwijderen/overzicht)"+
+				"\n 3: bestelling (aanpassen/overzicht)"+
 				"\n 4: "+
 				"\n 5: "+
 				"\n 6: "+
@@ -57,13 +57,17 @@ public class MainEmployeeMenu {
 				mainmenu.runStartMenu();
 				break;
 			case "1":
-				console.println("U gaat inloggen.",Color.ORANGE);
+				console.println("account.",Color.ORANGE);
 				mainController.inlogControle();
 				break;
 			case "2":
-				console.println("U gaat een Klant Account aanmaken",Color.ORANGE);
+				console.println("product",Color.ORANGE);
 				userController.createUserAccount();
 				break;
+                        case "3":       
+                                console.println("bestelling",Color.ORANGE);
+                                //functie
+                                break;
 			default:
 				console.println("Ongeldige invoer, probeer opnieuw.",Color.magenta);
 				validResponse = false;
