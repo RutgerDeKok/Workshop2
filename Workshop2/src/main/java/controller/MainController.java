@@ -25,8 +25,7 @@ public class MainController {
 	private MainOrderMenu mainOrderMenu; 
 	@Autowired
 	private MainEmployeeMenu mainEmployeeMenu; 
-//	@Autowired
-	private ConsoleDemo consoleTest;
+
 	private final EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("webshop");
 	
 
