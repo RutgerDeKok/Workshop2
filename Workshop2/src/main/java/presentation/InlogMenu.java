@@ -10,8 +10,8 @@ import java.util.Arrays;
 import main.java.infrastructure.Validator;
 import main.java.model.Adress;
 import main.java.model.UserAccount;
-import main.java.controller.AccountController;
-import main.java.controller.PassHasher;
+import main.java.controller.UserAccountController;
+import main.java.infrastructure.PassHasher;
 import main.java.infrastructure.TextIO;
 
 /**
@@ -110,7 +110,7 @@ public class InlogMenu {
 		// factuur adress toevoegen
 		Adress factuurAdress = createAdress();
 
-		AccountController ac  = new AccountController();
+		UserAccountController ac  = new UserAccountController();
 		 ac.createAccount(email, hash, factuurAdress);
 		
 		// System.out.println("Uw account is : " + a.toStringWachtwoordloos());
