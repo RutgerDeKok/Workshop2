@@ -20,30 +20,43 @@ import org.springframework.stereotype.Component;
 import main.java.infrastructure.Kleur;
 import main.java.controller.MainController;
 import main.java.controller.ProductController;
+import main.java.infrastructure.TextIO;
 
 
 @Component
 public class EmployeeProductMenu {
     
     
-    @Autowired
+        @Autowired
 	private ColorConsole console;
 	@Autowired
 	private MainController mainController;
+
+
+public void runHey(){
+console.println("hoi",Kleur.CART);
 }
-	//@Autowired
-	//private ProductController productController;
-       // @Autowired
-       // private MainEmployeeMenu m;
+
+
+
+
+	@Autowired
+	private ProductController pC;
+        @Autowired
+        private MainEmployeeMenu mem;
        // @Autowired
         //private Product product1;
 	/*
+*/
+
 	public void runEmployeeProductMenu() {
 		String response;
 		boolean validResponse;
 				
-				console.println("================================"+
-				"\nWat wilt u met het product doen?"+
+				console.println("================================================="+
+				"\n Product Menu"+
+				"\n================================================="+
+				"\n Wat wilt u met het product doen?"+
 				"\n 1: ik wil het aanpassen."+
 				"\n 2: ik wil er één toevoegen."+
 				"\n 3: ik wil er één verwijderen."+
@@ -58,7 +71,7 @@ public class EmployeeProductMenu {
 			switch (response) {
 			case "0":
 				console.println(" terug ",Color.RED);
-				//m.runMenu();
+				mem.runMenu();
 				break;
 			case "1":
 				console.println(" aanpassen.",Color.ORANGE);
@@ -66,26 +79,43 @@ public class EmployeeProductMenu {
 				break;
 			case "2":
 				console.println("toevoegen",Color.ORANGE);
-                             //   String naam,merk,info;
                                 
-                              //  BigDecimal prijs = null;
-                               // ProductCategory categorie;
-                              //  naam = console.printResponse("Wat is de     naam   van het nieuwe product?","",Color.ORANGE);
-                              //  merk = console.printResponse("Wat is het    merk   van het nieuwe product?","",Color.ORANGE);
-                              //  categorie = console.printResponse("Wat is de catogorie  van het nieuwe product?",,Color.ORANGE);
-                              //  info = console.printResponse("Wat is de informatie van het nieuwe product?","",Color.ORANGE);
-                              // prijs = console.printResponse("Wat is de     prijs  van het nieuwe product?","",Color.ORANGE);
-                              // int voorraad = console.printResponseInt("Wat is de  voorraad  van het nieuwe product?",8, Color.ORANGE);
+                                String naam,merk,info;
+                                
+                                int categorie,voorraad, prijs;
                                
+                                console.println("Wat is de     naam   van het nieuwe product?",Color.ORANGE);
+                                naam = console.printResponse("naam :","",Color.ORANGE);
+                                console.println(naam, Color.yellow);
+                                
+                               console.println("Wat is het    merk   van het nieuwe product?",Color.ORANGE);
+                                merk = console.printResponse("merk:","",Color.ORANGE);
+                                console.println(merk, Color.yellow);
+                                
+                                console.println("wat is de catogorie van het product 1: Hard-Medium 2: Zacht-gesmolten 3: blauw 4: room 5: geit 6: overige/weet niet ", Color.ORANGE);
+                                categorie = console.printResponseInt("categorie:","",Color.ORANGE);
+                                 console.println(""+categorie, Color.yellow);
+                                 
+                                 console.println("ëinde he ",Color.orange);
+                                 
+                              
+                              console.println("Wat is de informatie   van het nieuwe product?",Color.ORANGE);
+                                info = console.printResponse("info:","",Color.ORANGE);
+                                console.println(info, Color.yellow);
+                              console.println("wat is de prijs van het product in CENTEN ", Color.RED);
+                                prijs = console.printResponseInt("prijs:","",Color.ORANGE);
+                                 console.println(""+prijs, Color.yellow);
+                                 
+                                                              
+                                 
+                             console.println("wat is de voorraad van het product ", Color.ORANGE);
+                                voorraad = console.printResponseInt("categorie:","",Color.ORANGE);
+                                 console.println(""+voorraad, Color.yellow);
                                
-                             //  product1.setName(naam);
-                              // product1.setBrand(merk);
-                             //  product1.setInfo(info);
-                             //  product1.setStockCount(voorraad);
-                             //  product1.setCategory(main.java.model.ProductCategory.CREAM);
-                              // product1.setPrice(prijs);
-                               
-				//productController.createProduct(product1);
+                             //  pC.createProductWithInputs(naam,merk,info,voorraad,prijs,categorie);
+                             
+                               console.println("einde", Color.yellow);
+				
 				break;
                         case "3":
 				console.println(" verwijderen.",Color.ORANGE);
@@ -109,4 +139,3 @@ public class EmployeeProductMenu {
 	}
 }
 
-*/

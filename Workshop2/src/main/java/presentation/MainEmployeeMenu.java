@@ -1,12 +1,9 @@
 package main.java.presentation;
 
 import java.awt.Color;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import main.java.presentation.ColorConsole;
-
 import java.awt.Color;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +28,15 @@ public class MainEmployeeMenu {
 	private UserController userController;
         @Autowired
         private MainMenu mainmenu;
+        @Autowired
+        private EmployeeProductMenu epm;
 	
 	public void runMenu() {
 		String response;
 		boolean validResponse;
 				
 	
-				console.println("================================================"+
+				console.println("================================================="+
 				"\n Welkom in het Medewerker Menu"+
 				"\n================================================="+
 				"\n 1: account(aanpassen/toevoegen/verwijderen/overzicht)"+
@@ -47,7 +46,7 @@ public class MainEmployeeMenu {
 				"\n 5: "+
 				"\n 6: "+
 				"\n 0: terug"+
-				"\n====================================================/n", Kleur.CART);
+				"\n====================================================", Kleur.CART);
                                 
                                 do{
 			validResponse = true;
@@ -63,8 +62,9 @@ public class MainEmployeeMenu {
 				mainController.inlogControle();
 				break;
 			case "2":
-				console.println("product",Color.ORANGE);
-				userController.createUserAccount();
+				console.println(" ",Color.ORANGE);
+				//epm.runHey();
+                                epm.runEmployeeProductMenu();
 				break;
                         case "3":       
                                 console.println("bestelling",Color.ORANGE);
