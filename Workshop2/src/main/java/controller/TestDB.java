@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import main.java.daos.GenericDao;
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.model.Adress;
@@ -19,9 +22,13 @@ import main.java.model.Order;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
 
-public class TestMain {
+@Component
+public class TestDB {
+	
+	@Autowired
+	private EntityManager em;
 
-	public static void main(String[] args) {
+	public void populateDB() {
 
 		// Create some objects to persist
 
@@ -113,15 +120,7 @@ public class TestMain {
 		order2.setSaledate(LocalDate.now());
 		order2.setTotalPrice(new BigDecimal("99.99"));
 
-		// Start Entity Manager
-
-		EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("webshop"); // Mijn
-																							// DB
-																							// heet
-																							// webshop
-																							// !
-
-		EntityManager em = emFactory.createEntityManager();
+		
 
 		// create concrete Dao
 
@@ -162,9 +161,9 @@ public class TestMain {
 		// System.out.println(dbHond);
 
 		// Close manager and factory
-		em.close();
-		emFactory.close();
-		System.exit(0);
+//		em.close();
+//		emFactory.close();
+//		
 	}
 
 }
