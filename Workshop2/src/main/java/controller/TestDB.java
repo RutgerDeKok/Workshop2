@@ -25,8 +25,8 @@ import main.java.model.UserType;
 @Component
 public class TestDB {
 	
-	@Autowired
-	private EntityManager em;
+
+	
 
 	public void populateDB() {
 
@@ -124,10 +124,12 @@ public class TestDB {
 
 		// create concrete Dao
 
-		GenericDao<UserAccount, Long> userDao = new GenericDaoJpaImpl<UserAccount, Long>(UserAccount.class, em);
+		GenericDao<UserAccount, Long> userDao = new GenericDaoJpaImpl<UserAccount, Long>(UserAccount.class);
 
 		// Persist Objects
-	
+
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("webshop");
+		EntityManager em =  emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(factAdress);
 		em.persist(product1);
@@ -147,7 +149,7 @@ public class TestDB {
 		em.getTransaction().commit();
 		em.clear();
 
-		userDao.delete(user2);
+		
 		System.out.println(userDao.read(1L).getBillingAdress().getFamilyName());
 
 		// Some test operations

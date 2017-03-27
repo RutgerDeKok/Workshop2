@@ -4,20 +4,28 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Component;
+
 import main.java.model.UserAccount;
 
 //@Component
 public class UserAccountDao extends GenericDaoJpaImpl<UserAccount, Long> {
+	
+//	@Autowired
+//	protected EntityManagerFactory emf;
 
-	public UserAccountDao(Class<UserAccount> entityClass, EntityManager entityManager) {
-		super(entityClass, entityManager);
+	public UserAccountDao(Class<UserAccount> entityClass) {
+		super(entityClass);
 	}
+		
 
 	// @Bean
 	public UserAccount findUserbyEmail(String email) {
 
 		try {
-			// System.out.println("entityman? "+entityManager);
+			EntityManager entityManager = emf.createEntityManager();
+			 System.out.println("entityman? "+entityManager);
+			
 			Query query = entityManager.createQuery
 					("select p from UserAccount p where email = :email",
 					UserAccount.class);
