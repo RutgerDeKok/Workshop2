@@ -9,7 +9,7 @@ package main.java.presentation;
  *
  * @author Frank
  */
-/**
+
 import java.awt.Color;
 import java.math.BigDecimal;
 
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import main.java.infrastructure.Kleur;
 import main.java.controller.MainController;
 import main.java.controller.ProductController;
-import main.java.model.Product;
+
 
 @Component
 public class EmployeeProductMenu {
@@ -30,13 +30,14 @@ public class EmployeeProductMenu {
 	private ColorConsole console;
 	@Autowired
 	private MainController mainController;
-	@Autowired
-	private ProductController productController;
-        @Autowired
-        private EmployeeMainMenu employeeMainMenu;
+}
+	//@Autowired
+	//private ProductController productController;
+       // @Autowired
+       // private MainEmployeeMenu m;
        // @Autowired
         //private Product product1;
-	
+	/*
 	public void runEmployeeProductMenu() {
 		String response;
 		boolean validResponse;
@@ -57,7 +58,7 @@ public class EmployeeProductMenu {
 			switch (response) {
 			case "0":
 				console.println(" terug ",Color.RED);
-				employeeMainMenu.runMenu();
+				//m.runMenu();
 				break;
 			case "1":
 				console.println(" aanpassen.",Color.ORANGE);
@@ -65,16 +66,16 @@ public class EmployeeProductMenu {
 				break;
 			case "2":
 				console.println("toevoegen",Color.ORANGE);
-                                String naam,merk,info;
+                             //   String naam,merk,info;
                                 
-                                BigDecimal prijs = null;
+                              //  BigDecimal prijs = null;
                                // ProductCategory categorie;
-                                naam = console.printResponse("Wat is de     naam   van het nieuwe product?","",Color.ORANGE);
-                                merk = console.printResponse("Wat is het    merk   van het nieuwe product?","",Color.ORANGE);
+                              //  naam = console.printResponse("Wat is de     naam   van het nieuwe product?","",Color.ORANGE);
+                              //  merk = console.printResponse("Wat is het    merk   van het nieuwe product?","",Color.ORANGE);
                               //  categorie = console.printResponse("Wat is de catogorie  van het nieuwe product?",,Color.ORANGE);
-                                info = console.printResponse("Wat is de informatie van het nieuwe product?","",Color.ORANGE);
+                              //  info = console.printResponse("Wat is de informatie van het nieuwe product?","",Color.ORANGE);
                               // prijs = console.printResponse("Wat is de     prijs  van het nieuwe product?","",Color.ORANGE);
-                               int voorraad = console.printResponseInt("Wat is de  voorraad  van het nieuwe product?",8, Color.ORANGE);
+                              // int voorraad = console.printResponseInt("Wat is de  voorraad  van het nieuwe product?",8, Color.ORANGE);
                                
                                
                              //  product1.setName(naam);
@@ -106,5 +107,6 @@ public class EmployeeProductMenu {
 		}while(!validResponse);
 
 	}
-    */
+}
 
+*/

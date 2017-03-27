@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import main.java.presentation.MainEmployeeMenu;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class MainController {
 	private MainOrderMenu mainOrderMenu; 
 	@Autowired
 	private MainEmployeeMenu mainEmployeeMenu; 
-//	@Autowired
-	private ConsoleDemo consoleTest;
+
+	
 	private final EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("webshop");
 	
 

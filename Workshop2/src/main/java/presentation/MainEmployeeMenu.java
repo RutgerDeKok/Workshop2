@@ -1,4 +1,4 @@
-package main.java.controller;
+package main.java.presentation;
 
 import java.awt.Color;
 
@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 import main.java.controller.UserController;
 import main.java.infrastructure.Kleur;
 import main.java.controller.MainController;
+import main.java.controller.MainController;
+import main.java.controller.UserController;
 import main.java.presentation.MainMenu;
 
 
