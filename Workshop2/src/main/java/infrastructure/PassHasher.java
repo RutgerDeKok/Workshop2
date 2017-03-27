@@ -1,4 +1,4 @@
-package main.java.controller;
+package main.java.infrastructure;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;

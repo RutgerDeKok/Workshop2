@@ -1,4 +1,4 @@
-package main.java.model;
+package main.java.infrastructure;
 
 import java.awt.Color;
 

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+//@Controller
 public class ProductController {
     
-    @Autowired
+//    @Autowired
     ProductService productService;
     
     public List<Product> getAllProducts(){

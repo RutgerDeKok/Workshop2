@@ -1,6 +1,5 @@
 package main.java.controller;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,7 @@ import main.java.presentation.MainOrderMenu;
 @Component
 public class MainController {
 
-	// @Autowired
-	// private MainMenu mainMenu;
+	
 	@Autowired
 	private MainMenu mainMenu;
 	@Autowired

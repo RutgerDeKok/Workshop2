@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import main.java.model.*;
 
-@Repository
+//@Repository
 public interface CartRepository extends CrudRepository<Cart,Long> {
     
 }

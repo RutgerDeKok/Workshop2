@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.controller.MainController;
-import main.java.controller.PassHasher;
 import main.java.controller.UserController;
+import main.java.infrastructure.PassHasher;
 import main.java.infrastructure.Validator;
 import main.java.model.UserAccount;
 import main.java.model.UserType;

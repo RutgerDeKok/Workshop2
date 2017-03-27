@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import main.java.daos.*;
 import main.java.model.*;
 
-@Service
+//@Service
 public class FinalSubOrderService {
     
-    @Autowired
+//    @Autowired
     FinalSubOrderRepository finalSubOrderRepository;
     FinalSubOrder finalSubOrder;
     

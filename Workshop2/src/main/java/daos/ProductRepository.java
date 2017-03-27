@@ -13,7 +13,7 @@ import main.java.model.*;
  *
  * @author Nadkine
  */
-@Repository
+//@Repository
 public interface ProductRepository extends CrudRepository<Product,Long> {
     
 }

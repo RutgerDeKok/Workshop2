@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import main.java.daos.GenericDao;
 import main.java.daos.GenericDaoJpaImpl;
+import main.java.infrastructure.PassHasher;
 import main.java.model.Adress;
 import main.java.model.Cart;
 import main.java.model.CartSubOrder;
