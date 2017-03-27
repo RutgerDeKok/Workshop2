@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.controller.UserController;
+import main.java.model.Kleur;
 import main.java.controller.MainController;
 
 
@@ -31,7 +32,7 @@ public class MainMenu {
 				"\n 1: Inloggen."+
 				"\n 2: Klant Account aanmaken."+
 				"\n 0: Afsluiten."+
-				"\n================================", Color.CYAN);
+				"\n================================", Kleur.CART);
 		do{
 			validResponse = true;
 			response = console.printResponse("Maak uw keuze: \n", "1", Color.CYAN);
