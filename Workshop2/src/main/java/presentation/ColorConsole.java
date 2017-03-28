@@ -31,6 +31,7 @@ public class ColorConsole {
 	private JScrollPane scrollPane;
 	private String response;
 	private char[] chars;
+        private int i;
 	private boolean hasResponded;
 	private StyledDocument document;
 	
@@ -161,6 +162,52 @@ public class ColorConsole {
 		return response;
 
 	}
+        
+        public int printResponseInt(String message, String defaultResponse, Color color) {
+		// display main text
+
+		Style style = console.addStyle("Style", null);
+		StyleConstants.setForeground(style, color);
+
+		try {
+			document.insertString(document.getLength(),"\n"+ message, style);
+		} catch (BadLocationException e1) {
+			e1.printStackTrace();
+		}
+
+		scrollBotton();
+
+		// set response default text and highlight
+		response = defaultResponse;
+		if (response == null)
+			response = ">";
+	
+
+		input.setText(response);
+		input.requestFocusInWindow();
+		input.selectAll();
+
+		// loop that checks for a response with a 30 second timeout
+		hasResponded = false;
+		int timeout = 120;  // 120 x 250 milliseconds  = 30 sec
+		while (!hasResponded && (timeout > 0)) {
+			timeout--;
+			try {
+				Thread.sleep(250);
+			} catch (InterruptedException e1) {
+			}
+		}
+		response = String.valueOf(input.getPassword());
+		if (timeout == 0)
+			response = "Timeout!";
+		int foo = Integer.parseInt(response);
+		return foo;
+
+	}
+        
+        
+        
+        
 	
 	
 	public char[] printResponseMask(String message, Color color) {
@@ -205,6 +252,9 @@ public class ColorConsole {
 
 	}
 	
+        
+        
+        
 	
 	public void clear() {
 	

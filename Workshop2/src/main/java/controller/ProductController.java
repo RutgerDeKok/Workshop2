@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 //@Controller
 public class ProductController {
     
-//    @Autowired
+   // @Autowired
     ProductService productService;
     
     public List<Product> getAllProducts(){
@@ -27,7 +27,10 @@ public class ProductController {
     }
        
     public void createProduct(Product product){
-    productService.createProduct(product);
+        System.out.println("wordt aangeroepen.");
+        System.out.println(product);
+        System.out.println(product.getBrand());
+        productService.createProduct(product);
     }
       
     public void updateProduct(Long id, Product product){
@@ -37,4 +40,6 @@ public class ProductController {
     public void deleteProduct(Long id){
     productService.deleteProduct(id);
     }
+
+   
 }
