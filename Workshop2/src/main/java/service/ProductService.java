@@ -11,7 +11,7 @@ import main.java.model.*;
 //@Service
 public class ProductService {
     
-//    @Autowired
+    //@Autowired
     ProductRepository productRepository;
     Product product;
     

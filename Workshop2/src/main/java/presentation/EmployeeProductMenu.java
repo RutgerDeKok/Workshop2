@@ -23,6 +23,7 @@ import main.java.controller.ProductController;
 import main.java.infrastructure.TextIO;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
+import main.java.service.ProductService;
 
 
 @Component
@@ -44,7 +45,7 @@ console.println("hoi",Kleur.CART);
 
 	//@Autowired
 	//private ProductController pC;
-        @Autowired
+       // @Autowired
         private MainEmployeeMenu mem;
         
 	/*
@@ -117,31 +118,38 @@ console.println("hoi",Kleur.CART);
                                 Product productNew = new Product();
                                  productNew.setInfo(info);
                                  productNew.setName(naam);
+                                 productNew.setBrand(merk);
                                 //int in centen moet nog naar BigDecimal.
                                  productNew.setPrice(BigDecimal.ONE);
                                  productNew.setStockCount(voorraad);
                                  
-                                 console.println(productNew.toString()+" einde run",Color.MAGENTA);
-                                 console.println(naam+""+merk+""+info,Color.LIGHT_GRAY);
-                                 console.println(productNew.getName(),Color.LIGHT_GRAY);
-                                 
-                                 
-                              //   switch(categorie){
-                              //     case  1:  productNew.setCategory(ProductCategory.MEDIUM_HARD); break;
-                              //     case  2:  productNew.setCategory(ProductCategory.SOFT_MOLD); break;
-                              //     case  3:  productNew.setCategory(ProductCategory.BLUE); break;
-                              //     case  4:  productNew.setCategory(ProductCategory.CREAM); break;
-                             //      case  5:  productNew.setCategory(ProductCategory.GOAT); break;
-                             //      case  6:  productNew.setCategory(ProductCategory.ALL); break;
-                            //     }
                                  
                                  
                                  
-                           //  pC.createProduct(productNew);
+                                 switch(categorie){
+                                   case  1:  productNew.setCategory(ProductCategory.MEDIUM_HARD); break;
+                                   case  2:  productNew.setCategory(ProductCategory.SOFT_MOLD); break;
+                                   case  3:  productNew.setCategory(ProductCategory.BLUE); break;
+                                   case  4:  productNew.setCategory(ProductCategory.CREAM); break;
+                                   case  5:  productNew.setCategory(ProductCategory.GOAT); break;
+                                   case  6:  productNew.setCategory(ProductCategory.ALL); break;
+                                 }
+                                 
+                                 console.println(productNew.getBrand(),Color.RED);
+                                 console.println(productNew.getName(), Color.yellow);
+                                 console.println(productNew.getInfo(), Color.cyan);
+                                 console.println(productNew.getPrice().toString(), Color.cyan);
+                             //    ProductService pC = new ProductService();
+                             //   pC.createProduct(productNew);
+                                 
+                                // }catch(Exception ex){ console.print(ex.getMessage(),Color.RED);}
+                                 
+                           
                              
                              //  console.println("einde", Color.yellow);
                               // runEmployeeProductMenu();
-				
+				mem.runMenu();
+                                
 				break;
                         case "3":
 				console.println(" verwijderen.",Color.ORANGE);
