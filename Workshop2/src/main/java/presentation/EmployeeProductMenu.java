@@ -82,9 +82,9 @@ console.println("hoi",Kleur.CART);
 			case "2":
 				console.println("toevoegen",Color.ORANGE);
                                 
-                                String naam,merk,info;
+                                String naam,merk,info,prijs;
                                 
-                                int categorie,voorraad, prijs;
+                                int categorie,voorraad;
                                
                                 console.println("Wat is de     naam   van het nieuwe product?",Color.ORANGE);
                                 naam = console.printResponse("naam :","",Color.ORANGE);
@@ -106,7 +106,7 @@ console.println("hoi",Kleur.CART);
                                 
                                 
                               console.println("wat is de prijs van het product in CENTEN ", Color.RED);
-                                prijs = console.printResponseInt("prijs:","",Color.ORANGE);
+                               prijs = console.printResponse("prijs:","",Color.ORANGE);
                                  console.println(""+prijs, Color.yellow);
                                  
                                                               
@@ -120,7 +120,7 @@ console.println("hoi",Kleur.CART);
                                  productNew.setName(naam);
                                  productNew.setBrand(merk);
                                 //int in centen moet nog naar BigDecimal.
-                                 productNew.setPrice(BigDecimal.ONE);
+                                 productNew.setPrice(new BigDecimal(prijs));
                                  productNew.setStockCount(voorraad);
                                  
                                  
@@ -139,6 +139,7 @@ console.println("hoi",Kleur.CART);
                                  console.println(productNew.getName(), Color.yellow);
                                  console.println(productNew.getInfo(), Color.cyan);
                                  console.println(productNew.getPrice().toString(), Color.cyan);
+                                 
                              //    ProductService pC = new ProductService();
                              //   pC.createProduct(productNew);
                                  
