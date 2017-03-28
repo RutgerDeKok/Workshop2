@@ -1,5 +1,9 @@
 package main.java.config;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,9 +12,10 @@ import org.springframework.context.annotation.Configuration;
 
 class AppConfig {
 	
-//	 @Bean 
-//	   public GreetingBean greetingBean(){
-//	      return new GreetingBean();
-//	   }
+    @Bean
+    public EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("webshop");
+        return factory.createEntityManager();
+    }
     
 }

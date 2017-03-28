@@ -1,8 +1,9 @@
-package main.java.controller;
+package main.java;
 
 import org.springframework.context.ApplicationContext;
 
 import main.java.config.ApplicationContextProvider;
+import main.java.controller.MainController;
 
 public class AppMain {
 
@@ -13,8 +14,7 @@ public class AppMain {
 		MainController controller = (MainController) context.getBean(main.java.controller.MainController.class);
 
 		controller.start();
-//
-//
+
 		// System.out.println("Einde programma");
 	}
 
