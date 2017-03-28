@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import main.java.controller.UserController;
 import main.java.infrastructure.Kleur;
 import main.java.controller.MainController;
+import main.java.controller.ProductController;
 import main.java.controller.MainController;
 import main.java.controller.UserController;
 import main.java.presentation.MainMenu;
@@ -24,6 +25,8 @@ public class MainEmployeeMenu {
 	private ColorConsole console;
 	@Autowired
 	private MainController mainController;
+	@Autowired
+	private ProductController productController;;
 	@Autowired
 	private UserController userController;
         @Autowired
@@ -63,8 +66,8 @@ public class MainEmployeeMenu {
 				break;
 			case "2":
 				console.println(" ",Color.ORANGE);
-				//epm.runHey();
-                                epm.runEmployeeProductMenu();
+				
+                                productController.runEmployeeProductMenu();
 				break;
                         case "3":       
                                 console.println("bestelling",Color.ORANGE);
