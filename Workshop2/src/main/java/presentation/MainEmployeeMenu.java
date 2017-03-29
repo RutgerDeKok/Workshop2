@@ -15,6 +15,7 @@ import main.java.controller.MainController;
 import main.java.controller.ProductController;
 import main.java.controller.MainController;
 import main.java.controller.UserController;
+import main.java.infrastructure.Formatter;
 import main.java.presentation.MainMenu;
 
 @Component
@@ -37,12 +38,12 @@ public class MainEmployeeMenu {
 		String response;
 		boolean validResponse;
 
-		console.println("=================================================" + "\n Welkom in het Medewerker Menu"
-				+ "\n================================================="
+		console.println(Formatter.LINE + "\n Welkom in het Medewerker Menu"
+				+ "\n"+Formatter.LINE
 				+ "\n 1: account(aanpassen/toevoegen/verwijderen/overzicht)"
 				+ "\n 2: product(aanpassen/toevoegen/verwijderen/overzicht)" + "\n 3: bestelling (aanpassen/overzicht)"
 				+ "\n 4: naar klant menu" + "\n 5: " + "\n 6: " + "\n 0: uitloggen"
-				+ "\n====================================================", Kleur.CART);
+				+ "\n"+Formatter.LINE, Kleur.CART);
 
 		do {
 			validResponse = true;
@@ -55,16 +56,16 @@ public class MainEmployeeMenu {
 				break;
 			case "1":
 				console.println("account.", Color.ORANGE);
-				mainController.inlogControle();
+				// functie ontbreekt
 				break;
 			case "2":
 				console.println(" ", Color.ORANGE);
-
+                                // gaat naar EmployeeProductMenu
 				productController.runEmployeeProductMenu();
 				break;
 			case "3":
 				console.println("bestelling", Color.ORANGE);
-				// functie
+				// functie ontbreekt
 				break;
 			case "4":
 				console.println("Naar klant menu", Color.RED);

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import main.java.infrastructure.Kleur;
 import main.java.controller.MainController;
 import main.java.controller.ProductController;
+import main.java.infrastructure.Formatter;
 import main.java.infrastructure.TextIO;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
@@ -58,9 +59,9 @@ console.println("hoi",Kleur.CART);
 		String response;
 		boolean validResponse;
 				
-				console.println("================================================="+
+				console.println(Formatter.LINE+
 				"\n Product Menu"+
-				"\n================================================="+
+				"\n"+Formatter.LINE+
 				"\n Wat wilt u met het product doen?"+
 				"\n 1: ik wil het aanpassen."+
 				"\n 2: ik wil er één toevoegen."+
@@ -68,7 +69,7 @@ console.println("hoi",Kleur.CART);
                                 "\n 4: ik wil een overzicht van alle producten."+        
                                 "\n 5: ik wil één producten zoeken die voldoen aan ..."+        
                                 "\n 0: ik wil terug naar Medewerker menu"+
-				"\n================================", Kleur.CART);
+				"\n"+Formatter.LINE, Kleur.CART);
 		do{
 			validResponse = true;
 			response = console.printResponse("Maak uw keuze: \n", "1", Color.CYAN);
@@ -76,6 +77,7 @@ console.println("hoi",Kleur.CART);
 			switch (response) {
 			case "0":
 				console.println(" terug ",Color.RED);
+                                //gaat naar mainemployeemenu.
 				mem.runMenu();
 				break;
 			case "1":
@@ -93,6 +95,7 @@ console.println("hoi",Kleur.CART);
 				break;
 			case "4":
 				console.println("overzicht",Color.ORANGE);
+                                //displayed alle producten.
 				productController.getAllProducts();
 				break;
                         case "5":
