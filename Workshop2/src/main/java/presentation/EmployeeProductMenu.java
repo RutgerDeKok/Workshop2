@@ -98,10 +98,24 @@ console.println("hoi",Kleur.CART);
                                 console.clear();
 				console.println("Overzicht Alle Producten.",Color.ORANGE);
                                 //displayed alle producten.
+                                console.println(Formatter.LINE, Color.orange);
+                                int[] padnums={6,16,16,26,8,18,8};
+                                int[] alignLR={1,1,1,1,1,0,1};
+                                
+                                console.println(Formatter.padString(padnums, alignLR, "id " ,"naam ","merk ","info ","prijs "," catogorie","voorraad"),Color.orange);
                                List<Product> myList = new ArrayList<Product>();
 				myList = productController.getAllProducts();
+                                
                                 for(Product p : myList){
-                                    console.println(p.getName()+", "+p.getBrand()+", "+p.getInfo()+", "+p.getCategory()+", "+p.getPrice()+", "+p.getStockCount()+", "+p.getId()+"id nummer.", Color.yellow);
+                                 String idp = p.getId()+" ";
+                                 String naamp = p.getName()+" ";//beetje lang
+                                 String merkp = p.getBrand()+" ";
+                                 String infop = p.getInfo()+" "; //lang
+                                 String prijsp    =p.getPrice()+" ";
+                                 String catop     =p.getCategory()+" "; //beetje lang
+                                 String voorraadp =p.getStockCount()+" ";
+                                 console.println(Formatter.padString(padnums, alignLR, idp ,naamp,merkp,infop,prijsp,catop,voorraadp),Color.YELLOW);
+
                                 }
                                 
                                 runEmployeeProductMenu();
