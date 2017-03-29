@@ -12,6 +12,7 @@ package main.java.presentation;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,7 +48,7 @@ console.println("hoi",Kleur.CART);
 
 	//@Autowired
 	//private ProductController pC;
-       // @Autowired
+        @Autowired
         private MainEmployeeMenu mem;
         
 	/*
@@ -79,7 +80,7 @@ console.println("hoi",Kleur.CART);
 				break;
 			case "1":
 				console.println(" aanpassen.",Color.ORANGE);
-				//productController.();
+				productController.pasProductAan();
 				break;
 			case "2":
 				console.println("toevoegen",Color.ORANGE);
@@ -92,7 +93,7 @@ console.println("hoi",Kleur.CART);
 				break;
 			case "4":
 				console.println("overzicht",Color.ORANGE);
-				//productController.();
+				productController.getAllProducts();
 				break;
                         case "5":
 				console.println("zoeken opn",Color.ORANGE);
@@ -200,6 +201,29 @@ console.println("hoi",Kleur.CART);
 		
 		
 	}
+
+    public Product pasProductAan() {
+        
+        String zoeknaam, zoekmerk;
+       console.println("Wat is de     naam   van het nieuwe product?",Color.ORANGE);
+        zoeknaam = console.printResponse("naam :","",Color.ORANGE);
+        console.println(zoeknaam, Color.yellow);
+        
+       console.println("Wat is het    merk   van het nieuwe product?",Color.ORANGE);
+        zoekmerk = console.printResponse("merk:","",Color.ORANGE);
+        console.println(zoekmerk, Color.yellow); 
+        
+        Product productdata = new Product();
+        productdata.setName(zoekmerk);
+        productdata.setBrand(zoekmerk);
+        return productdata;
+        
+    }
+
+    public void printProductLijst(){
+        //
+        System.out.print("hio");
+    }
 	
 	
 	

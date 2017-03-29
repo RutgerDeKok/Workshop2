@@ -21,12 +21,13 @@ public class ProductController {
 
 	
     
-   // @Autowired
+    @Autowired
     ProductService productService;
     @Autowired
     EmployeeProductMenu epm;
     
     public List<Product> getAllProducts(){
+        
     return productService.getAllProducts();
     }
     
@@ -51,7 +52,13 @@ public void createProduct() {
 		epm.runEmployeeProductMenu();
 	}
     
-    
+    public void pasProductAan() {
+        productService.getAllProducts();
+        Product zoekproduct = epm.pasProductAan();
+        
+        //roep dao aan
+        epm.runEmployeeProductMenu();
+    }
     
     
       
@@ -67,6 +74,8 @@ public void createProduct() {
 		epm.runEmployeeProductMenu();
 		
 	}
+
+    
 
    
 }
