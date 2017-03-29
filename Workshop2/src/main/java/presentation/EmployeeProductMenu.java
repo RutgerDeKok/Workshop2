@@ -12,6 +12,7 @@ package main.java.presentation;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,10 +95,14 @@ console.println("hoi",Kleur.CART);
 				//productController.inlogControle();
 				break;
 			case "4":
-				console.println("overzicht",Color.ORANGE);
+                                console.clear();
+				console.println("Overzicht Alle Producten.",Color.ORANGE);
                                 //displayed alle producten.
-                                //dit moet uitgeprint worden.
-				productController.getAllProducts();
+                               List<Product> myList = new ArrayList<Product>();
+				myList = productController.getAllProducts();
+                                for(Product p : myList){
+                                    console.println(p.getName()+", "+p.getBrand()+", "+p.getInfo()+", "+p.getCategory()+", "+p.getPrice()+", "+p.getStockCount()+", "+p.getId()+"id nummer.", Color.yellow);
+                                }
                                 
                                 runEmployeeProductMenu();
                                 
