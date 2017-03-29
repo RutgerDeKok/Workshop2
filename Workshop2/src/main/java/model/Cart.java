@@ -6,36 +6,36 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "carts")
 public class Cart {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@OneToOne
-	private /* @Jurjen final */ UserAccount user;
+	private UserAccount user;
 	@OneToOne
 	private Adress deliveryAdress;
 	@OneToMany
+	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "cart_id")
 	private List<CartSubOrder> subOrders = new ArrayList<>();
-	@Column(length = 10, nullable = false)
+	@Column(length = 10)
 	private BigDecimal totalPrice;
 
 	public Cart() {
 	}
-	
-	//GETTERS AND SETTERS /* @Jurjen dit kan weg toch? */
+
+
 	public UserAccount getUser() {
 		return user;
 	}
@@ -44,10 +44,7 @@ public class Cart {
 		return id;
 	}
 
-	/* @Jurjen
-        Overbodig, doet Hibernate al
-        */
-        public void setId(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -67,36 +64,28 @@ public class Cart {
 		subOrders.add(subOrder);
 	}
 
-	public void setSubOrders(List<CartSubOrder> subOrders) { /* @Jurjen ben even kwijt waar deze functie voor was */
+	public void setSubOrders(List<CartSubOrder> subOrders) {
 		this.subOrders = subOrders;
 	}
-        
-        /* @Jurjen
-        Geeft de inhoud van de Cart weer, handig voor overzichtsfuncties
-        public List<CartSubOrder> getSubOrders() {
-            return subOrders;
-        }
-        */
+
+	public List<CartSubOrder> getSubOrders() {
+		return subOrders;
+	}
 
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
-        /* @Jurjen
-        Volgens mij is setTotalPrice niet nodig, maar kan het beter vervangen
-        worden door een functie die de totaalprijs berekent
-        */
+	/*
+	 * @Jurjen Volgens mij is setTotalPrice niet nodig, maar kan het beter
+	 * vervangen worden door een functie die de totaalprijs berekent
+	 */
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-        
-        /* @Jurjen
-        protected void emptyCart() {
-            subOrders.clear();
-        }
-        */
-            
-        
-	
-	
+
+	protected void emptyCart() {
+		subOrders.clear();
+	}
+
 }

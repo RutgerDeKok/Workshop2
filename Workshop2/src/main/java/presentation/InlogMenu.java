@@ -10,7 +10,6 @@ import main.java.controller.UserController;
 import main.java.infrastructure.PassHasher;
 import main.java.infrastructure.Validator;
 import main.java.model.UserAccount;
-import main.java.model.UserType;
 
 @Component
 public class InlogMenu {
@@ -30,7 +29,7 @@ public class InlogMenu {
 		String email;
 
 		do {
-			email = console.printResponse("\nvoer uw email adress in " + "\n Type x, om naar het hoofmenu te gaan", "",
+			email = console.printResponse("\nvoer uw email adress in " + "\nType x, om naar het hoofmenu te gaan", "",
 					Color.CYAN);
 			if (isX(email))
 				mainController.start();
