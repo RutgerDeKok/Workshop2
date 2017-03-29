@@ -4,8 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.springframework.stereotype.Component;
-
 import main.java.model.UserAccount;
 
 //@Component
@@ -19,7 +17,7 @@ public class UserAccountDao extends GenericDaoJpaImpl<UserAccount, Long> {
 	}
 		
 
-	// @Bean
+	
 	public UserAccount findUserbyEmail(String email) {
 
 		try {

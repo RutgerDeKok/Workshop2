@@ -2,39 +2,41 @@ package main.java.presentation;
 
 import java.awt.Color;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-@Component
 public class ConsoleDemo {
 
 	boolean runDemoAgain = true;
-	@Autowired
 	private ColorConsole console;
+	
 
-	public void tester() {
+	public static void main(String[] args) {
+		ConsoleDemo consoledemo = new ConsoleDemo();
+		consoledemo.runDemo();
+	}
+	
 
+	public void runDemo() {
+		console = new ColorConsole();
 		confirmdDemoAgain();
-		while (runDemoAgain){
-			runDemo();
+		while (runDemoAgain) {
+			demo();
 			confirmdDemoAgain();
 		}
-
 		confirmExit();
-
 	}
+	
 
-	private void runDemo() {
-		System.out.println(console);
+	private void demo() {
+		
 		console.println("testing 123 ", Color.magenta);
 		console.print("testing 123 ", Color.green);
 		console.print("testing 123 ", Color.white);
 		console.print("testing 123", Color.orange);
 
-		console.println("\nTesting a long text" +
-						"\ntesting 123 test" + 
-						"\ntesting 456 test" + 
-						"\ntesting 789 test", Color.BLUE);
+		console.println("\nTesting a long text" 
+				+ "\ntesting 123 test" 
+				+ "\ntesting 456 test" 
+				+ "\ntesting 789 test",
+				Color.CYAN);
 
 		String response = console.printResponse("What's your Name?", "Pipo", Color.green);
 
@@ -53,10 +55,10 @@ public class ConsoleDemo {
 			console.println("Geen mening?", Color.MAGENTA);
 			break;
 		}
-		
+
 		char[] pass = console.printResponseMask("\nType een password", Color.cyan);
-		console.println("je password is: ["+String.valueOf(pass)+"] oops.....verklapt!\n", Color.orange);
-				
+		console.println("je password is: [" + String.valueOf(pass) + "] oops.....verklapt!\n", Color.orange);
+
 		for (int i = 5; i > 0; i--) {
 			response = console.printResponse("Type wat zinnigs, je hebt nog " + i + (i > 1 ? " kansen" : " kans"),
 					"Kaas", new Color(70, 206, 206));
@@ -79,6 +81,7 @@ public class ConsoleDemo {
 		}
 
 	}
+	
 
 	public void confirmdDemoAgain() {
 		String response;
@@ -97,6 +100,7 @@ public class ConsoleDemo {
 			break;
 		}
 	}
+	
 
 	public void confirmExit() {
 
@@ -108,7 +112,6 @@ public class ConsoleDemo {
 			response = console.printResponse("", "", Color.green);
 			response = response.toUpperCase();
 		}
-
 		console.exit();
 	}
 

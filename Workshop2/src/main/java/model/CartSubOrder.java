@@ -1,14 +1,21 @@
 package main.java.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 @Entity
@@ -19,17 +26,27 @@ public class CartSubOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@OneToOne
+	@Fetch(FetchMode.JOIN)
 	private Product product;
 	@Column(length = 10, nullable = false)
 	private int quantity;
 	@Column(length = 10, nullable = false)
 	private BigDecimal subTotal;
+	
         /* @Jurjen
         CartSubOrder heeft een referentie naar Cart nodig toch?
         @OneToOne
         @Column(name = "cart_id", nullable = false)
         private Cart cart;
-        */
+       
+		@Rutger 
+		dit wordt automatisch geregeld door de annotaties in Cart
+		@OneToMany
+		@JoinColumn(name = "cart_id")
+		private List<CartSubOrder> subOrders = new ArrayList<>();
+		
+		Het werkt prima, kijk maar in de DB
+		 */
 	
 	public CartSubOrder(){
 	}
@@ -65,12 +82,10 @@ public class CartSubOrder {
 		return subTotal;
 	}
 
-        /* @Jurjen
-        Volgens mij is setTotalPrice niet nodig, maar kan het beter vervangen
-        worden door een functie die de totaalprijs berekent
-        */
-	public void setTotalPrice(BigDecimal totalPrice) { /* @Jurjen setSubTotal(BigDecimal subTotal) */
-		this.subTotal = totalPrice;
+      
+	public void setSubTotal(BigDecimal price, int quantity) { 
+		subTotal =(price.multiply(new BigDecimal(quantity)));
+		subTotal.setScale(2);
 	}
         
         /* @Jurjen
@@ -79,6 +94,28 @@ public class CartSubOrder {
             Cart.addSubOrder(this);
         }
         */
+	
+	@Override
+	public String toString(){
+		//  Product   - Aantal  -  Prijs  - Subtotaal",
+		int q =this.getQuantity();
+		BigDecimal p = this.getProduct().getPrice();
+		setSubTotal(p, q);
+		p.setScale(2);
+		String result = this.getProduct().getName()
+				+ "\t" + q
+				+ "\t" + p
+				+ "\t" + subTotal;
+	
+		return result;
+	}
+
+	// this method was used in the persistence test to quickly 
+	// add some numbers to a subOrder
+	public void setTotalPrice(BigDecimal bigDecimal) {
+		subTotal = bigDecimal;
+		
+	}
 
 
 }

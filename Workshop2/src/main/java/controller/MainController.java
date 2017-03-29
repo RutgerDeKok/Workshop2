@@ -4,12 +4,10 @@ import main.java.presentation.MainEmployeeMenu;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import main.java.model.UserAccount;
 import main.java.model.UserType;
-import main.java.presentation.ConsoleDemo;
 import main.java.presentation.InlogMenu;
 import main.java.presentation.MainMenu;
 import main.java.presentation.MainOrderMenu;
@@ -26,6 +24,8 @@ public class MainController {
 	private MainOrderMenu mainOrderMenu; 
 	@Autowired
 	private MainEmployeeMenu mainEmployeeMenu; 
+	
+	private UserAccount currentUser;
 
 	
 	private final EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("webshop");
@@ -33,7 +33,6 @@ public class MainController {
 
 	public void start() {
 
-//		 consoleTest.tester();
 		 mainMenu.runStartMenu();
 	}
 	
@@ -42,6 +41,7 @@ public class MainController {
 
 	public void inlogControle() {
 		UserAccount user = loginMenu.Login();
+		setCurrentUser(user);
 		if(user==null) start();
 		if(user.getUserType()==UserType.CUSTOMER){
 			mainOrderMenu.runMenu();
@@ -50,11 +50,24 @@ public class MainController {
 			mainEmployeeMenu.runMenu();
 		}
 	}
+	
+	public UserAccount getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(UserAccount currentUser) {
+		this.currentUser = currentUser;
+	}
 
 
-	@Bean
+//	@Bean
 	public EntityManagerFactory getEntityManagerFactory() {
 		return emFactory;
 	}
+
+
+
+
+	
 
 }
