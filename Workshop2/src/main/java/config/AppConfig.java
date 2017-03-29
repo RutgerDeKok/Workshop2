@@ -14,7 +14,7 @@ class AppConfig {
 	
     @Bean
     public EntityManager getEntityManager() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("javabook");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("webshop");
         return factory.createEntityManager();
     }
     

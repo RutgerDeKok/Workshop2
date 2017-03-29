@@ -4,7 +4,7 @@ import main.java.daos.GenericDao;
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.model.Product;
 
-import main.java.presentation.EmployeeMenu.EmployeeProductMenu;
+import main.java.presentation.EmployeeProductMenu;
 import main.java.service.ProductService;
 
 import java.util.List;

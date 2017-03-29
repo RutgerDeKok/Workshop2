@@ -5,7 +5,6 @@
  */
 package main.java.controller;
 
-import main.java.infrastructure.MainController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 import main.java.daos.GenericDao;
 import main.java.daos.UserAccountDao;
 import main.java.model.UserAccount;
-import main.java.presentation.CreateMenus.CreateUserAccountMenu;
+import main.java.presentation.CreateUserAccountMenu;
 
 @Component
 public class UserController {

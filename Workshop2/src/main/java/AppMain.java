@@ -3,7 +3,7 @@ package main.java;
 import org.springframework.context.ApplicationContext;
 
 import main.java.config.ApplicationContextProvider;
-import main.java.infrastructure.MainController;
+import main.java.controller.MainController;
 
 public class AppMain {
 
@@ -11,7 +11,7 @@ public class AppMain {
 
 		ApplicationContextProvider appContext = new ApplicationContextProvider();
 		ApplicationContext context = appContext.getApplicationContext();
-		MainController controller = (MainController) context.getBean(main.java.infrastructure.MainController.class);
+		MainController controller = (MainController) context.getBean(main.java.controller.MainController.class);
 
 		controller.start();
 
