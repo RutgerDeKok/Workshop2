@@ -8,6 +8,7 @@ import main.java.presentation.EmployeeProductMenu;
 import main.java.service.ProductService;
 
 import java.util.List;
+import main.java.daos.ProductUniqueDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -18,7 +19,7 @@ public class ProductController {
 //	private CreateProductMenu createProductMenu;
 	private GenericDao<Product, Long> dao = new GenericDaoJpaImpl<>(Product.class);
 
-
+        private  ProductUniqueDao pdao = new ProductUniqueDao(Product.class);
 	
     
     @Autowired
@@ -26,10 +27,10 @@ public class ProductController {
     @Autowired
     EmployeeProductMenu epm;
     
-    public List<Product> getAllProducts(){
-        
-    return productService.getAllProducts();
-    }
+//    public List<Product> getAllProducts(){
+//        
+//    return productService.getAllProducts();
+//    }
     
     public Product getProduct(Long id){
     return productService.getProduct(id);
@@ -51,9 +52,16 @@ public void createProduct() {
 		dao.create(product);
 		epm.runEmployeeProductMenu();
 	}
+
+public List<Product> getAllProducts(){
+    return pdao.getAllProducts();
+}
+
+
+
     
     public void pasProductAan() {
-        productService.getAllProducts();
+       // productService.getAllProducts();
         Product zoekproduct = epm.pasProductAan();
         
         //roep dao aan

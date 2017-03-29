@@ -96,7 +96,11 @@ console.println("hoi",Kleur.CART);
 			case "4":
 				console.println("overzicht",Color.ORANGE);
                                 //displayed alle producten.
+                                //dit moet uitgeprint worden.
 				productController.getAllProducts();
+                                
+                                runEmployeeProductMenu();
+                                
 				break;
                         case "5":
 				console.println("zoeken opn",Color.ORANGE);
