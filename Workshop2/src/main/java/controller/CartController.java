@@ -2,6 +2,9 @@ package main.java.controller;
 
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.model.*;
+import main.java.presentation.MainCartMenu;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -11,9 +14,23 @@ public class CartController {
 //  CartService cartService;
 //	@Autowired
 	private GenericDaoJpaImpl<Cart, Long> dao = new GenericDaoJpaImpl<>(Cart.class);
+	@Autowired
+	private MainCartMenu mainCartMenu;
+	
+	private Cart currentCart;
     
-    public Cart getCart(long id) {
-    	return dao.read(id);
+	// get Cart from DB
+    public Cart getCart(long id) { 
+    	currentCart = dao.read(id);
+    	return currentCart;
+	}
+    
+    public Cart getCurrentCart() { 
+    	return currentCart;
+	}
+    
+    public void setCurrentCart(Cart userCart) { 
+    	currentCart = userCart;
 	}
 
 	public void createCartByID(long id) {
@@ -28,6 +45,10 @@ public class CartController {
 	
 	public void updateCart(Cart cart) {
 		dao.saveOrUpdate(cart);
+	}
+
+	public void runMainCartMenu() {
+		mainCartMenu.runMenu();
 	}
     
 //    public List<Cart> getAllCarts(){

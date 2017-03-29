@@ -32,8 +32,7 @@ public class MainController {
 	
 
 	public void start() {
-
-		 mainMenu.runStartMenu();
+		 runStartMenu();
 	}
 	
 
@@ -54,6 +53,7 @@ public class MainController {
 	
 	
 	public void runMainCustomerMenu() {
+		
 		mainCustomerMenu.runMenu();
 		
 	}
@@ -75,7 +75,9 @@ public class MainController {
 		return emFactory;
 	}
 
-
+	public void runStartMenu(){
+		mainMenu.runStartMenu();
+	}
 
 
 	

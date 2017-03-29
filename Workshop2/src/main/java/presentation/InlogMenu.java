@@ -46,7 +46,7 @@ public class InlogMenu {
 		} while (true);
 
 		// check password
-		char[] pass = console.printResponseMask("Voer uw password in", Color.cyan);
+		char[] pass = console.printResponseMask("Voer uw password in", Color.ORANGE);
 		if(checkPass(pass, user)){
 			console.println("Gegevens correct\n", Color.MAGENTA);
 			return user;

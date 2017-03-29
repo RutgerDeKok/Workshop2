@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.daos.UserAccountDao;
+import main.java.model.Cart;
 import main.java.model.UserAccount;
 import main.java.presentation.CreateUserAccountMenu;
 
@@ -49,6 +50,10 @@ public class UserController {
 			UserAccount user = dao.findUserbyEmail(email);
 			return user;
 	}
+
+
+
+	
 
 	
 

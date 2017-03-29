@@ -37,10 +37,12 @@ public class MainEmployeeMenu {
 		String response;
 		boolean validResponse;
 
-		console.println("=================================================" + "\n Welkom in het Medewerker Menu"
+		console.println("=================================================" 
+				+ "\n Welkom in het Medewerker Menu"
 				+ "\n================================================="
 				+ "\n 1: account(aanpassen/toevoegen/verwijderen/overzicht)"
-				+ "\n 2: product(aanpassen/toevoegen/verwijderen/overzicht)" + "\n 3: bestelling (aanpassen/overzicht)"
+				+ "\n 2: product(aanpassen/toevoegen/verwijderen/overzicht)" 
+				+ "\n 3: bestelling (aanpassen/overzicht)"
 				+ "\n 4: naar klant menu" + "\n 5: " + "\n 6: " + "\n 0: uitloggen"
 				+ "\n====================================================", Kleur.CART);
 
