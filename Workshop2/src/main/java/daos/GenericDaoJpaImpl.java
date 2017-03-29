@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import main.java.controller.MainController;
+import main.java.infrastructure.MainController;
 
 //@Component
 public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao<T, PK> {

@@ -1,11 +1,12 @@
 package main.java.presentation;
 
+import main.java.infrastructure.ColorConsole;
 import java.awt.Color;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import main.java.controller.MainController;
+import main.java.infrastructure.MainController;
 import main.java.controller.UserController;
 import main.java.infrastructure.PassHasher;
 import main.java.infrastructure.Validator;
