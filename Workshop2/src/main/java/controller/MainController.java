@@ -10,7 +10,7 @@ import main.java.model.UserAccount;
 import main.java.model.UserType;
 import main.java.presentation.InlogMenu;
 import main.java.presentation.MainMenu;
-import main.java.presentation.MainOrderMenu;
+import main.java.presentation.MainCustomerMenu;
 
 @Component
 public class MainController {
@@ -21,7 +21,7 @@ public class MainController {
 	@Autowired
 	private InlogMenu loginMenu; 
 	@Autowired
-	private MainOrderMenu mainOrderMenu; 
+	private MainCustomerMenu mainCustomerMenu; 
 	@Autowired
 	private MainEmployeeMenu mainEmployeeMenu; 
 	
@@ -44,13 +44,23 @@ public class MainController {
 		setCurrentUser(user);
 		if(user==null) start();
 		if(user.getUserType()==UserType.CUSTOMER){
-			mainOrderMenu.runMenu();
+			
+			runMainCustomerMenu();
 		}
 		if(user.getUserType()==UserType.EMPLOYEE){
 			mainEmployeeMenu.runMenu();
 		}
 	}
 	
+	
+	public void runMainCustomerMenu() {
+		mainCustomerMenu.runMenu();
+		
+	}
+
+
+
+
 	public UserAccount getCurrentUser() {
 		return currentUser;
 	}

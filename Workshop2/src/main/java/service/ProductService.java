@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import main.java.daos.*;
+import main.java.daos.repositories.ProductRepository;
 import main.java.model.*;
 import org.springframework.stereotype.Component;
 

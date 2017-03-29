@@ -1,10 +1,10 @@
-package main.java.daos;
+package main.java.daos.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import main.java.model.*;
 
 //@Repository
-public interface CartRepository extends CrudRepository<Cart,Long> {
+public interface AdressRepository extends CrudRepository<Adress,Long> {
     
 }

@@ -17,10 +17,9 @@ import main.java.controller.MainController;
 import main.java.controller.UserController;
 import main.java.presentation.MainMenu;
 
-
 @Component
 public class MainEmployeeMenu {
-	
+
 	@Autowired
 	private ColorConsole console;
 	@Autowired
@@ -29,61 +28,55 @@ public class MainEmployeeMenu {
 	private ProductController productController;;
 	@Autowired
 	private UserController userController;
-        @Autowired
-        private MainMenu mainmenu;
-        @Autowired
-        private EmployeeProductMenu epm;
-	
+	@Autowired
+	private MainMenu mainmenu;
+	@Autowired
+	private EmployeeProductMenu epm;
+
 	public void runMenu() {
 		String response;
 		boolean validResponse;
-				
-	
-				console.println("================================================="+
-				"\n Welkom in het Medewerker Menu"+
-				"\n================================================="+
-				"\n 1: account(aanpassen/toevoegen/verwijderen/overzicht)"+
-				"\n 2: product(aanpassen/toevoegen/verwijderen/overzicht)"+
-				"\n 3: bestelling (aanpassen/overzicht)"+
-				"\n 4: "+
-				"\n 5: "+
-				"\n 6: "+
-				"\n 0: terug"+
-				"\n====================================================", Kleur.CART);
-                                
-                                do{
+
+		console.println("=================================================" + "\n Welkom in het Medewerker Menu"
+				+ "\n================================================="
+				+ "\n 1: account(aanpassen/toevoegen/verwijderen/overzicht)"
+				+ "\n 2: product(aanpassen/toevoegen/verwijderen/overzicht)" + "\n 3: bestelling (aanpassen/overzicht)"
+				+ "\n 4: naar klant menu" + "\n 5: " + "\n 6: " + "\n 0: uitloggen"
+				+ "\n====================================================", Kleur.CART);
+
+		do {
 			validResponse = true;
 			response = console.printResponse("Maak uw keuze: \n", "1", Color.CYAN);
-		
+
 			switch (response) {
 			case "0":
-				console.println(" terug ",Color.RED);
+				console.println(" terug ", Color.RED);
 				mainmenu.runStartMenu();
 				break;
 			case "1":
-				console.println("account.",Color.ORANGE);
+				console.println("account.", Color.ORANGE);
 				mainController.inlogControle();
 				break;
 			case "2":
-				console.println(" ",Color.ORANGE);
-				
-                                productController.runEmployeeProductMenu();
+				console.println(" ", Color.ORANGE);
+
+				productController.runEmployeeProductMenu();
 				break;
-                        case "3":       
-                                console.println("bestelling",Color.ORANGE);
-                                //functie
-                                break;
+			case "3":
+				console.println("bestelling", Color.ORANGE);
+				// functie
+				break;
+			case "4":
+				console.println("Naar klant menu", Color.RED);
+				mainController.runMainCustomerMenu();
+				break;
 			default:
-				console.println("Ongeldige invoer, probeer opnieuw.",Color.magenta);
+				console.println("Ongeldige invoer, probeer opnieuw.", Color.magenta);
 				validResponse = false;
 				break;
 			}
-		}while(!validResponse);
+		} while (!validResponse);
 
 	}
-                                
-                                
-                                
-	}
 
-
+}
