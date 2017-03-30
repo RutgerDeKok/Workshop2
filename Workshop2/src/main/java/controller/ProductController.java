@@ -19,6 +19,8 @@ public class ProductController {
 //	private CreateProductMenu createProductMenu;
 	@Autowired
 	private GenericDao<Product, Long> dao;
+	
+	private List<Product> producten;
 
 //        private  ProductUniqueDao pdao = new ProductUniqueDao();
 	
@@ -47,7 +49,7 @@ public class ProductController {
 public void createProduct() {
 		
 		// get Klant object back (adress can remain null at first)
-		Product product = epm.createProduct();
+		Product product = epm.createUpdateProduct(new Product());
 		
 		// send Klant object to DAO to persist in DB
 		dao.create(product);
@@ -62,12 +64,9 @@ public List<Product> getAllProducts(){
 
 
     
-    public void pasProductAan() {
-       // productService.getAllProducts();
-        Product zoekproduct = epm.pasProductAan();
-        
-        //roep dao aan
-        epm.runEmployeeProductMenu();
+    public void pasProductAan(Product aangepastProduct) {
+    		dao.saveOrUpdate(aangepastProduct);
+    		epm.runEmployeeProductMenu();
     }
     
     
@@ -83,6 +82,14 @@ public List<Product> getAllProducts(){
 	public void runEmployeeProductMenu() {
 		epm.runEmployeeProductMenu();
 		
+	}
+
+	public List<Product> getProducten() {
+		return producten;
+	}
+
+	public void setProducten(List<Product> producten) {
+		this.producten = producten;
 	}
 
     
