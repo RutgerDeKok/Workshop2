@@ -1,4 +1,4 @@
-package main.java.presentation;
+package main.java.presentation.CreateMenus;
 
 import main.java.infrastructure.TextIO;
 import main.java.infrastructure.Validator;

@@ -2,7 +2,7 @@ package main.java.controller;
 
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.model.*;
-import main.java.presentation.MainCartMenu;
+import main.java.presentation.klant.CustomerEditCartMenu;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ public class CartController {
 //	@Autowired
 	private GenericDaoJpaImpl<Cart, Long> dao = new GenericDaoJpaImpl<>(Cart.class);
 	@Autowired
-	private MainCartMenu mainCartMenu;
+	private CustomerEditCartMenu editCartMenu;
 	
 	private Cart currentCart;
     
@@ -48,7 +48,7 @@ public class CartController {
 	}
 
 	public void runMainCartMenu() {
-		mainCartMenu.runMenu();
+		editCartMenu.runMenu();
 	}
     
 //    public List<Cart> getAllCarts(){

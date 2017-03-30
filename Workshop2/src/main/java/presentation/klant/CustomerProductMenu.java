@@ -1,4 +1,4 @@
-package main.java.presentation;
+package main.java.presentation.klant;
 
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -14,10 +14,13 @@ import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
 import main.java.model.CartSubOrder;
 import main.java.model.ProductCategory;
+import main.java.presentation.ColorConsole;
+import main.java.presentation.DisplayCart;
+import main.java.presentation.MainMenu;
 
 @Component
 //public class MainCustomerMenu{
-public class MainCustomerMenu implements DisplayCart{
+public class CustomerProductMenu implements DisplayCart{
         @Autowired
         private MainMenu mainMenu;
 	@Autowired
@@ -105,47 +108,7 @@ public class MainCustomerMenu implements DisplayCart{
 	}
 	
 	
-	
-	
 
-//	public void displayCart() {
-//		BigDecimal totaal = BigDecimal.ZERO;
-//		// header van tabel
-//		// id in deze lijst is het getalletje in de lijst 1,2,3...,n'de subOrder
-//		console.println(Formatter.LINE, Color.YELLOW);
-//		console.println("  -- Uw Winkel Wagen --", Color.GREEN);
-//		console.println(Formatter.LINE, Color.YELLOW);
-//		
-//
-//		// loop om alle suborders te printen en totaal bedrag uit te rekenen
-//		int[] padnums = { 4,4,25, 10, 10, 12}; 
-//		int[] allignLR = { 1,1, 0, 1, 1, 1}; 
-//		console.println(Formatter.padString(padnums,allignLR,"Id","  ",
-//				"Product         -","Aantal", "-  Prijs", "- Subtotaal"),Color.YELLOW);
-//		
-//		
-//		List<CartSubOrder> subOrders = userCart.getSubOrders();
-//		Integer i = 1;
-//		for (CartSubOrder sub : subOrders) {
-//			
-//			String product = sub.getProduct().getName();
-//			String aantal = (""+sub.getQuantity());
-//			String prijs = sub.getProduct().getPrice().toString();
-//			String subtotaal = sub.getTotalPrice().toString();
-//			console.println(Formatter.padString(padnums,allignLR,i.toString(),"  ", 
-//					product, aantal, prijs, subtotaal),Color.YELLOW);
-//			totaal = totaal.add(sub.getTotalPrice());
-//			i++;
-//		}
-//		
-//		totaal.setScale(2);  // aantal decimalen instellen
-//		
-//		// Footer van tabel
-//		console.println("                                             Totaal:  " + totaal, Color.GREEN);
-//		console.println(Formatter.LINE, Color.YELLOW);
-//
-//	}
-	
 
 
 }

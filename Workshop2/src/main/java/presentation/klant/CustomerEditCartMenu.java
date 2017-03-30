@@ -1,4 +1,9 @@
-package main.java.presentation;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package main.java.presentation.klant;
 
 import java.awt.Color;
 
@@ -8,10 +13,13 @@ import org.springframework.stereotype.Component;
 import main.java.controller.CartController;
 import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
+import main.java.presentation.ColorConsole;
+import main.java.presentation.DisplayCart;
+
 
 @Component
-public class MainCartMenu implements DisplayCart{
-	
+public class CustomerEditCartMenu implements DisplayCart{
+    
 	@Autowired
 	private ColorConsole console;
 	@Autowired
@@ -67,5 +75,5 @@ public class MainCartMenu implements DisplayCart{
 		// TODO Auto-generated method stub
 		
 	}
-
+    
 }
