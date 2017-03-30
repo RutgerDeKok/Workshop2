@@ -31,7 +31,7 @@ public class InlogMenu {
 		do {
 			email = console.printResponse("\nvoer uw email adress in " + "\nType x, om naar het hoofmenu te gaan", "",
 					Color.CYAN);
-			if (isX(email))
+			if (email.equalsIgnoreCase("x"))
 				mainController.start();
 
 			if (emailValid(email)) {
@@ -71,9 +71,5 @@ public class InlogMenu {
 
 	private boolean emailValid(String s) {
 		return Validator.getInstance().validateEmail(s);
-	}
-
-	private boolean isX(String s) {
-		return (s.toLowerCase() == "x");
 	}
 }

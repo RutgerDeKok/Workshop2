@@ -11,7 +11,7 @@ public class AppMain {
 
 		ApplicationContextProvider appContext = new ApplicationContextProvider();
 		ApplicationContext context = appContext.getApplicationContext();
-		MainController controller = (MainController) context.getBean(main.java.controller.MainController.class);
+		MainController controller = context.getBean(main.java.controller.MainController.class);
 
 		controller.start();
 
