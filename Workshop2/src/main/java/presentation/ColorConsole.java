@@ -76,9 +76,9 @@ public class ColorConsole {
 		frame.add(scrollPane, BorderLayout.CENTER);
 		frame.getContentPane().setBackground(new Color(50, 50, 50));
 
-		frame.setSize(1200, 800);
+		frame.setSize(1080, 640);
 		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setVisible(true);
 		
 		input.addActionListener(new ActionListener() {

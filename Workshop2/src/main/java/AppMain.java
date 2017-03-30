@@ -2,15 +2,17 @@ package main.java;
 
 import org.springframework.context.ApplicationContext;
 
-import main.java.config.ApplicationContextProvider;
+
 import main.java.controller.MainController;
+import main.java.config.AppConfig;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AppMain {
 
 	public static void main(String[] args) {
 
-		ApplicationContextProvider appContext = new ApplicationContextProvider();
-		ApplicationContext context = appContext.getApplicationContext();
+	
+		ApplicationContext context = new AnnotationConfigApplicationContext(main.java.config.AppConfig.class);
 		MainController controller = context.getBean(main.java.controller.MainController.class);
 
 		controller.start();
