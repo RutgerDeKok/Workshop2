@@ -15,6 +15,8 @@ import main.java.model.UserType;
 @Component
 public class CreateUserAccountMenu {
 
+        @Autowired
+        private MainMenu mainMenu;
 	@Autowired
 	private MainController mainController;
 	@Autowired
@@ -47,7 +49,7 @@ public class CreateUserAccountMenu {
 		System.out.println("email isavailable?: " + isAvailable);
 		if (!isAvailable) {
 			console.println("\nDit email adres heeft reeds een account\n", Color.magenta);
-			mainController.start();
+			mainMenu.runStartMenu();
 		}
 
 		user.setEmail(email);

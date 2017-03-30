@@ -14,6 +14,8 @@ import main.java.model.UserAccount;
 @Component
 public class InlogMenu {
 
+        @Autowired
+        private MainMenu mainMenu;
 	@Autowired
 	private MainController mainController;
 	@Autowired
@@ -32,7 +34,7 @@ public class InlogMenu {
 			email = console.printResponse("\nvoer uw email adress in " + "\nType x, om naar het hoofmenu te gaan", "",
 					Color.CYAN);
 			if (email.equalsIgnoreCase("x"))
-				mainController.start();
+				mainMenu.runStartMenu();
 
 			if (emailValid(email)) {
 

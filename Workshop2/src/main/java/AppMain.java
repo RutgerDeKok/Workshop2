@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 
 import main.java.controller.MainController;
 import main.java.config.AppConfig;
+import main.java.presentation.MainMenu;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class AppMain {
@@ -13,9 +14,9 @@ public class AppMain {
 
 	
 		ApplicationContext context = new AnnotationConfigApplicationContext(main.java.config.AppConfig.class);
-		MainController controller = context.getBean(main.java.controller.MainController.class);
+		MainMenu menu = context.getBean(main.java.presentation.MainMenu.class);
 
-		controller.start();
+		menu.runStartMenu();
 
 		// System.out.println("Einde programma");
 	}

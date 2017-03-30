@@ -8,10 +8,13 @@ import main.java.daos.UserAccountDao;
 import main.java.model.Cart;
 import main.java.model.UserAccount;
 import main.java.presentation.CreateUserAccountMenu;
+import main.java.presentation.MainMenu;
 
 @Component
 public class UserController {
 	
+        @Autowired
+        private MainMenu mainMenu;
 	@Autowired
 	private CreateUserAccountMenu menu;
 	@Autowired
@@ -35,7 +38,7 @@ public class UserController {
 		
 		// create cart with the same id
 		cartController.createCartByID(id);
-		mainController.start();
+		mainMenu.runStartMenu();
 	}
 	
 	

@@ -31,17 +31,10 @@ public class MainController {
 	private final EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("webshop");
 	
 
-	public void start() {
-		 runStartMenu();
-	}
-	
-
-
-
 	public void inlogControle() {
 		UserAccount user = loginMenu.Login();
 		setCurrentUser(user);
-		if(user==null) start();
+		if(user==null) mainMenu.runStartMenu();
 		if(user.getUserType()==UserType.CUSTOMER){
 			
 			runMainCustomerMenu();
@@ -73,10 +66,6 @@ public class MainController {
 //	@Bean
 	public EntityManagerFactory getEntityManagerFactory() {
 		return emFactory;
-	}
-
-	public void runStartMenu(){
-		mainMenu.runStartMenu();
 	}
 
 

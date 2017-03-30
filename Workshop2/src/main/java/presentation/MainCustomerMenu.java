@@ -18,6 +18,8 @@ import main.java.model.ProductCategory;
 @Component
 //public class MainCustomerMenu{
 public class MainCustomerMenu implements DisplayCart{
+        @Autowired
+        private MainMenu mainMenu;
 	@Autowired
 	private ColorConsole console;
 	@Autowired
@@ -56,7 +58,7 @@ public class MainCustomerMenu implements DisplayCart{
 			case "0":
 				console.println("Uitloggen. Uw Winkelwagen wordt opgeslagen", Color.RED);
 				cartController.updateCart(userCart);
-				mainController.runStartMenu();
+				mainMenu.runStartMenu();
 				break;
 			case "1":
 				console.println("Alle Kazen", Color.ORANGE);
