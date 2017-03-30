@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import main.java.daos.UserAccountDao;
 import main.java.model.Cart;
 import main.java.model.UserAccount;
-import main.java.presentation.CreateUserAccountMenu;
+import main.java.presentation.CreateMenus.CreateUserAccountMenu;
 import main.java.presentation.MainMenu;
 
 @Component

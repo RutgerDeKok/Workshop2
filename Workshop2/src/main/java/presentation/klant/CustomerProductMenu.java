@@ -1,4 +1,4 @@
-package main.java.presentation;
+package main.java.presentation.klant;
 
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -14,10 +14,13 @@ import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
 import main.java.model.CartSubOrder;
 import main.java.model.ProductCategory;
+import main.java.presentation.ColorConsole;
+import main.java.presentation.DisplayCart;
+import main.java.presentation.MainMenu;
 
 @Component
 //public class MainCustomerMenu{
-public class MainCustomerMenu implements DisplayCart{
+public class CustomerProductMenu implements DisplayCart{
         @Autowired
         private MainMenu mainMenu;
 	@Autowired

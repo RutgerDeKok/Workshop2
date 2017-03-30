@@ -17,6 +17,7 @@ import main.java.controller.MainController;
 import main.java.controller.UserController;
 import main.java.infrastructure.Formatter;
 import main.java.presentation.MainMenu;
+import main.java.presentation.klant.CustomerMenu;
 
 @Component
 public class MainEmployeeMenu {
@@ -33,6 +34,8 @@ public class MainEmployeeMenu {
 	private MainMenu mainmenu;
 	@Autowired
 	private EmployeeProductMenu epm;
+        @Autowired
+        CustomerMenu customerMenu;
 
 	public void runMenu() {
 		String response;
@@ -70,7 +73,7 @@ public class MainEmployeeMenu {
 				break;
 			case "4":
 				console.println("Naar klant menu", Color.RED);
-				mainController.runMainCustomerMenu();
+				customerMenu.runMenu();
 				break;
 			default:
 				console.println("Ongeldige invoer, probeer opnieuw.", Color.magenta);
