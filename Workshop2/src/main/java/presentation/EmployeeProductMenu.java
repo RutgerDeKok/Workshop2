@@ -23,7 +23,7 @@ import main.java.model.Product;
 import main.java.model.ProductCategory;
 
 @Component
-public class EmployeeProductMenu {
+public class EmployeeProductMenu implements DisplayProducts{
 
 	@Autowired
 	private ColorConsole console;
@@ -37,17 +37,32 @@ public class EmployeeProductMenu {
 	@Autowired
 	private MainEmployeeMenu mem;
 	private char eAc = '\u00E9'; // e accent
-	private List<Product> producten;
+	private List<Product> products;
+	private List<Product> filteredProducts;
+	private boolean comingFromOutsideMenu = true;
+	private ProductCategory filterCategory = ProductCategory.ALL;
 
 	public void runEmployeeProductMenu() {
 		String response;
 		boolean validResponse;
-
-		console.println(Formatter.LINE + "\n Product Menu" + "\n" + Formatter.LINE
-				+ "\n Wat wilt u met het product doen?" + "\n 1: ik wil het aanpassen." + "\n 2: ik wil er " + eAc + eAc
-				+ "n toevoegen." + "\n 3: ik wil er " + eAc + eAc + "n verwijderen."
-				+ "\n 4: ik wil een overzicht van alle producten."
-				+ "\n 5: ik wil alle producten zoeken die voldoen aan ..." + "\n 0: ik wil terug naar Medewerker menu"
+		
+		if(comingFromOutsideMenu){
+		products = productController.getAllProducts();  
+		filteredProducts = new ArrayList<>(products);
+		}
+		comingFromOutsideMenu = false;
+		displayProducts(console, filteredProducts);
+		
+		console.println("\n"+Formatter.LINE, Kleur.CART);
+		console.println("Product Menu", Kleur.RED_ORANGE);
+		console.println(Formatter.LINE 
+				+ "\n Wat wilt u met het product doen?" 
+				+ "\n 1: ik wil er " + eAc + eAc+ "n aanpassen." 
+				+ "\n 2: ik wil er " + eAc + eAc+ "n toevoegen." 
+				+ "\n 3: ik wil er " + eAc + eAc + "n verwijderen."
+				+ "\n 4: ik wil producten filteren op categorie"
+				+ "\n 5: ik wil producten filteren op merk" 
+				+ "\n 0: ik wil terug naar Medewerker menu"
 				+ "\n" + Formatter.LINE, Kleur.CART);
 		do {
 			validResponse = true;
@@ -62,7 +77,7 @@ public class EmployeeProductMenu {
 			case "1":
 				console.println(" aanpassen.", Color.ORANGE);
 				String keuze = console.printResponse("Kies een getal om een product om aan te passen", "", Color.CYAN);
-				Product aangepastProduct = createUpdateProduct(producten.get(Integer.parseInt(keuze)-1));
+				Product aangepastProduct = createUpdateProduct(filteredProducts.get(Integer.parseInt(keuze)-1));
 				productController.pasProductAan(aangepastProduct);
 				break;
 			case "2":
@@ -75,36 +90,19 @@ public class EmployeeProductMenu {
 				// productController.inlogControle();
 				break;
 			case "4":
-				console.clear();
-				console.println("Overzicht Alle Producten.", Color.ORANGE);
-				// displayed alle producten.
-				console.println(Formatter.LINE, Color.orange);
-				int[] padnums = { 4, 3, 20, 16, 22, 8, 3, 14, 10};
-				int[] alignLR = { 1, 1,  0,  0,  0, 1,  1, 0,  1};
-
-				console.println(Formatter.padString(padnums, alignLR, "id"," ", "naam ", "merk", "info"
-							, "prijs",	" ", "catogorie", "voorraad"), Color.orange);
-				producten = productController.getAllProducts();
-
-				for (Product p : producten) {
-					String idp = p.getId() + "";
-					String naamp = p.getName();// beetje lang
-					String merkp = p.getBrand();
-					String infop = p.getInfo(); //lang
-					String prijsp = p.getPrice() + "";
-					String catop = p.getCategory().getNL(); // beetje lang
-					String voorraadp = ""+p.getStockCount();
-					console.println(
-							Formatter.padString(padnums, alignLR, idp," ", naamp, merkp, infop, prijsp, " ",catop, voorraadp),
-							Color.YELLOW);
-
-				}
-
+				
+				console.println("Filteren op categorie", Color.ORANGE);
+				filterCategory = selectCategory(filterCategory);
+				console.println("Filter " + filterCategory.getNL(), Color.YELLOW);
+				
+				filterProductenByCat();
+				
+				comingFromOutsideMenu = false;
 				runEmployeeProductMenu();
 
 				break;
 			case "5":
-				console.println("zoeken opn", Color.ORANGE);
+				console.println("Filteren op merk", Color.ORANGE);
 				// productController.();
 				break;
 			default:
@@ -120,52 +118,54 @@ public class EmployeeProductMenu {
 	
 	
 
+	private void filterProductenByCat() {
+		System.out.println("filt: "+filteredProducts);
+		filteredProducts.clear();
+		System.out.println("filt: "+filteredProducts);
+		for(Product prod: products){
+			if(filterCategory ==ProductCategory.ALL || prod.getCategory()==filterCategory){
+				filteredProducts.add(prod);
+			}
+		}
+		System.out.println("filt: "+filteredProducts);
+	}
+
+
+
+
+
 	public Product createUpdateProduct(Product product) {
 
 		String naam, merk, info;
 		BigDecimal prijs = null;
-		int categorie, voorraad;
-
+		int  voorraad;
+		
+		
+		// Naam
 		console.println("Wat is de     naam   van het nieuwe product?", Color.ORANGE);
 		naam = console.printResponse("naam :", product.getName(), Color.ORANGE);
 		console.println(naam, Color.yellow);
 
+		// Merk
 		console.println("Wat is het    merk   van het nieuwe product?", Color.ORANGE);
 		merk = console.printResponse("merk:", product.getBrand(), Color.ORANGE);
 		console.println(merk, Color.yellow);
 
-		console.println(
-				"wat is de catogorie van het product 1: Hard-Medium 2: Zacht-Schimmel"
-				+"\n3: blauw 4: room 5: geit 6: overige/weet niet ",
-				Color.ORANGE);
-
-		categorie = 0;
-		boolean badResponse = false;
-		do {
-			try {
-				if(product.getCategory()==null){product.setCategory(ProductCategory.ALL);
-				};
-				categorie = console.printResponseInt("categorie:", "" + (product.getCategory().ordinal()+1), Color.ORANGE);
-				badResponse = false;
-
-				if (categorie < 1 || categorie > ProductCategory.values().length) {
-					console.println("Foutieve invoer", Color.RED);
-					badResponse = true;
-				}
-			} catch (NumberFormatException e) {
-				console.println("Foutieve invoer, vul een getal in", Color.RED);
-				badResponse = true;
-			}
-
-		} while (badResponse);
-
-		console.println("" + categorie, Color.yellow);
-
+		// Categorie
+		if(product.getCategory()==null){
+			product.setCategory(ProductCategory.ALL);
+		};
+		
+		ProductCategory prodCat = selectCategory(product.getCategory());
+		console.println("Categorie: " + prodCat.getNL(), Color.YELLOW);
+	
+		// Product Informatie
 		console.println("Wat is de informatie   van het nieuwe product?", Color.ORANGE);
 		info = console.printResponse("info:", product.getInfo(), Color.ORANGE);
 		console.println(info, Color.yellow);
-
-		badResponse = false;
+		
+		// Prijs
+		boolean badResponse = false;
 		do {
 
 			try {
@@ -185,6 +185,7 @@ public class EmployeeProductMenu {
 
 		console.println("" + prijs, Color.yellow);
 
+		// Voorraad
 		console.println("wat is de voorraad van het product ", Color.ORANGE);
 
 		badResponse = false;
@@ -201,33 +202,14 @@ public class EmployeeProductMenu {
 		console.println("" + voorraad, Color.yellow);
 
 		
+		// Product populeren met waarden
 		product.setInfo(info);
 		product.setName(naam);
 		product.setBrand(merk);
 		product.setPrice(prijs);
 		product.setStockCount(voorraad);
-
-		switch (categorie) {
-		case 1:
-			product.setCategory(ProductCategory.MEDIUM_HARD);
-			break;
-		case 2:
-			product.setCategory(ProductCategory.SOFT_MOLD);
-			break;
-		case 3:
-			product.setCategory(ProductCategory.BLUE);
-			break;
-		case 4:
-			product.setCategory(ProductCategory.CREAM);
-			break;
-		case 5:
-			product.setCategory(ProductCategory.GOAT);
-			break;
-		case 6:
-			product.setCategory(ProductCategory.ALL);
-			break;
-		}
-
+		product.setCategory(prodCat);
+		
 		console.println("\nProduct succesvol opgeslagen\n ", Color.magenta);
 		return product;
 
@@ -255,10 +237,37 @@ public class EmployeeProductMenu {
 		return productdata;
 
 	}
+	
+	
 
-	public void printProductLijst() {
-		//
-		System.out.print("hio");
+	public ProductCategory selectCategory(ProductCategory cat){
+		console.println(
+				"Selecteer de catogorie van het product 1: Hard-Medium 2: Zacht-Schimmel"
+				+"\n3: blauw 4: room 5: geit 6: alles/overige ",
+				Color.ORANGE);
+
+		int categorieNum = 0;
+		boolean badResponse = false;
+		do {
+			try {
+				
+				categorieNum = console.printResponseInt("categorie:", "" + (cat.ordinal()+1), Color.ORANGE);
+				badResponse = false;
+
+				if (categorieNum < 1 || categorieNum > ProductCategory.values().length) {
+					console.println("Foutieve invoer", Color.RED);
+					badResponse = true;
+				}else{
+					cat = ProductCategory.values()[categorieNum-1];
+				}
+			} catch (NumberFormatException e) {
+				console.println("Foutieve invoer, vul een getal in", Color.RED);
+				badResponse = true;
+			}
+
+		} while (badResponse);
+
+		return cat;
 	}
 
 }
