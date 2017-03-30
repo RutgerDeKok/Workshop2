@@ -11,24 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao<T, PK> {
 
-	//protected Class<T> entityClass;
-	
-	/*
-	 * trying to get the EntityManagerFactory in here directly autowired does not work
-	 * trying by creating MainController . getEntityManagerFactory() Autowired controller
-	 *  does not work
-	 */
-    
-        //@Autowired does not work
-	//protected MainController controller = new MainController();
 	@Autowired
-        EntityManagerFactory emf;
-        //@Autowired
-        //EntityManager entityManager;
+	EntityManagerFactory emf;
 
-        public GenericDaoJpaImpl() {}
-        
-        @Override
+	public GenericDaoJpaImpl() {
+	}
+
+	@Override
 	public T create(T t) {
 		System.out.println("creating new record for " + t);
 		EntityManager entityManager = emf.createEntityManager();
@@ -38,8 +27,8 @@ public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao
 		entityManager.clear();
 		return t;
 	}
-        
-        @Override
+
+	@Override
 	public T read(Class<T> entityClass, PK id) {
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
@@ -48,20 +37,20 @@ public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao
 		entityManager.clear();
 		return result;
 	}
-        
-        @Override
+
+	@Override
 	public T saveOrUpdate(T t) {
-                EntityManager entityManager = emf.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		T result = entityManager.merge(t);
 		entityManager.getTransaction().commit();
 		entityManager.clear();
-                return result;
+		return result;
 	}
-        
-        @Override
+
+	@Override
 	public void delete(T t) {
-                EntityManager entityManager = emf.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		t = entityManager.merge(t);
 		entityManager.remove(t);
@@ -69,13 +58,12 @@ public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao
 		entityManager.clear();
 	}
 
-        @Override
-        public List<T> findAll(Class<T> entityClass) {
-            EntityManager entityManager = emf.createEntityManager();
-            entityManager.getTransaction().begin();        
-            List list = entityManager.createQuery("from" + entityClass.getName()).getResultList();
-            entityManager.getTransaction().commit();
-            return list;
-        }
+	@Override
+	public List<T> findAll(Class<T> entityClass) {
+		EntityManager entityManager = emf.createEntityManager();
+		entityManager.getTransaction().begin();
+		List list = entityManager.createQuery("select t from "+ entityClass.getName()+ " t").getResultList();
+		entityManager.getTransaction().commit();
+		return list;
+	}
 }
-    

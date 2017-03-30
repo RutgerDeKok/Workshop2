@@ -15,9 +15,5 @@ public class AppConfig {
     public EntityManagerFactory emFactory() {
         return Persistence.createEntityManagerFactory("webshop");
     }
-    
-    /*@Bean
-    public LocalEntityManagerFactoryBean entityManagerFactory() {
-        return new LocalEntityManagerFactoryBean();
-    }  */  
+     
 }

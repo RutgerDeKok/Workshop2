@@ -29,8 +29,6 @@ public class MainController {
 	private UserAccount currentUser;
 
 	
-	private final EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("webshop");
-	
 
 	public void inlogControle() {
 		UserAccount user = loginMenu.Login();
@@ -58,10 +56,6 @@ public class MainController {
 	}
 
 
-//	@Bean
-	public EntityManagerFactory getEntityManagerFactory() {
-		return emFactory;
-	}
 
 
 	

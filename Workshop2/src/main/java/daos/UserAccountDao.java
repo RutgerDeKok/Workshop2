@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserAccountDao extends GenericDaoJpaImpl<UserAccount, Long> {
 	
-	//@Autowired
-        //EntityManager entityManager;
         
         @Autowired
         EntityManagerFactory emf;
@@ -24,8 +22,7 @@ public class UserAccountDao extends GenericDaoJpaImpl<UserAccount, Long> {
 
 		try {
 			EntityManager entityManager = emf.createEntityManager();
-			System.out.println("entityman? "+entityManager);
-			
+				
 			Query query = entityManager.createQuery
 					("select p from UserAccount p where email = :email",
 					UserAccount.class);
