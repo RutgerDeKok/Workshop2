@@ -26,7 +26,7 @@ import main.java.infrastructure.Formatter;
 import main.java.infrastructure.TextIO;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
-import main.java.presentation.ColorConsole;
+import main.java.infrastructure.ColorConsole;
 import main.java.service.ProductService;
 
 

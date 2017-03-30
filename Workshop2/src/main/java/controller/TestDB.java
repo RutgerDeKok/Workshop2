@@ -125,7 +125,7 @@ public class TestDB {
 
 		// create concrete Dao
 
-		GenericDao<UserAccount, Long> userDao = new GenericDaoJpaImpl<UserAccount, Long>(UserAccount.class);
+		GenericDao<UserAccount, Long> userDao = new GenericDaoJpaImpl<>();
 
 		// Persist Objects
 
@@ -151,7 +151,7 @@ public class TestDB {
 		em.clear();
 
 		
-		System.out.println(userDao.read(1L).getBillingAdress().getFamilyName());
+		System.out.println(userDao.read(UserAccount.class, 1L).getBillingAdress().getFamilyName());
 
 		// Some test operations
 		

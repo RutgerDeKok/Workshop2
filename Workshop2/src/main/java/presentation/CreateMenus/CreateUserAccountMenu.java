@@ -11,7 +11,7 @@ import main.java.infrastructure.PassHasher;
 import main.java.infrastructure.Validator;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
-import main.java.presentation.ColorConsole;
+import main.java.infrastructure.ColorConsole;
 import main.java.presentation.MainMenu;
 
 @Component

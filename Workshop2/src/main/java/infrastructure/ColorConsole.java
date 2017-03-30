@@ -1,4 +1,4 @@
-package main.java.presentation;
+package main.java.infrastructure;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

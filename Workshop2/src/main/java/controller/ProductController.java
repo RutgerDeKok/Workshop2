@@ -17,9 +17,9 @@ import org.springframework.stereotype.Controller;
 public class ProductController {
 //	@Autowired
 //	private CreateProductMenu createProductMenu;
-	private GenericDao<Product, Long> dao = new GenericDaoJpaImpl<>(Product.class);
+	private GenericDao<Product, Long> dao = new GenericDaoJpaImpl<>();
 
-        private  ProductUniqueDao pdao = new ProductUniqueDao(Product.class);
+        private  ProductUniqueDao pdao = new ProductUniqueDao();
 	
     
     @Autowired

@@ -8,20 +8,25 @@ package main.java.daos;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import main.java.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 /**
  *
  * @author Frank
  */
+@Component
 public class ProductUniqueDao extends GenericDaoJpaImpl<Product, Long> {
     
-    public ProductUniqueDao(Class<Product> entityClass) {
-		super(entityClass);
-	}
+    @Autowired
+    EntityManagerFactory emf;
+    
+    public ProductUniqueDao() {}
     
     public List<Product> getAllProducts() {
 

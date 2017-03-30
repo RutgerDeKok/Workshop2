@@ -19,8 +19,8 @@ public class UserController {
 	private CreateUserAccountMenu menu;
 	@Autowired
 	private MainController mainController;
-//	@Autowired
-	private UserAccountDao dao = new UserAccountDao(UserAccount.class);
+	@Autowired
+	private UserAccountDao dao;// = new UserAccountDao();
 	
 	@Autowired
 	private CartController cartController;

@@ -12,8 +12,8 @@ public class CartController {
     
 //  @Autowired
 //  CartService cartService;
-//	@Autowired
-	private GenericDaoJpaImpl<Cart, Long> dao = new GenericDaoJpaImpl<>(Cart.class);
+	@Autowired
+	private GenericDaoJpaImpl<Cart, Long> dao;// = new GenericDaoJpaImpl<>();
 	@Autowired
 	private CustomerEditCartMenu editCartMenu;
 	
@@ -21,7 +21,7 @@ public class CartController {
     
 	// get Cart from DB
     public Cart getCart(long id) { 
-    	currentCart = dao.read(id);
+    	currentCart = dao.read(Cart.class, id);
     	return currentCart;
 	}
     
@@ -40,7 +40,7 @@ public class CartController {
 	}
 	
 	public Cart getCart(Long id) {
-		return dao.read(id);
+		return dao.read(Cart.class, id);
 	}
 	
 	public void updateCart(Cart cart) {

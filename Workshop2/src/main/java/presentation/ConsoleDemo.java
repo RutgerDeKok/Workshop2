@@ -1,5 +1,6 @@
 package main.java.presentation;
 
+import main.java.infrastructure.ColorConsole;
 import java.awt.Color;
 
 public class ConsoleDemo {

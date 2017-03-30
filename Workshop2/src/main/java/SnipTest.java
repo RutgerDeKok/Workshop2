@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.math.BigDecimal;
 
 import main.java.infrastructure.Formatter;
-import main.java.presentation.ColorConsole;
+import main.java.infrastructure.ColorConsole;
 
 public class SnipTest {
 
