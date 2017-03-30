@@ -2,7 +2,7 @@ package main.java.infrastructure;
 
 public class Formatter {
 	
-	public final static String LINE = "============================================================";
+	public final static String LINE = "===========================================================================================";
 	
 	
 	/*
@@ -32,9 +32,14 @@ public class Formatter {
 		
 		StringBuilder sb = new StringBuilder();
 		for (int j = 0; j < strings.length; j++) {
-			String tempString = strings[j];
 			int padnum = padnums[j];
 			int lr = alignLR[j];
+			
+			String tempString = strings[j];
+			if(tempString==null){tempString="";};
+			tempString = tempString.length()>padnum-1?tempString.substring(0,padnum-2):tempString;
+			
+			
 			int rest = padnum - tempString.length();
 			if (rest < 0)
 				rest = 0;
