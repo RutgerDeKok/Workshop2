@@ -79,23 +79,23 @@ public class EmployeeProductMenu {
 				console.println("Overzicht Alle Producten.", Color.ORANGE);
 				// displayed alle producten.
 				console.println(Formatter.LINE, Color.orange);
-				int[] padnums = { 6, 26, 16, 26, 8, 18, 8 };
-				int[] alignLR = { 1, 1, 1, 1, 1, 0, 1 };
+				int[] padnums = { 4, 3, 20, 16, 22, 8, 3, 14, 10};
+				int[] alignLR = { 1, 1,  0,  0,  0, 1,  1, 0,  1};
 
-				console.println(Formatter.padString(padnums, alignLR, "id ", "naam ", "merk ", "info ", "prijs ",
-						" catogorie", "voorraad"), Color.orange);
+				console.println(Formatter.padString(padnums, alignLR, "id"," ", "naam ", "merk", "info"
+							, "prijs",	" ", "catogorie", "voorraad"), Color.orange);
 				producten = productController.getAllProducts();
 
 				for (Product p : producten) {
-					String idp = p.getId() + " ";
-					String naamp = p.getName() + " ";// beetje lang
-					String merkp = p.getBrand() + " ";
-					String infop = p.getInfo() + " "; // lang
-					String prijsp = p.getPrice() + " ";
-					String catop = p.getCategory() + " "; // beetje lang
-					String voorraadp = p.getStockCount() + " ";
+					String idp = p.getId() + "";
+					String naamp = p.getName();// beetje lang
+					String merkp = p.getBrand();
+					String infop = p.getInfo(); //lang
+					String prijsp = p.getPrice() + "";
+					String catop = p.getCategory().getNL(); // beetje lang
+					String voorraadp = ""+p.getStockCount();
 					console.println(
-							Formatter.padString(padnums, alignLR, idp, naamp, merkp, infop, prijsp, catop, voorraadp),
+							Formatter.padString(padnums, alignLR, idp," ", naamp, merkp, infop, prijsp, " ",catop, voorraadp),
 							Color.YELLOW);
 
 				}
@@ -135,7 +135,8 @@ public class EmployeeProductMenu {
 		console.println(merk, Color.yellow);
 
 		console.println(
-				"wat is de catogorie van het product 1: Hard-Medium 2: Zacht-gesmolten 3: blauw 4: room 5: geit 6: overige/weet niet ",
+				"wat is de catogorie van het product 1: Hard-Medium 2: Zacht-Schimmel"
+				+"\n3: blauw 4: room 5: geit 6: overige/weet niet ",
 				Color.ORANGE);
 
 		categorie = 0;

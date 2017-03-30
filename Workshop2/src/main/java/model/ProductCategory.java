@@ -1,11 +1,27 @@
 package main.java.model;
 
 public enum ProductCategory {
-	MEDIUM_HARD, SOFT_MOLD, BLUE, CREAM, GOAT, ALL;
+
+	MEDIUM_HARD("Medium-Hard"),
+	SOFT_MOLD("Zacht-Schimmel"), 
+	BLUE("Blauw"), 
+	CREAM("Roomkaas"), 
+	GOAT("Geiten"),
+	ALL("Alles");
+	
+
+
+	private final String naamNL;
+
+	private ProductCategory(String naamNL) {
+		this.naamNL = naamNL;
+	}
+	
+	public String getNL() {
+		return naamNL;
+	}
+	
 }
-/* @Jurjen niet dat het belangrijk is, maar je hebt blijkbaar een verschil
-    tussen hardheid en rijpingsmanier (zie https://en.wikipedia.org/wiki/Types_of_cheese)
-*/
 
 /* examples
  * 
