@@ -12,6 +12,7 @@ package main.java.presentation;
 
 import java.awt.Color;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
 import main.java.infrastructure.Kleur;
 import main.java.controller.MainController;
 import main.java.controller.ProductController;
+import main.java.infrastructure.Formatter;
 import main.java.infrastructure.TextIO;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
@@ -58,9 +60,9 @@ console.println("hoi",Kleur.CART);
 		String response;
 		boolean validResponse;
 				
-				console.println("================================================="+
+				console.println(Formatter.LINE+
 				"\n Product Menu"+
-				"\n================================================="+
+				"\n"+Formatter.LINE+
 				"\n Wat wilt u met het product doen?"+
 				"\n 1: ik wil het aanpassen."+
 				"\n 2: ik wil er één toevoegen."+
@@ -68,7 +70,7 @@ console.println("hoi",Kleur.CART);
                                 "\n 4: ik wil een overzicht van alle producten."+        
                                 "\n 5: ik wil één producten zoeken die voldoen aan ..."+        
                                 "\n 0: ik wil terug naar Medewerker menu"+
-				"\n================================", Kleur.CART);
+				"\n"+Formatter.LINE, Kleur.CART);
 		do{
 			validResponse = true;
 			response = console.printResponse("Maak uw keuze: \n", "1", Color.CYAN);
@@ -76,6 +78,7 @@ console.println("hoi",Kleur.CART);
 			switch (response) {
 			case "0":
 				console.println(" terug ",Color.RED);
+                                //gaat naar mainemployeemenu.
 				mem.runMenu();
 				break;
 			case "1":
@@ -92,8 +95,31 @@ console.println("hoi",Kleur.CART);
 				//productController.inlogControle();
 				break;
 			case "4":
-				console.println("overzicht",Color.ORANGE);
-				productController.getAllProducts();
+                                console.clear();
+				console.println("Overzicht Alle Producten.",Color.ORANGE);
+                                //displayed alle producten.
+                                console.println(Formatter.LINE, Color.orange);
+                                int[] padnums={6,16,16,26,8,18,8};
+                                int[] alignLR={1,1,1,1,1,0,1};
+                                
+                                console.println(Formatter.padString(padnums, alignLR, "id " ,"naam ","merk ","info ","prijs "," catogorie","voorraad"),Color.orange);
+                               List<Product> myList = new ArrayList<Product>();
+				myList = productController.getAllProducts();
+                                
+                                for(Product p : myList){
+                                 String idp = p.getId()+" ";
+                                 String naamp = p.getName()+" ";//beetje lang
+                                 String merkp = p.getBrand()+" ";
+                                 String infop = p.getInfo()+" "; //lang
+                                 String prijsp    =p.getPrice()+" ";
+                                 String catop     =p.getCategory()+" "; //beetje lang
+                                 String voorraadp =p.getStockCount()+" ";
+                                 console.println(Formatter.padString(padnums, alignLR, idp ,naamp,merkp,infop,prijsp,catop,voorraadp),Color.YELLOW);
+
+                                }
+                                
+                                runEmployeeProductMenu();
+                                
 				break;
                         case "5":
 				console.println("zoeken opn",Color.ORANGE);
