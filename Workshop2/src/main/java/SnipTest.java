@@ -1,6 +1,10 @@
 package main.java;
 
+import java.awt.Color;
 import java.math.BigDecimal;
+
+import main.java.infrastructure.Formatter;
+import main.java.presentation.ColorConsole;
 
 public class SnipTest {
 
@@ -8,7 +12,18 @@ public class SnipTest {
 		// TODO Auto-generated method stub
 
 		SnipTest snip = new SnipTest();
-		snip.tabledatatest();
+//		snip.tabledatatest();
+		snip.test();
+	}
+	
+	
+	void test(){
+		ColorConsole console = new ColorConsole();
+		console.println(Formatter.LINE
+				+ "\n 1 - "+9+":  Selecteer een order regel om aan te passen"
+				+ "\n 0:      Terug naar bestel menu"
+				+ "\n[enter]: Toets enter om door te gaan naar kassa\n"  // "" = enter
+				+ Formatter.LINE,Color.CYAN);
 	}
 
 	public void tabledatatest() {

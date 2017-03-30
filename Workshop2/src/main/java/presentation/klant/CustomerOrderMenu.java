@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.presentation;
+package main.java.presentation.klant;
 
 /**
  *
@@ -26,6 +26,8 @@ import main.java.infrastructure.Formatter;
 import main.java.infrastructure.TextIO;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
+import main.java.presentation.ColorConsole;
+import main.java.presentation.MainEmployeeMenu;
 import main.java.service.ProductService;
 
 

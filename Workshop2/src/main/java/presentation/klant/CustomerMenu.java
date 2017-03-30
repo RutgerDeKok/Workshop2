@@ -32,7 +32,7 @@ public class CustomerMenu implements DisplayCart{
         @Autowired
         CustomerProductMenu customerProductMenu;
         @Autowired
-        CustomerCartMenu customerCartMenu;
+        CustomerEditCartMenu customerCartMenu;
         @Autowired
         CustomerOrderHistoryMenu customerOrderHistoryMenu;
         @Autowired
@@ -78,10 +78,17 @@ public class CustomerMenu implements DisplayCart{
 				break;
 			case "2":
 				console.println("Wijzig Winkelwagen", Color.ORANGE);
-				customerCartMenu.runMenu();
+				if(userCart.getSubOrders().size()==0){
+					console.println("Uw winkelwagen is nog leeg", Color.magenta);
+					validResponse = false;
+					break;
+				}
+				cartController.setCurrentCart(userCart); 
+				cartController.runMainCartMenu();
 				break;
 			case "3":
 				console.println("Bevestig/Plaats bestelling", Color.ORANGE);
+				cartController.setCurrentCart(userCart);
                                 customerOrderMenu.runEmployeeProductMenu();
 				
 				break;

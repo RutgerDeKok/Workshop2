@@ -2,9 +2,6 @@ package main.java;
 
 import org.springframework.context.ApplicationContext;
 
-
-import main.java.controller.MainController;
-import main.java.config.AppConfig;
 import main.java.presentation.MainMenu;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

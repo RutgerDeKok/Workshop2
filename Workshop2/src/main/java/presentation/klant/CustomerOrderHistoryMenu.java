@@ -5,10 +5,14 @@
  */
 package main.java.presentation.klant;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Nadkine
  */
+
+@Component
 public class CustomerOrderHistoryMenu {
      public void runMenu(){}
 }
