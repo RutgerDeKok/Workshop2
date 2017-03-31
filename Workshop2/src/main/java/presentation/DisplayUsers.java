@@ -17,7 +17,7 @@ public interface DisplayUsers {
 		console.println("Overzicht Alle Gebruiker Accounts.", Kleur.RED_ORANGE);
 		
 		console.println(Formatter.LINE, Color.orange);
-		int[] padnums = { 4, 3, 20, 22, 8, 8, 3, 12};
+		int[] padnums = { 4, 3, 22, 28, 10, 8, 3, 14};
 		int[] alignLR = { 1, 1,  0,  0, 1, 1, 1,  1};
 		
 	
