@@ -43,10 +43,11 @@ public class MainEmployeeMenu {
 
 		console.println(Formatter.LINE + "\n Welkom in het Medewerker Menu"
 				+ "\n"+Formatter.LINE
-				+ "\n 1: account(aanpassen/toevoegen/verwijderen/overzicht)"
-				+ "\n 2: product(aanpassen/toevoegen/verwijderen/overzicht)" + "\n 3: bestelling (aanpassen/overzicht)"
-				+ "\n 3: bestelling (aanpassen/overzicht)"
-				+ "\n 4: naar klant menu" + "\n 5: " + "\n 6: " + "\n 0: uitloggen"
+				+ "\n 1: accounts(aanpassen/overzicht)"
+				+ "\n 2: producten(aanpassen/overzicht)" 
+				+ "\n 3: bestellingen (aanpassen/overzicht)"
+				+ "\n 4: naar klant menu" 
+				+ "\n 0: uitloggen"
 				+ "\n"+Formatter.LINE, Kleur.CART);
 
 		do {
@@ -60,7 +61,7 @@ public class MainEmployeeMenu {
 				break;
 			case "1":
 				console.println("account.", Color.ORANGE);
-				// functie ontbreekt
+				productController.runEmployeeAccountsMenu();
 				break;
 			case "2":
 				console.println(" ", Color.ORANGE);
