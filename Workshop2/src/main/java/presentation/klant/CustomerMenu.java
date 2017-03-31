@@ -36,7 +36,7 @@ public class CustomerMenu implements DisplayCart{
         @Autowired
         CustomerOrderHistoryMenu customerOrderHistoryMenu;
         @Autowired
-        CustomerOrderMenu customerOrderMenu;
+        CustomerCheckOutMenu customerOrderMenu;
         @Autowired
         CustomerProfileMenu customerProfileMenu;
 
@@ -74,6 +74,7 @@ public class CustomerMenu implements DisplayCart{
 				break;
 			case "1":
 				console.println("Voeg een product toe aan winkelwagen", Color.ORANGE);
+                                System.out.println("HET WERKT");
                                 customerProductMenu.runMenu();
 				break;
 			case "2":
@@ -89,7 +90,7 @@ public class CustomerMenu implements DisplayCart{
 			case "3":
 				console.println("Bevestig/Plaats bestelling", Color.ORANGE);
 				cartController.setCurrentCart(userCart);
-                                customerOrderMenu.runEmployeeProductMenu();
+                                customerOrderMenu.runMenu();
 				
 				break;
 			case "4":

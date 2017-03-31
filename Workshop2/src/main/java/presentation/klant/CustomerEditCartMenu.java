@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.controller.CartController;
+import main.java.controller.CartSubOrderController;
 import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
 import main.java.infrastructure.ColorConsole;
@@ -25,6 +26,14 @@ public class CustomerEditCartMenu implements DisplayCart{
 	@Autowired
 	private CartController cartController;
 	private Cart userCart;
+        @Autowired
+        private CustomerCheckOutMenu customerCheckOutMenu;
+        @Autowired
+        private CustomerMenu customerMenu;
+        @Autowired
+        CustomerProductMenu customerProductMenu;
+        @Autowired
+        private CartSubOrderController cartSubOrderController;
 	
 	public void runMenu() {
 
@@ -34,8 +43,8 @@ public class CustomerEditCartMenu implements DisplayCart{
 		int size = userCart.getSubOrders().size();
 
 		console.println(Formatter.LINE
-				+ "\n 1 - "+size+":  Selecteer een order regel om aan te passen"
-				+ "\n 0:      Terug naar bestel menu"
+				+ "\n 1 - "+(size+1)+":  Selecteer een order regel om aan te passen"
+				+ "\n 0:      Terug naar hoofdmenu"
 				+ "\n[enter]: Toets enter om door te gaan naar kassa\n"  // "" = enter
 				+ Formatter.LINE,Color.CYAN);
 		boolean validResponse;
@@ -43,25 +52,31 @@ public class CustomerEditCartMenu implements DisplayCart{
 			validResponse = true;
 			int num=0;
 			String response = console.printResponse("Maak uw keuze: \n", "", Color.CYAN);
-				
-			
-			if(response == ""){
-				console.println("Door naar Kassa", Color.ORANGE);
-				validResponse = true;
-			}else if(response == "0"){
-				console.println("Terug naar bestel menu", Color.ORANGE);
-				validResponse = true;
-			}else 
 				try{
 				num = Integer.parseInt(response);
 				}catch(Exception e){
 					console.println("Ongeldige invoer", Color.RED);
 					validResponse = false;
 				}
+			
+			if(response == ""){
+				console.println("Door naar Kassa", Color.ORANGE);
+				validResponse = true;
+                                customerCheckOutMenu.runMenu();
+                                
+			}else if(response == "0"){
+				console.println("Terug naar bestel menu", Color.ORANGE);
+				validResponse = true;
+                                customerMenu.runMenu();
+                                
+			}else 
+				
 			if(0<num&&num<=size){
 				validResponse = true;
 				console.println("Order regel "+num+" aanpassen", Color.ORANGE);
-				EditSubOrder(num-1)	; // sub orders are stored in a list (0 to size-1)			
+                                Long longNum = Long.parseLong("" + num);
+				cartSubOrderController.deleteCartSubOrder(longNum);
+                                customerProductMenu.runMenu();
 			}else{
 				console.println("Ongeldige invoer", Color.RED);
 				validResponse = false;
@@ -70,10 +85,4 @@ public class CustomerEditCartMenu implements DisplayCart{
 		} while (!validResponse);
 		
 	}
-
-	private void EditSubOrder(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-    
 }

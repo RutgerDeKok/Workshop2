@@ -9,33 +9,33 @@ import main.java.daos.*;
 import main.java.daos.repositories.CartSubOrderRepository;
 import main.java.model.*;
 
-//@Service
+@Service
 public class CartSubOrderService {
     
-//    @Autowired
-    CartSubOrderRepository cartSubOrderRepository;
+    //@Autowired
+   // CartSubOrderRepository cartSubOrderRepository;
     CartSubOrder cartSubOrder;
+    @Autowired
+    GenericDaoJpaImpl genericDaoJpaImpl;
     
     
     public List<CartSubOrder> getAllCartSubOrders(){
-        List<CartSubOrder> list = new ArrayList<>();
-        cartSubOrderRepository.findAll().forEach(list::add);
-        return list;
+        return genericDaoJpaImpl.findAll(CartSubOrder.class);   
     }
     
     public CartSubOrder getCartSubOrder(Long id){
-        return cartSubOrderRepository.findOne(id);
+        return (CartSubOrder) genericDaoJpaImpl.read(CartSubOrder.class, id);
     }
     
     public void updateCartSubOrder(Long id, CartSubOrder cartSubOrder){
-         cartSubOrderRepository.save(cartSubOrder);
+             genericDaoJpaImpl.saveOrUpdate(cartSubOrder);
     }
     
      public void deleteCartSubOrder(Long id){
-         cartSubOrderRepository.delete(id);
+            genericDaoJpaImpl.delete(genericDaoJpaImpl.read(CartSubOrder.class, id));
     }
      
       public void createCartSubOrder(CartSubOrder cartSubOrder){
-         cartSubOrderRepository.save(cartSubOrder);
+         genericDaoJpaImpl.create(cartSubOrder);
     }
 }
