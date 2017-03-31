@@ -3,6 +3,7 @@ package main.java.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Cart {
 	private UserAccount user;
 	@OneToOne
 	private Adress deliveryAdress;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.PERSIST)
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "cart_id")
 	private List<CartSubOrder> subOrders = new ArrayList<>();

@@ -44,8 +44,11 @@ public class CustomerAddProductMenu implements DisplayCart {
         @Autowired
         private CustomerMenu customerMenu;
         Cart userCart;
-        CartSubOrder cartSubOrder = new CartSubOrder();
-                
+        
+    
+    public String checkInput(String prompt, String cancelKey) {
+        return console.printResponse(prompt + "\nVoer " + cancelKey + " in om te annuleren.", "", Color.CYAN);
+    }    
                 
     public void runMenu(){
       // met de db checken of er iets in de opgeslagen cart van de user zit
@@ -55,9 +58,11 @@ public class CustomerAddProductMenu implements DisplayCart {
 		displayCart(console,userCart);
                 
                 //voeg kaas toe
+                //String response = checkInput("Wat is het id van het product wat u toe wilt voegen?", "x");
                 String productId = console.printResponse(Formatter.LINE
 				+ "\nWat is het id van het product wat u toe wil voegen???"
-				+ "\n"+Formatter.LINE, "1", Color.CYAN);
+				+ "\nVoor 'x' in om te annuleren"
+                                        + "\n"+Formatter.LINE, "1", Color.CYAN);
                 
                 //voeg amount toe
                 String amount = console.printResponse(Formatter.LINE
@@ -67,12 +72,15 @@ public class CustomerAddProductMenu implements DisplayCart {
                 //voeg suborder en cart toe aan database.. nog niet met elkaar verbonden
                 Long id = Long.parseLong(productId);
                 Product p = productController.getProduct(id);
+                CartSubOrder cartSubOrder = new CartSubOrder();
                 cartSubOrder.setProduct(p);                        
                 cartSubOrder.setQuantity(Integer.parseInt(amount));
-                userCart.addSubOrder(cartSubOrder);
                 // subOrder kan nu nog niet goed opgeslagen worden
-                //cartSubOrderController.createCartSubOrder(cartSubOrder);
+                cartSubOrder.setSubTotal(p.getPrice(), Integer.parseInt(amount));
+                cartSubOrderController.createCartSubOrder(cartSubOrder);
+                userCart.addSubOrder(cartSubOrder);                
                 cartController.updateCart(userCart);
+                
                 
                 console.println(Formatter.LINE
 				+ "Dit was het alweer,, we gaan nu terug naar Klantenmenu" , Color.CYAN);
