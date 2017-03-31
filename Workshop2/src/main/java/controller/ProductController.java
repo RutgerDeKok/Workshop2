@@ -75,9 +75,20 @@ public List<Product> getAllProducts(){
     productService.updateProduct(id, product);
     }
      
+    
+    
+    
     public void deleteProduct(Long id){
     productService.deleteProduct(id);
     }
+    
+    public void deleteProductP(Product p){
+    dao.delete(p);
+    epm.runEmployeeProductMenu();
+    }
+    
+    
+    
 
 	public void runEmployeeProductMenu() {
 		epm.runEmployeeProductMenu();
