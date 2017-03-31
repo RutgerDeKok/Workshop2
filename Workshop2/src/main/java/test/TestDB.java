@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.daos.GenericDao;
-import main.java.daos.GenericDaoJpaImpl;
 import main.java.infrastructure.PassHasher;
 import main.java.model.Adress;
 import main.java.model.Cart;
@@ -26,10 +25,15 @@ import main.java.model.UserType;
 @Component
 public class TestDB {
 	
-
+    @Autowired
+    GenericDao<UserAccount, Long> userDao;
+    
+    public static void main(String[] args) {
+        populateDB();
+    }
 	
 
-	public void populateDB() {
+	public static void populateDB() {
 
 		// Create some objects to persist
 
@@ -124,8 +128,7 @@ public class TestDB {
 		
 
 		// create concrete Dao
-
-		GenericDao<UserAccount, Long> userDao = new GenericDaoJpaImpl<>();
+                //GenericDao<UserAccount, Long> userDao; // = new GenericDaoJpaImpl<>();
 
 		// Persist Objects
 
@@ -144,14 +147,14 @@ public class TestDB {
 		em.persist(user2);
 		
 		em.persist(cart1);
-		em.persist(cart2);
+                //em.persist(cart2);
 		em.persist(order1);
 		em.persist(order2);
 		em.getTransaction().commit();
 		em.clear();
 
 		
-		System.out.println(userDao.read(UserAccount.class, 1L).getBillingAdress().getFamilyName());
+		//System.out.println(userDao.read(UserAccount.class, 1L).getBillingAdress().getFamilyName());
 
 		// Some test operations
 		

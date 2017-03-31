@@ -14,6 +14,7 @@ import main.java.infrastructure.ColorConsole;
 import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
 import main.java.model.CartSubOrder;
+import main.java.model.Product;
 import main.java.presentation.DisplayCart;
 import main.java.presentation.MainMenu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class CustomerAddProductMenu implements DisplayCart {
         @Autowired
         private CustomerMenu customerMenu;
         Cart userCart;
-        CartSubOrder cartSubOrder;
+        CartSubOrder cartSubOrder = new CartSubOrder();
                 
                 
     public void runMenu(){
@@ -64,10 +65,13 @@ public class CustomerAddProductMenu implements DisplayCart {
 				+ "\n"+Formatter.LINE, "1", Color.CYAN);
                 
                 //voeg suborder en cart toe aan database.. nog niet met elkaar verbonden
-                cartSubOrder.setProduct(productController.getProduct(Long.getLong("" + productId)));
+                Long id = Long.parseLong(productId);
+                Product p = productController.getProduct(id);
+                cartSubOrder.setProduct(p);                        
                 cartSubOrder.setQuantity(Integer.parseInt(amount));
                 userCart.addSubOrder(cartSubOrder);
-                cartSubOrderController.createCartSubOrder(cartSubOrder);
+                // subOrder kan nu nog niet goed opgeslagen worden
+                //cartSubOrderController.createCartSubOrder(cartSubOrder);
                 cartController.updateCart(userCart);
                 
                 console.println(Formatter.LINE

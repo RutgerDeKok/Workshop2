@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerProfileMenu {
-    
+    // Voor Tjeerd
     public void runMenu(){}
 }

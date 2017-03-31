@@ -93,8 +93,12 @@ public class CustomerCheckOutMenu implements DisplayCart{
 				break;
 			case "y":
 				console.println("Topper!", Color.ORANGE);
+                                // Voor Tjeerd!
                                 //print address
                                 //klopt dit??
+                                console.println(Formatter.LINE +
+				"Zijn deze gegevens correct?[y/n]", 
+                                Color.CYAN);
                                 //voeg bestelling toe aan final suborder
                                 //cart leegmaken
                                 //terug naar hoofdpagina
