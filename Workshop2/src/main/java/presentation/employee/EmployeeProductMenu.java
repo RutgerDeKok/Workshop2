@@ -1,11 +1,12 @@
 
-package main.java.presentation;
+package main.java.presentation.employee;
 
 /**
  *
  * @author Frank
  */
 
+import main.java.presentation.employee.MainEmployeeMenu;
 import main.java.infrastructure.ColorConsole;
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ import main.java.controller.ProductController;
 import main.java.infrastructure.Formatter;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
+import main.java.presentation.DisplayProducts;
 
 @Component
 public class EmployeeProductMenu implements DisplayProducts{

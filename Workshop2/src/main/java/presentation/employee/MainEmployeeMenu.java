@@ -1,4 +1,4 @@
-package main.java.presentation;
+package main.java.presentation.employee;
 
 import java.awt.Color;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import main.java.controller.ProductController;
 import main.java.controller.MainController;
 import main.java.controller.UserController;
 import main.java.infrastructure.Formatter;
+import main.java.presentation.MainMenu;
 import main.java.presentation.MainMenu;
 import main.java.presentation.klant.CustomerMenu;
 

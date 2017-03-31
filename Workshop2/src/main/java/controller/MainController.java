@@ -1,6 +1,6 @@
 package main.java.controller;
 
-import main.java.presentation.MainEmployeeMenu;
+import main.java.presentation.employee.MainEmployeeMenu;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.springframework.beans.factory.annotation.Autowired;

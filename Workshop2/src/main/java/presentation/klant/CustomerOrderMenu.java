@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import main.java.controller.MainController;
 import main.java.controller.ProductController;
 import main.java.infrastructure.ColorConsole;
-import main.java.presentation.MainEmployeeMenu;
+import main.java.presentation.employee.MainEmployeeMenu;
 
 @Component
 public class CustomerOrderMenu {
