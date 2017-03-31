@@ -50,7 +50,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 		products = productController.getAllProducts();  
 		filteredProducts = new ArrayList<>(products);
 		}
-		//comingFromOutsideMenu = false;
+		comingFromOutsideMenu = false;
 		displayProducts(console, filteredProducts);
 		
 		console.println("\n"+Formatter.LINE, Kleur.CART);
@@ -89,6 +89,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 				console.println(" verwijderen.", Color.ORANGE);
                                 String keuzeDelete = console.printResponse("Kies een getal om een product om aan te verwijderen", "", Color.CYAN);
                                 Product delProduct = (filteredProducts.get(Integer.parseInt(keuzeDelete)-1));
+                comingFromOutsideMenu = true; 
 				productController.deleteProductP(delProduct);
 				break;
 			case "4":
@@ -121,15 +122,12 @@ public class EmployeeProductMenu implements DisplayProducts{
 	
 
 	private void filterProductenByCat() {
-		System.out.println("filt: "+filteredProducts);
 		filteredProducts.clear();
-		System.out.println("filt: "+filteredProducts);
 		for(Product prod: products){
 			if(filterCategory ==ProductCategory.ALL || prod.getCategory()==filterCategory){
 				filteredProducts.add(prod);
 			}
 		}
-		System.out.println("filt: "+filteredProducts);
 	}
 
 

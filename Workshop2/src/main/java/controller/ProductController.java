@@ -28,36 +28,26 @@ public class ProductController {
     @Autowired
     ProductService productService;
     @Autowired
-    EmployeeProductMenu epm;
+    EmployeeProductMenu epMenu;
     
-//    public List<Product> getAllProducts(){
-//        
-//    return productService.getAllProducts();
-//    }
     
     public Product getProduct(Long id){
     return productService.getProduct(id);
     }
        
-//    public void createProduct(Product product){
-//        System.out.println("wordt aangeroepen.");
-//        System.out.println(product);
-//        System.out.println(product.getBrand());
-//        productService.createProduct(product);
-//    }
     
 public void createProduct() {
 		
 		// get Klant object back (adress can remain null at first)
-		Product product = epm.createUpdateProduct(new Product());
+		Product product = epMenu.createUpdateProduct(new Product());
 		
 		// send Klant object to DAO to persist in DB
 		dao.create(product);
-		epm.runEmployeeProductMenu();
+		epMenu.runEmployeeProductMenu();
 	}
 
 public List<Product> getAllProducts(){
-//    return pdao.getAllProducts();
+ 
 	return dao.findAll(Product.class);
 }
 
@@ -66,7 +56,7 @@ public List<Product> getAllProducts(){
     
     public void pasProductAan(Product aangepastProduct) {
     		dao.saveOrUpdate(aangepastProduct);
-    		epm.runEmployeeProductMenu();
+    		epMenu.runEmployeeProductMenu();
     }
     
     
@@ -78,20 +68,20 @@ public List<Product> getAllProducts(){
     
     
     
-    public void deleteProduct(Long id){
-    productService.deleteProduct(id);
-    }
+//    public void deleteProduct(Long id){
+//    productService.deleteProduct(id);
+//    }
     
     public void deleteProductP(Product p){
     dao.delete(p);
-    epm.runEmployeeProductMenu();
+    epMenu.runEmployeeProductMenu();
     }
     
     
     
 
 	public void runEmployeeProductMenu() {
-		epm.runEmployeeProductMenu();
+		epMenu.runEmployeeProductMenu();
 		
 	}
 
