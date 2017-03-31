@@ -30,7 +30,7 @@ public interface DisplayCart {
 		
 		
 		List<CartSubOrder> subOrders = userCart.getSubOrders();
-		Integer i = 1;
+                Integer i = 1;
 		for (CartSubOrder sub : subOrders) {
 			
 			String product = sub.getProduct().getName();
@@ -46,9 +46,15 @@ public interface DisplayCart {
 		totaal.setScale(2);  // aantal decimalen instellen
 		
 		// Footer van tabel
+                if (subOrders.isEmpty()) {
+                    console.println("----------------------------------------------------------------", Color.RED);
+                    console.println(Formatter.padString(padnums,allignLR,"  ","  ",
+				"                 ","      ", "        ", "            Totaal:  " + totaal),Color.GREEN);
+                
+                } else {
 		console.println("                                             Totaal:  " + totaal, Color.GREEN);
 		console.println(Formatter.LINE, Color.YELLOW);
-
+                }
 	}
 
 }
