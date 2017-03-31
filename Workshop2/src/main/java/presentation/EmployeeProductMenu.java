@@ -3,7 +3,7 @@ package main.java.presentation;
 
 /**
  *
- * @author Frank
+ * @author Frank/Rutger
  */
 
 import main.java.infrastructure.ColorConsole;
@@ -28,12 +28,8 @@ public class EmployeeProductMenu implements DisplayProducts{
 	@Autowired
 	private ColorConsole console;
 	@Autowired
-	private MainController mainController;
-	@Autowired
 	private ProductController productController;
 
-	// @Autowired
-	// private ProductController pC;
 	@Autowired
 	private MainEmployeeMenu mem;
 	private char eAc = '\u00E9'; // e accent
@@ -76,9 +72,9 @@ public class EmployeeProductMenu implements DisplayProducts{
 				break;
 			case "1":
 				console.println(" aanpassen.", Color.ORANGE);
-				String keuze = console.printResponse("Kies een getal om een product om aan te passen", "", Color.CYAN);
+				String keuze = console.printResponse("Kies een getal voor een product om aan te passen", "", Color.CYAN);
 				Product aangepastProduct = createUpdateProduct(filteredProducts.get(Integer.parseInt(keuze)-1));
-				productController.pasProductAan(aangepastProduct);
+				productController.updateProduct(aangepastProduct);
 				break;
 			case "2":
 				console.println("toevoegen", Color.ORANGE);
@@ -87,7 +83,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 				break;
 			case "3":
 				console.println(" verwijderen.", Color.ORANGE);
-                                String keuzeDelete = console.printResponse("Kies een getal om een product om aan te verwijderen", "", Color.CYAN);
+                                String keuzeDelete = console.printResponse("Kies een getal voor een product te verwijderen", "", Color.CYAN);
                                 Product delProduct = (filteredProducts.get(Integer.parseInt(keuzeDelete)-1));
                 comingFromOutsideMenu = true; 
 				productController.deleteProductP(delProduct);
@@ -216,27 +212,8 @@ public class EmployeeProductMenu implements DisplayProducts{
 	}
 	
 	
+
 	
-	
-	
-
-	public Product pasProductAan() {
-
-		String zoeknaam, zoekmerk;
-		console.println("Wat is de     naam   van het nieuwe product?", Color.ORANGE);
-		zoeknaam = console.printResponse("naam :", "", Color.ORANGE);
-		console.println(zoeknaam, Color.yellow);
-
-		console.println("Wat is het    merk   van het nieuwe product?", Color.ORANGE);
-		zoekmerk = console.printResponse("merk:", "", Color.ORANGE);
-		console.println(zoekmerk, Color.yellow);
-
-		Product productdata = new Product();
-		productdata.setName(zoekmerk);
-		productdata.setBrand(zoekmerk);
-		return productdata;
-
-	}
 	
 	
 

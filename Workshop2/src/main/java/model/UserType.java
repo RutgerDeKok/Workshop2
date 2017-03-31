@@ -1,7 +1,19 @@
 package main.java.model;
 
 public enum UserType {
-	EMPLOYEE,CUSTOMER; /* @Jurjen +admin? */
+	EMPLOYEE("Medewerker"),
+	CUSTOMER("Klant"),
+	ALL("Alles");
+	
+	private final String naamNL;
+
+	private UserType(String naamNL) {
+		this.naamNL = naamNL;
+	}
+	
+	public String getNL() {
+		return naamNL;
+	}
 
 
 }
