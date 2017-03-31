@@ -29,6 +29,8 @@ public class CustomerProductMenu implements DisplayCart{
 	private MainController mainController;
 	@Autowired
 	private CartController cartController;
+        @Autowired
+	private CustomerAddProductMenu customerAddProductMenu;
 
 	private Cart userCart;
 
@@ -100,7 +102,7 @@ public class CustomerProductMenu implements DisplayCart{
 			}
 		} while (!validResponse);
 	
-		
+         customerAddProductMenu.runMenu();     
 	}
 	
 	public void displayProducts(ProductCategory  filter){
