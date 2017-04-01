@@ -19,6 +19,7 @@ public class Validator {
 
 	public boolean validateEmail(String email) {
 		boolean validEmail;
+		email = email.toLowerCase();
 		EmailValidator validator = EmailValidator.getInstance();
 		if (validator.isValid(email)) {
 			validEmail = true;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.daos.UserAccountDao;
+import main.java.model.Adress;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
 import main.java.presentation.CreateMenus.CreateUserAccountMenu;
@@ -57,9 +58,10 @@ public class UserController {
 		runEmployeeAccountsMenuUpdateFromDB();
 	}
 
-	public void updateUser(UserAccount aangepasteUser) {
-		dao.saveOrUpdate(aangepasteUser);
-		empAccMenu.runMenu();
+	public void updateUser(UserAccount updatedUser) {
+		updatedUser = empAccMenu.createUpdateUser(updatedUser);
+		dao.saveOrUpdate(updatedUser);
+		runEmployeeAccountsMenuUpdateFromDB();
 	}
 
 	public boolean checkEmailAvailable(String email) {
@@ -97,5 +99,11 @@ public class UserController {
 	public List<UserAccount> getFilteredUsers() {
 		return filteredUsers;
 	}
+
+//	public UserAccount createEmptyAdressForUSer(UserAccount user) {
+//		user.setBillingAdress(new Adress());
+//		dao.saveOrUpdate(user);
+//		return user;
+//	}
 
 }

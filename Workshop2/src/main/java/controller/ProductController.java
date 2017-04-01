@@ -25,7 +25,7 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	@Autowired
-	EmployeeProductMenu epMenu;
+	EmployeeProductMenu empProdMenu;
 	@Autowired
 	EmployeeAccountsMenu empAccountsMenu;
 
@@ -35,7 +35,7 @@ public class ProductController {
 
 	public void createProduct() {
 
-		Product product = epMenu.createUpdateProduct(new Product());
+		Product product = empProdMenu.createUpdateProduct(new Product());
 		dao.create(product);
 		runEmployeeProductMenuUpdateFromDB();
 	}
@@ -45,9 +45,10 @@ public class ProductController {
 		return dao.findAll(Product.class);
 	}
 
-	public void updateProduct(Product aangepastProduct) {
-		dao.saveOrUpdate(aangepastProduct);
-		epMenu.runEmployeeProductMenu();
+	public void updateProduct(Product updatedProduct) {
+		updatedProduct = empProdMenu.createUpdateProduct(updatedProduct);
+		dao.saveOrUpdate(updatedProduct);
+		runEmployeeProductMenuUpdateFromDB();
 	}
 
 	public void deleteProductP(Product p) {
@@ -58,7 +59,7 @@ public class ProductController {
 	public void runEmployeeProductMenuUpdateFromDB() {
 			products = getAllProducts();
 			filteredProducts = new ArrayList<>(products);
-		epMenu.runEmployeeProductMenu();
+		empProdMenu.runEmployeeProductMenu();
 
 	}
 

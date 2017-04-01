@@ -36,8 +36,8 @@ public class InlogMenu {
 					Color.CYAN);
 			if (email.equalsIgnoreCase("x"))
 				mainMenu.runStartMenu();
-
-			if (emailValid(email)) {
+			emailValid = Validator.getInstance().validateEmail(email);
+			if (emailValid) {
 
 				user = userController.getUserByEmail(email);
 				if (user != null) // user exists
@@ -72,7 +72,4 @@ public class InlogMenu {
 
 
 
-	private boolean emailValid(String s) {
-		return Validator.getInstance().validateEmail(s);
-	}
 }

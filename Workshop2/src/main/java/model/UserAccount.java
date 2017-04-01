@@ -1,5 +1,6 @@
 package main.java.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,7 +23,7 @@ public class UserAccount {
 	@Column(name = "type")
 	@Enumerated(EnumType.STRING) // komt in de tabel als string, alternatief is ORDINAL, komt als index (int)
 	private UserType UserType;  //Enum
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Adress billingAdress;
 	
 	

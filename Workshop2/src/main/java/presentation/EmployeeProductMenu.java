@@ -64,8 +64,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 			case "1":
 				console.println(" aanpassen.", Color.ORANGE);
 				String keuze = console.printResponse("Kies een getal voor een product om aan te passen", "", Color.CYAN);
-				Product aangepastProduct = createUpdateProduct(filteredProducts.get(Integer.parseInt(keuze)-1));
-				productController.updateProduct(aangepastProduct);
+				productController.updateProduct(filteredProducts.get(Integer.parseInt(keuze)-1));
 				break;
 			case "2":
 				console.println("toevoegen", Color.ORANGE);
