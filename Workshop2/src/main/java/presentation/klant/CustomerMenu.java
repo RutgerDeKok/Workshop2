@@ -101,7 +101,6 @@ public class CustomerMenu implements DisplayCart{
 			case "5":
 				console.println("Mijn Profiel", Color.ORANGE);
                                 customerProfileMenu.runMenu();
-				
 				break;
 			default:
 				console.println("Ongeldige invoer, probeer opnieuw.", Color.magenta);
