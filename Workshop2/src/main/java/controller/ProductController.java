@@ -67,11 +67,6 @@ public class ProductController {
 //
 //	}
 
-	public void runEmployeeAccountsMenu() {
-		empAccountsMenu.runMenu();
-
-	}
-	
 	
 	public void filterProductenByCat(ProductCategory filterCategory) {
 		filteredProducts.clear();

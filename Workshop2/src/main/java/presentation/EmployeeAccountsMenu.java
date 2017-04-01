@@ -5,20 +5,14 @@ package main.java.presentation;
 
 import main.java.infrastructure.ColorConsole;
 import java.awt.Color;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.infrastructure.Kleur;
-import main.java.controller.MainController;
-import main.java.controller.ProductController;
 import main.java.controller.UserController;
 import main.java.infrastructure.Formatter;
-import main.java.model.Product;
-import main.java.model.ProductCategory;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
 
@@ -28,28 +22,21 @@ public class EmployeeAccountsMenu implements DisplayUsers{
 	@Autowired
 	private ColorConsole console;
 	@Autowired
-	private MainController mainController;
-	@Autowired
 	private UserController userController;
 	@Autowired
 	private MainEmployeeMenu mainEmpMenu;
 	
 	private char eAc = '\u00E9'; // e accent
-	private List<UserAccount> users;
 	private List<UserAccount> filteredUsers; // filter by UserType
 	private UserType filterType = UserType.ALL;
-	private boolean comingFromOutsideMenu = true;
 	
 
 	public void runMenu() {
 		String response;
 		boolean validResponse;
-		
-		if(comingFromOutsideMenu){
-		users = userController.getAllUsers();  
-		filteredUsers = new ArrayList<>(users);
-		}
-		comingFromOutsideMenu = false;
+		  
+		filteredUsers = userController.getFilteredUsers();
+	
 		displayUsers(console, filteredUsers);
 		
 		console.println("\n"+Formatter.LINE, Kleur.CART);
@@ -87,7 +74,7 @@ public class EmployeeAccountsMenu implements DisplayUsers{
 				console.println(" verwijderen.", Color.ORANGE);
                                 String keuzeDelete = console.printResponse("Kies een getal voor een Account om te verwijderen", "", Color.CYAN);
                                 UserAccount delAccount = (filteredUsers.get(Integer.parseInt(keuzeDelete)-1));
-                comingFromOutsideMenu = true; 
+     
 				userController.deleteAccount(delAccount);
 				break;
 			case "4":
@@ -96,9 +83,8 @@ public class EmployeeAccountsMenu implements DisplayUsers{
 				filterType = selectType(filterType);
 				console.println("Filter " + filterType.getNL(), Color.YELLOW);
 				
-				filterAccountsByType();
+				userController.filterAccountsByType(filterType);
 				
-				comingFromOutsideMenu = false;
 				runMenu();
 
 				break;
@@ -112,17 +98,6 @@ public class EmployeeAccountsMenu implements DisplayUsers{
 
 	}
 	
-	
-
-	private void filterAccountsByType() {
-		filteredUsers.clear();
-		for(UserAccount user: users){
-			if(filterType ==UserType.ALL || user.getUserType()==filterType){
-				filteredUsers.add(user);
-			}
-		}
-	}
-
 
 
 

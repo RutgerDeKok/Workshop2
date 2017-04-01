@@ -61,7 +61,7 @@ public class MainEmployeeMenu {
 				break;
 			case "1":
 				console.println("account.", Color.ORANGE);
-				productController.runEmployeeAccountsMenu();
+				userController.runEmployeeAccountsMenuUpdateFromDB();
 				break;
 			case "2":
 				console.println(" ", Color.ORANGE);
