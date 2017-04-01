@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Order {
 	private long id;
 	@ManyToOne
 	private /* @Jurjen final */ UserAccount user;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL) // nog niet helemaal duidelijk welk type nodig is
 	@JoinColumn(name = "order_id")
 	private /* @Jurjen final */ List<FinalSubOrder> subOrders = new ArrayList<>();
 	private /* @Jurjen final */ LocalDate orderDate;
@@ -132,5 +133,13 @@ public class Order {
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+        
+        public void calculateTotalPrice() {
+            for (FinalSubOrder fso : subOrders) {
+                int quantity = fso.getQuantity();
+                BigDecimal subTotal = fso.getSubTotal();
+                setTotalPrice(subTotal.multiply(new BigDecimal(quantity)));
+            }
+        }
 
 }

@@ -5,6 +5,8 @@
  */
 package main.java.test;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import main.java.model.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,8 +29,9 @@ public class DbFiller {
     
     public static void main(String[] args) {
         DbFiller dbFiller = new DbFiller();
-        dbFiller.persistUserAccount();
-        
+        //dbFiller.dummyCustomers();
+        //dbFiller.dummyEmployees();
+        dbFiller.dummyOrders();        
     }  
     
     void dummyCustomers() {
@@ -86,5 +89,50 @@ public class DbFiller {
             dbFiller.em.getTransaction().commit();
         }
     }
-    
+
+    void dummyOrders() {
+        for (int i = 0; i <= 10; i++) {
+            DbFiller dbFiller = new DbFiller();
+            dbFiller.em.getTransaction().begin();
+            Product product = new Product();
+            product.setBrand("La vache qui rit");
+            product.setCategory(ProductCategory.CREAM);
+            product.setInfo("Hahahaha hmmmmmmm");
+            product.setName("La vache qui dit");
+            product.setPrice(BigDecimal.ONE);
+            product.setStockCount(500);
+            dbFiller.em.persist(product);
+            dbFiller.em.getTransaction().commit();
+            dbFiller.em.getTransaction().begin();
+            CartSubOrder cartSubOrder = new CartSubOrder();
+            cartSubOrder.setProduct(product);
+            cartSubOrder.setQuantity(i);
+            cartSubOrder.setSubTotal(BigDecimal.ONE, i);
+            dbFiller.em.persist(cartSubOrder);
+            dbFiller.em.getTransaction().commit();
+            dbFiller.em.getTransaction().begin();
+            Adress delAdress = new Adress();
+		delAdress.setFirstName("Piet");
+		delAdress.setInsertion("de");
+		delAdress.setFamilyName("Boer");
+		delAdress.setCity("Stremselgat");
+		delAdress.setStreet("Kaasweg");
+		delAdress.setNumber(12);
+            dbFiller.em.persist(delAdress);
+            dbFiller.em.getTransaction().commit();
+            dbFiller.em.getTransaction().begin();   
+            FinalSubOrder subOrder = new FinalSubOrder(cartSubOrder);
+            //dbFiller.em.persist(subOrder);
+            //dbFiller.em.getTransaction().commit();
+            //dbFiller.em.getTransaction().begin();   
+            Order order = new Order();
+            order.addSubOrder(subOrder);                
+            order.setDeliveryAdress(delAdress);
+            order.setSaledate(LocalDate.now());
+            order.calculateTotalPrice();
+            dbFiller.em.persist(order);
+            dbFiller.em.getTransaction().commit();
+            dbFiller.em.getTransaction().begin();   
+        }
+    }
 }

@@ -43,4 +43,8 @@ public class ProductService {
       public void createProduct(Product product){
          dao.create(product);
     }
+
+    public void deleteProduct(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
