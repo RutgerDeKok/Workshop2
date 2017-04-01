@@ -123,7 +123,9 @@ public class ColorConsole {
 
 	public String printResponse(String message, String defaultResponse, Color color) {
 		// display main text
-
+		if( defaultResponse==null){
+			defaultResponse = "";
+		}
 		Style style = console.addStyle("Style", null);
 		StyleConstants.setForeground(style, color);
 
@@ -137,8 +139,6 @@ public class ColorConsole {
 
 		// set response default text and highlight
 		response = defaultResponse;
-		if (response == null)
-			response = ">";
 	
 
 		input.setText(response);

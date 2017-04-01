@@ -1,14 +1,14 @@
 package main.java.controller;
 
 import main.java.daos.GenericDao;
-import main.java.daos.GenericDaoJpaImpl;
 import main.java.model.Product;
+import main.java.model.ProductCategory;
 import main.java.presentation.EmployeeAccountsMenu;
 import main.java.presentation.EmployeeProductMenu;
 import main.java.service.ProductService;
 
+import java.util.ArrayList;
 import java.util.List;
-import main.java.daos.ProductUniqueDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -18,14 +18,14 @@ public class ProductController {
 	@Autowired
 	private GenericDao<Product, Long> dao;
 
-	// private List<Product> producten;
+	private List<Product> products;
+	private List<Product> filteredProducts;
 
-	// private ProductUniqueDao pdao = new ProductUniqueDao();
 
 	@Autowired
 	ProductService productService;
 	@Autowired
-	EmployeeProductMenu epMenu;
+	EmployeeProductMenu empProdMenu;
 	@Autowired
 	EmployeeAccountsMenu empAccountsMenu;
 
@@ -35,9 +35,9 @@ public class ProductController {
 
 	public void createProduct() {
 
-		Product product = epMenu.createUpdateProduct(new Product());
+		Product product = empProdMenu.createUpdateProduct(new Product());
 		dao.create(product);
-		epMenu.runEmployeeProductMenu();
+		runEmployeeProductMenuUpdateFromDB();
 	}
 
 	public List<Product> getAllProducts() {
@@ -45,33 +45,42 @@ public class ProductController {
 		return dao.findAll(Product.class);
 	}
 
-	public void updateProduct(Product aangepastProduct) {
-		dao.saveOrUpdate(aangepastProduct);
-		epMenu.runEmployeeProductMenu();
+	public void updateProduct(Product updatedProduct) {
+		updatedProduct = empProdMenu.createUpdateProduct(updatedProduct);
+		dao.saveOrUpdate(updatedProduct);
+		runEmployeeProductMenuUpdateFromDB();
 	}
 
 	public void deleteProductP(Product p) {
 		dao.delete(p);
-		epMenu.runEmployeeProductMenu();
+		runEmployeeProductMenuUpdateFromDB();
 	}
 
-	public void runEmployeeProductMenu() {
-		epMenu.runEmployeeProductMenu();
+	public void runEmployeeProductMenuUpdateFromDB() {
+			products = getAllProducts();
+			filteredProducts = new ArrayList<>(products);
+		empProdMenu.runEmployeeProductMenu();
 
 	}
 
-	public void runEmployeeAccountsMenu() {
-		empAccountsMenu.runMenu();
-
-	}
-	
-	
-//	public List<Product> getProducten() {
-//		return producten;
-//	}
+//	public void runEmployeeProductMenu() {
+//		epMenu.runEmployeeProductMenu();
 //
-//	public void setProducten(List<Product> producten) {
-//		this.producten = producten;
 //	}
+
+	
+	public void filterProductenByCat(ProductCategory filterCategory) {
+		filteredProducts.clear();
+		for(Product prod: products){
+			if(filterCategory ==ProductCategory.ALL || prod.getCategory()==filterCategory){
+				filteredProducts.add(prod);
+			}
+		}
+	}
+	
+	public List<Product> getFilteredProducts() {
+		return filteredProducts;
+	}
+
 
 }

@@ -9,14 +9,12 @@ package main.java.presentation;
 import main.java.infrastructure.ColorConsole;
 import java.awt.Color;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.infrastructure.Kleur;
-import main.java.controller.MainController;
 import main.java.controller.ProductController;
 import main.java.infrastructure.Formatter;
 import main.java.model.Product;
@@ -29,24 +27,18 @@ public class EmployeeProductMenu implements DisplayProducts{
 	private ColorConsole console;
 	@Autowired
 	private ProductController productController;
-
 	@Autowired
-	private MainEmployeeMenu mem;
+	private MainEmployeeMenu mainEmpMenu;
 	private char eAc = '\u00E9'; // e accent
-	private List<Product> products;
 	private List<Product> filteredProducts;
-	private boolean comingFromOutsideMenu = true;
-	private ProductCategory filterCategory = ProductCategory.ALL;
+
 
 	public void runEmployeeProductMenu() {
 		String response;
 		boolean validResponse;
 		
-		if(comingFromOutsideMenu){
-		products = productController.getAllProducts();  
-		filteredProducts = new ArrayList<>(products);
-		}
-		comingFromOutsideMenu = false;
+		
+		filteredProducts = productController.getFilteredProducts();
 		displayProducts(console, filteredProducts);
 		
 		console.println("\n"+Formatter.LINE, Kleur.CART);
@@ -67,14 +59,12 @@ public class EmployeeProductMenu implements DisplayProducts{
 			switch (response) {
 			case "0":
 				console.println(" terug ", Color.RED);
-				// gaat naar mainemployeemenu.
-				mem.runMenu();
+				mainEmpMenu.runMenu();
 				break;
 			case "1":
 				console.println(" aanpassen.", Color.ORANGE);
 				String keuze = console.printResponse("Kies een getal voor een product om aan te passen", "", Color.CYAN);
-				Product aangepastProduct = createUpdateProduct(filteredProducts.get(Integer.parseInt(keuze)-1));
-				productController.updateProduct(aangepastProduct);
+				productController.updateProduct(filteredProducts.get(Integer.parseInt(keuze)-1));
 				break;
 			case "2":
 				console.println("toevoegen", Color.ORANGE);
@@ -84,19 +74,16 @@ public class EmployeeProductMenu implements DisplayProducts{
 			case "3":
 				console.println(" verwijderen.", Color.ORANGE);
                                 String keuzeDelete = console.printResponse("Kies een getal voor een product te verwijderen", "", Color.CYAN);
-                                Product delProduct = (filteredProducts.get(Integer.parseInt(keuzeDelete)-1));
-                comingFromOutsideMenu = true; 
+                                Product delProduct = (filteredProducts.get(Integer.parseInt(keuzeDelete)-1)); 
 				productController.deleteProductP(delProduct);
 				break;
 			case "4":
-				
+				ProductCategory filterCategory = ProductCategory.ALL;
 				console.println("Filteren op categorie", Color.ORANGE);
-				filterCategory = selectCategory(filterCategory);
+				filterCategory = selectCategory(ProductCategory.ALL);
 				console.println("Filter " + filterCategory.getNL(), Color.YELLOW);
 				
-				filterProductenByCat();
-				
-				comingFromOutsideMenu = false;
+				productController.filterProductenByCat(filterCategory);
 				runEmployeeProductMenu();
 
 				break;
@@ -115,20 +102,6 @@ public class EmployeeProductMenu implements DisplayProducts{
 	
 	
 	
-	
-
-	private void filterProductenByCat() {
-		filteredProducts.clear();
-		for(Product prod: products){
-			if(filterCategory ==ProductCategory.ALL || prod.getCategory()==filterCategory){
-				filteredProducts.add(prod);
-			}
-		}
-	}
-
-
-
-
 
 	public Product createUpdateProduct(Product product) {
 
@@ -214,10 +187,9 @@ public class EmployeeProductMenu implements DisplayProducts{
 	
 
 	
-	
-	
 
 	public ProductCategory selectCategory(ProductCategory cat){
+		
 		console.println(
 				"Selecteer de catogorie van het product 1: Hard-Medium 2: Zacht-Schimmel"
 				+"\n3: blauw 4: room 5: geit 6: alles/overige ",
@@ -246,5 +218,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 
 		return cat;
 	}
+	
+
 
 }

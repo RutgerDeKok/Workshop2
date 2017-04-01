@@ -1,13 +1,16 @@
 
 package main.java.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.daos.UserAccountDao;
+import main.java.model.Adress;
 import main.java.model.UserAccount;
+import main.java.model.UserType;
 import main.java.presentation.CreateMenus.CreateUserAccountMenu;
 import main.java.presentation.EmployeeAccountsMenu;
 import main.java.presentation.MainMenu;
@@ -20,12 +23,14 @@ public class UserController {
 	@Autowired
 	private CreateUserAccountMenu menu;
 	@Autowired
-	EmployeeAccountsMenu empAccountsMenu;
+	EmployeeAccountsMenu empAccMenu;
 	@Autowired
 	private UserAccountDao dao;
-
 	@Autowired
 	private CartController cartController;
+
+	private List<UserAccount> users;
+	private List<UserAccount> filteredUsers; // filter by UserType
 
 	public void createUserAccount() {
 
@@ -46,20 +51,19 @@ public class UserController {
 		return dao.findAll(UserAccount.class);
 	}
 
-	
 	public void createUser() {
 
-		UserAccount user = empAccountsMenu.createUpdateUser(new UserAccount());
+		UserAccount user = empAccMenu.createUpdateUser(new UserAccount());
 		dao.create(user);
-		empAccountsMenu.runMenu();
+		runEmployeeAccountsMenuUpdateFromDB();
 	}
 
-	public void updateUser(UserAccount aangepasteUser) {
-		dao.saveOrUpdate(aangepasteUser);
-		empAccountsMenu.runMenu();
+	public void updateUser(UserAccount updatedUser) {
+		updatedUser = empAccMenu.createUpdateUser(updatedUser);
+		dao.saveOrUpdate(updatedUser);
+		runEmployeeAccountsMenuUpdateFromDB();
 	}
 
-	
 	public boolean checkEmailAvailable(String email) {
 
 		UserAccount user = getUserByEmail(email);
@@ -73,8 +77,33 @@ public class UserController {
 
 	public void deleteAccount(UserAccount a) {
 		dao.delete(a);
-		empAccountsMenu.runMenu();
+		runEmployeeAccountsMenuUpdateFromDB();
 	}
 
+	public void runEmployeeAccountsMenuUpdateFromDB() {
+		users = getAllUsers();
+		filteredUsers = new ArrayList<>(users);
+		empAccMenu.runMenu();
+
+	}
+
+	public void filterAccountsByType(UserType filterType) {
+		filteredUsers.clear();
+		for (UserAccount user : users) {
+			if (filterType == UserType.ALL || user.getUserType() == filterType) {
+				filteredUsers.add(user);
+			}
+		}
+	}
+
+	public List<UserAccount> getFilteredUsers() {
+		return filteredUsers;
+	}
+
+//	public UserAccount createEmptyAdressForUSer(UserAccount user) {
+//		user.setBillingAdress(new Adress());
+//		dao.saveOrUpdate(user);
+//		return user;
+//	}
 
 }
