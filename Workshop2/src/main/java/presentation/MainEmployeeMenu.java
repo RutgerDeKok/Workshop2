@@ -66,7 +66,7 @@ public class MainEmployeeMenu {
 			case "2":
 				console.println(" ", Color.ORANGE);
                                 // gaat naar EmployeeProductMenu
-				productController.runEmployeeProductMenu();
+				productController.runEmployeeProductMenuUpdateFromDB();
 				break;
 			case "3":
 				console.println("bestelling", Color.ORANGE);
