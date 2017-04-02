@@ -82,8 +82,18 @@ public class Cart {
 	 * vervangen worden door een functie die de totaalprijs berekent
 	 */
 	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+            if (this.totalPrice == null) {
+                this.totalPrice = new BigDecimal(0);
+            }
+            this.totalPrice.add(totalPrice);
 	}
+        
+        public void calculateTotalPrice() {
+            for (CartSubOrder cso : subOrders) {
+                BigDecimal subTotal = cso.getTotalPrice();
+                setTotalPrice(subTotal);
+            }
+        }
 
 	protected void emptyCart() {
 		subOrders.clear();

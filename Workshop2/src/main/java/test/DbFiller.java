@@ -12,8 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import main.java.infrastructure.PassHasher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  *
@@ -24,58 +22,58 @@ import org.springframework.stereotype.Component;
 public class DbFiller {
     
     //@Autowired
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("webshop");
-    private EntityManager em = emf.createEntityManager();
+    static EntityManagerFactory emf; // = Persistence.createEntityManagerFactory("webshop");
+    static EntityManager em; // = emf.createEntityManager();
     
     public static void main(String[] args) {
-        DbFiller dbFiller = new DbFiller();
-        //dbFiller.dummyCustomers();
-        //dbFiller.dummyEmployees();
-        dbFiller.dummyOrders();        
+        setEntityManager();
+        em.getTransaction().begin();
+        dummyCustomers();
+        dummyEmployees();
+        em.getTransaction().commit();
+        System.exit(0);
     }  
     
-    void dummyCustomers() {
-        for (int i = 0; i <= 10; i++) {
-            DbFiller dbFiller = new DbFiller();
-            dbFiller.em.getTransaction().begin();
+    static void dummyCustomers() {
+        for (int i = 0; i <= 1; i++) {
             UserAccount user = new UserAccount();
             user.setEmail("c"+i+"@c.nl");
             user.setUserType(UserType.CUSTOMER);
-                Adress factAdress = new Adress();
-		factAdress.setFirstName("Piet");
-		factAdress.setInsertion("de");
-		factAdress.setFamilyName("Boer");
-		factAdress.setCity("Stremselgat");
-		factAdress.setStreet("Kaasweg");
-		factAdress.setNumber(12);
+            Adress factAdress = new Adress();
+            factAdress.setFirstName("Piet");
+            factAdress.setInsertion("de");
+            factAdress.setFamilyName("Boer");
+            factAdress.setCity("Stremselgat");
+            factAdress.setStreet("Kaasweg");
+            factAdress.setNumber(12);
+            factAdress.setZipCode("1234 AA");
             user.setBillingAdress(factAdress);
             char[] pass = { 1, 1, 1, 1 };
             try {
-                    user.setPassHash(PassHasher.getSaltedHash(pass));
+                user.setPassHash(PassHasher.getSaltedHash(pass));
             } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                e.getMessage();
             }
-            dbFiller.em.persist(factAdress);
-            dbFiller.em.persist(user);
-            dbFiller.em.getTransaction().commit();
+            em.persist(factAdress);
+            em.persist(user);
+            // Dummy orders aan de customer toevoegen
+            dummyOrders(user, factAdress);
         }
     }
     
-    void dummyEmployees() {
-        for (int i = 0; i <= 10; i++) {
-            DbFiller dbFiller = new DbFiller();
-            dbFiller.em.getTransaction().begin();
+    static void dummyEmployees() {
+        for (int i = 0; i <= 1; i++) {
             UserAccount user = new UserAccount();
             user.setEmail("e"+i+"@e.nl");
             user.setUserType(UserType.EMPLOYEE);
-                Adress factAdress = new Adress();
-		factAdress.setFirstName("Piet");
-		factAdress.setInsertion("de");
-		factAdress.setFamilyName("Boer");
-		factAdress.setCity("Stremselgat");
-		factAdress.setStreet("Kaasweg");
-		factAdress.setNumber(12);
+            Adress factAdress = new Adress();
+            factAdress.setFirstName("Piet");
+            factAdress.setInsertion("de");
+            factAdress.setFamilyName("Boer");
+            factAdress.setCity("Stremselgat");
+            factAdress.setStreet("Kaasweg");
+            factAdress.setNumber(12);
+            factAdress.setZipCode("4321 ZZ");
             user.setBillingAdress(factAdress);
             char[] pass = { 1, 1, 1, 1 };
             try {
@@ -84,16 +82,13 @@ public class DbFiller {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
             }
-            dbFiller.em.persist(factAdress);
-            dbFiller.em.persist(user);
-            dbFiller.em.getTransaction().commit();
+            em.persist(factAdress);
+            em.persist(user);
         }
     }
 
-    void dummyOrders() {
-        for (int i = 0; i <= 10; i++) {
-            DbFiller dbFiller = new DbFiller();
-            dbFiller.em.getTransaction().begin();
+    static void dummyOrders(UserAccount user, Adress adress) {
+        for (int i = 0; i <= 1; i++) {
             Product product = new Product();
             product.setBrand("La vache qui rit");
             product.setCategory(ProductCategory.CREAM);
@@ -101,38 +96,31 @@ public class DbFiller {
             product.setName("La vache qui dit");
             product.setPrice(BigDecimal.ONE);
             product.setStockCount(500);
-            dbFiller.em.persist(product);
-            dbFiller.em.getTransaction().commit();
-            dbFiller.em.getTransaction().begin();
+            em.persist(product);            
             CartSubOrder cartSubOrder = new CartSubOrder();
             cartSubOrder.setProduct(product);
             cartSubOrder.setQuantity(i);
             cartSubOrder.setSubTotal(BigDecimal.ONE, i);
-            dbFiller.em.persist(cartSubOrder);
-            dbFiller.em.getTransaction().commit();
-            dbFiller.em.getTransaction().begin();
-            Adress delAdress = new Adress();
-		delAdress.setFirstName("Piet");
-		delAdress.setInsertion("de");
-		delAdress.setFamilyName("Boer");
-		delAdress.setCity("Stremselgat");
-		delAdress.setStreet("Kaasweg");
-		delAdress.setNumber(12);
-            dbFiller.em.persist(delAdress);
-            dbFiller.em.getTransaction().commit();
-            dbFiller.em.getTransaction().begin();   
+            em.persist(cartSubOrder);
+            Cart cart = new Cart();
+            cart.addSubOrder(cartSubOrder);
+            cart.setUser(user);
+            cart.setDeliveryAdress(adress);
+            cart.calculateTotalPrice();
+            em.persist(cart);
             FinalSubOrder subOrder = new FinalSubOrder(cartSubOrder);
-            //dbFiller.em.persist(subOrder);
-            //dbFiller.em.getTransaction().commit();
-            //dbFiller.em.getTransaction().begin();   
             Order order = new Order();
             order.addSubOrder(subOrder);                
-            order.setDeliveryAdress(delAdress);
+            order.setDeliveryAdress(adress);
             order.setSaledate(LocalDate.now());
             order.calculateTotalPrice();
-            dbFiller.em.persist(order);
-            dbFiller.em.getTransaction().commit();
-            dbFiller.em.getTransaction().begin();   
+            order.setUser(user);
+            em.persist(order);
         }
+    }
+
+    static void setEntityManager() {
+        emf = Persistence.createEntityManagerFactory("webshop");
+        em = emf.createEntityManager();
     }
 }

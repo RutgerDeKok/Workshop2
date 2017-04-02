@@ -1,7 +1,6 @@
 package main.java.controller;
 
 import main.java.presentation.employee.MainEmployeeMenu;
-import main.java.model.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

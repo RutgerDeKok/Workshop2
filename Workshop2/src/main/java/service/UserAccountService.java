@@ -12,13 +12,6 @@ public class UserAccountService {
 //    @Autowired
     UserAccountRepository userAccountRepository;
     
-    @Autowired
-    CurrentUser currentUser;
-    
-    public UserAccount getCurrentUser() {
-        return currentUser.getCurrentUser();
-    }
-    
     public List<UserAccount> getAllAccounts(){
         List<UserAccount> list = new ArrayList<>();
         userAccountRepository.findAll().forEach(list::add);

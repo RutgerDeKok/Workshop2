@@ -8,7 +8,6 @@ package main.java.controller;
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.infrastructure.ColorConsole;
 import main.java.model.Cart;
-import main.java.model.CurrentUser;
 import main.java.model.UserAccount;
 import main.java.presentation.DisplayCart;
 import main.java.presentation.DisplayOrders;
@@ -36,8 +35,6 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
     private ColorConsole console;
     @Autowired
     private MainController mainController;
-    @Autowired
-    private CartController cartController;
     @Autowired
     CustomerProductMenu productMenu;
     @Autowired
