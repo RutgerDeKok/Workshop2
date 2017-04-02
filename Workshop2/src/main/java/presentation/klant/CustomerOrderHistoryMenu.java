@@ -5,6 +5,7 @@
  */
 package main.java.presentation.klant;
 
+import java.awt.Color;
 import static java.lang.System.console;
 import java.util.List;
 import main.java.controller.MainController;
@@ -30,10 +31,16 @@ public class CustomerOrderHistoryMenu implements DisplayOrders {
     private OrderController orderController;
     @Autowired
     private ColorConsole console;
+    @Autowired
+    CustomerMenu customerMenu;
     
     public void runMenu() {
         long userId = mainController.getCurrentUser().getId();
         List<Order> orders = orderController.getOrdersByUserId(userId);        
-        displayOrders(console, orders);
+        displayOrders(console, orders); // eventueel nog een max aangeven + optie om verder terug te bladeren
+        String response = console.printResponse("Voer 'x' in om terug te keren naar het vorige menu.","x",Color.ORANGE);
+        if (response.equalsIgnoreCase("x")) {
+            customerMenu.runMenu();
+        }
     }
 }

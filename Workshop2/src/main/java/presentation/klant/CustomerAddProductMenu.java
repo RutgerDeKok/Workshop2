@@ -6,6 +6,7 @@
 package main.java.presentation.klant;
 
 import java.awt.Color;
+import java.util.LinkedHashMap;
 import main.java.controller.CartController;
 import main.java.controller.CartSubOrderController;
 import main.java.controller.MainController;
@@ -26,6 +27,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CustomerAddProductMenu implements DisplayCart {
+
+    public void setDisplayAndProductIds(LinkedHashMap<Integer, Long> displayAndProductIds) {
+        this.displayAndProductIds = displayAndProductIds;
+    }
   
    @Autowired
         private MainMenu mainMenu;
@@ -44,6 +49,7 @@ public class CustomerAddProductMenu implements DisplayCart {
         @Autowired
         private CustomerMenu customerMenu;
         Cart userCart;
+        private LinkedHashMap<Integer, Long> displayAndProductIds;
         
     
     public String checkInput(String prompt, String cancelKey) {
@@ -55,7 +61,7 @@ public class CustomerAddProductMenu implements DisplayCart {
 		long userId = mainController.getCurrentUser().getId();
 		userCart = cartController.getCart(userId);
 		// cart inhoud laten zien
-		displayCart(console,userCart);
+		//displayCart(console,userCart);
                 
                 //voeg kaas toe
                 //String response = checkInput("Wat is het id van het product wat u toe wilt voegen?", "x");
@@ -70,8 +76,10 @@ public class CustomerAddProductMenu implements DisplayCart {
 				+ "\n"+Formatter.LINE, "1", Color.CYAN);
                 
                 //voeg suborder en cart toe aan database.. nog niet met elkaar verbonden
-                Long id = Long.parseLong(productId);
-                Product p = productController.getProduct(id);
+                int id = Integer.parseInt(productId);                
+                long prodId = displayAndProductIds.get(id);
+                //Product p = userCart.getSubOrders().get(id).getProduct();
+                Product p = productController.getProduct(prodId);
                 CartSubOrder cartSubOrder = new CartSubOrder();
                 cartSubOrder.setProduct(p);                        
                 cartSubOrder.setQuantity(Integer.parseInt(amount));

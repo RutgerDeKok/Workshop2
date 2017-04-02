@@ -26,20 +26,22 @@ public interface DisplayOrders {
     
 		console.println("Uw bestellingen", Kleur.RED_ORANGE);
 		console.println(Formatter.LINE, Color.orange);
-		int[] padnums = { 4, 10, 20};
-		int[] alignLR = { 1, 1,  1};
+		int[] padnums = { 4, 15, 20, 30};
+		int[] alignLR = { 1, 1,  1, 1};
                 // header
-		console.println(Formatter.padString(padnums, alignLR, "id","besteldatum","totaalprijs"), Kleur.RED_ORANGE);
+		console.println(Formatter.padString(padnums, alignLR, "id","besteldatum","totaalprijs","aantal artikelen"), Kleur.RED_ORANGE);
 		
 		int i = 1;
                 int aantalArtikelen = 0;
 		for (Order o : orders) {
-                   int id = i;
-                   LocalDate saleDate = o.getSaledate();
-                   saleDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
+                   String saleDate = o.getSaledate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+                   //saleDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
                    BigDecimal totaalPrijs = o.getTotalPrice();
-                   aantalArtikelen += o.getSubOrders().get(i).getQuantity();
-                   console.println(Formatter.padString(padnums, alignLR, "" + i + id + saleDate + totaalPrijs + aantalArtikelen), Kleur.RED_ORANGE);
+                   for (int j = 0; j < o.getSubOrders().size(); j++) {
+                       aantalArtikelen += o.getSubOrders().get(j).getQuantity();
+                   }               
+                   console.println(Formatter.padString(padnums, alignLR, "" + i, "" + saleDate, "" + totaalPrijs, "" + aantalArtikelen), Kleur.RED_ORANGE);
+                   i++;
                 }
 
     }

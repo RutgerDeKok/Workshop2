@@ -11,36 +11,24 @@ package main.java.presentation.klant;
  */
 
 import java.awt.Color;
-import main.java.controller.CartController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import java.awt.Color;
-import java.math.BigDecimal;
-import java.util.List;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.controller.CartController;
+import main.java.presentation.DisplayCart;
 import main.java.controller.MainController;
-import main.java.controller.UserController;
+import main.java.controller.OrderController;
+import main.java.infrastructure.ColorConsole;
 import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
 import main.java.model.CartSubOrder;
-import main.java.model.ProductCategory;
-import main.java.infrastructure.ColorConsole;
-import main.java.presentation.DisplayCart;
-import main.java.presentation.MainMenu;
-import main.java.controller.MainController;
-import main.java.controller.OrderController;
-import main.java.controller.ProductController;
-import main.java.infrastructure.ColorConsole;
-import main.java.infrastructure.Formatter;
-import main.java.model.Cart;
-import main.java.model.ProductCategory;
+import main.java.model.FinalSubOrder;
+import main.java.model.Order;
+import main.java.model.UserAccount;
 import main.java.presentation.CreateMenus.CreateAdressMenu;
 import main.java.presentation.MainMenu;
-import main.java.presentation.employee.MainEmployeeMenu;
 
 @Component
 public class CustomerCheckOutMenu implements DisplayCart{
@@ -75,7 +63,8 @@ public class CustomerCheckOutMenu implements DisplayCart{
 	private Cart userCart;
         public void runMenu(){
 		// met de db checken of er iets in de opgeslagen cart van de user zit
-		long userId = mainController.getCurrentUser().getId();
+                UserAccount user = mainController.getCurrentUser();
+		long userId = user.getId();
 		userCart = cartController.getCart(userId);
 		// cart inhoud laten zien
 		displayCart(console,userCart);
@@ -110,6 +99,18 @@ public class CustomerCheckOutMenu implements DisplayCart{
                                 //voor cart-->order en hoe het domein dat hendelt):
                                 //1)alle suborders --> finalsuborders
                                 //2)cart --> order
+                                Order order = new Order();
+                                order.setUser(user);
+                                for (CartSubOrder cso : userCart.getSubOrders()) {
+                                    FinalSubOrder fso = new FinalSubOrder(cso);
+                                    order.addSubOrder(fso);
+                                }
+                                // TO DO: display and confirm/edit Adress
+                                // Gaat er nu automatisch vanuit dat userBillingAdress == orderDeliveryAdress
+                                order.setDeliveryAdress(user.getBillingAdress());
+                                order.calculateTotalPrice();
+                                order.setSaledate(LocalDate.now());                                
+                                orderController.createOrder(order);
                                 console.println("Uw bestelling is geplaatst, gefeliciteerd!", Color.RED);
                                 customerMenu.runMenu();
 				break;

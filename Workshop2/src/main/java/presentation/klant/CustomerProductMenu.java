@@ -2,6 +2,7 @@ package main.java.presentation.klant;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,13 +109,19 @@ public class CustomerProductMenu implements DisplayCart, DisplayProducts {
 				break;
 			}
 		} while (!validResponse);
-        products = productController.getAllProducts();        
+        products = productController.getAllProducts();
+        LinkedHashMap<Integer, Long> displayAndProductIds = new LinkedHashMap<>();
+        int i = 1;
         for(Product prod: products){
             if(category ==ProductCategory.ALL || prod.getCategory()==category) {
-                    filteredProducts.add(prod);
+                filteredProducts.add(prod);
+                // Keep a list of displayId + productId combination
+                displayAndProductIds.put(i,prod.getId());                
             }
+            i++;
 	}        
 	displayProducts(console, filteredProducts);
+        customerAddProductMenu.setDisplayAndProductIds(displayAndProductIds);
         customerAddProductMenu.runMenu();     
 	}
 }

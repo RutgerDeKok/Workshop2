@@ -63,7 +63,7 @@ public class CustomerProfileMenu {
         
     if (user.getBillingAdress()==null){
         console.println(Formatter.LINE
-				+ "\nU heeft nog geen emailadress aangemaakt"
+				+ "\nU heeft nog geen factuuradres aangemaakt"
                                 + "\nWilt u er nu een maken? [Y/N]"
 				+ "\n", Color.CYAN);
 		console.println("\n 0: uitloggen", Color.PINK);

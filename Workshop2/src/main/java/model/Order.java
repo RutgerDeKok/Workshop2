@@ -1,5 +1,6 @@
 package main.java.model;
 
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import main.java.infrastructure.ColorConsole;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Entity
@@ -131,14 +134,16 @@ public class Order {
         Niet nodig, totaalprijs kan berekend of doorgegeven worden ipv handmatige setTotalPrice
         */
 	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+            if (this.totalPrice == null) {
+                this.totalPrice = new BigDecimal(0);
+            }
+            this.totalPrice.add(totalPrice);
 	}
         
         public void calculateTotalPrice() {
             for (FinalSubOrder fso : subOrders) {
-                int quantity = fso.getQuantity();
                 BigDecimal subTotal = fso.getSubTotal();
-                setTotalPrice(subTotal.multiply(new BigDecimal(quantity)));
+                setTotalPrice(subTotal);
             }
         }
 
