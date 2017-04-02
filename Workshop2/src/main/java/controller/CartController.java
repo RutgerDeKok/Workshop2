@@ -39,9 +39,12 @@ public class CartController {
 		dao.create(cart);
 	}
 	
-	public Cart getCart(Long id) {
+	/*
+        @Jurjen deze bestaat al
+        public Cart getCart(Long id) {
 		return dao.read(Cart.class, id);
 	}
+        */
 	
 	public void updateCart(Cart cart) {
 		dao.saveOrUpdate(cart);

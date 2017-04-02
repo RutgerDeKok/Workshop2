@@ -1,26 +1,28 @@
 package main.java.service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import main.java.daos.*;
 import main.java.daos.repositories.UserAccountRepository;
 import main.java.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 //@Service
 public class UserAccountService {
     
 //    @Autowired
     UserAccountRepository userAccountRepository;
-    UserAccount account;
     
+    @Autowired
+    CurrentUser currentUser;
+    
+    public UserAccount getCurrentUser() {
+        return currentUser.getCurrentUser();
+    }
     
     public List<UserAccount> getAllAccounts(){
         List<UserAccount> list = new ArrayList<>();
         userAccountRepository.findAll().forEach(list::add);
-        list.add(account);
+        //list.add(account);
         return list;
     }
     
