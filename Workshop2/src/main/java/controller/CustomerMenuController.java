@@ -57,16 +57,21 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
     private GenericDaoJpaImpl<Order, Long> orderDao;
     Cart userCart;
     
-    public UserAccount getCurrentUser() {
+
+	public UserAccount getCurrentUser() {
         return mainController.getCurrentUser();
     }
     
-    public Cart getCart() {
+    public Cart getCartfromDB() {
         System.out.println("User: " + getCurrentUser().toString());
         userCart = cartDao.read(Cart.class, getCurrentUser().getId());
         System.out.println("Cart: " + userCart.toString());
         return userCart;
     }
+    
+    public Cart getUserCart() {
+		return userCart;
+	}
     
     public void displayCart(Cart userCart) {
         displayCart(console, userCart);
@@ -79,6 +84,7 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
     
     // temporary save
     public void saveCart(Cart currentCart) {
+    	System.out.println("saveCart menu objecten vergelijk"+ currentCart +" en " +userCart);
         userCart = currentCart;
     }
     

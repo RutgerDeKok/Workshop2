@@ -71,13 +71,15 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
         // met de db checken of er iets in de opgeslagen cart van de user zit
         UserAccount user = mainController.getCurrentUser();
         long userId = user.getId();
-        userCart = cartController.getCart(userId);
+//        userCart = cartController.getCart(userId);
+        userCart = controller.getUserCart();
         // cart inhoud laten zien
         displayCart(console,userCart);
 
         //dit is de profielpagina. hier kun je een adres maken en wordt
                         // adres ook getoond
         // alleen adres ophalen als de cart een adres heeft, anders aanmaken
+        console.println("Uw bestaande aflever adres: ", Color.CYAN);
         displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
                         //customerProfileMenu.showAdressDetails();
         console.println(Formatter.LINE +
@@ -114,10 +116,12 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
                 case "n":
                     // HIER controleren of Cart wel een adres heeft
                     console.print("Ooh.. jammer.", Color.ORANGE);
-                    displayAdress(console,user.getBillingAdress(),user.getEmail());
                     String input = console.printResponse("Wilt u de order bezorgen naar uw factuuradres?", "n", Color.yellow);
+                    displayAdress(console,user.getBillingAdress(),user.getEmail());
+                    
                     if (input.equalsIgnoreCase("y")) {
                         controller.copyAdress(userCart.getDeliveryAdress(), user.getBillingAdress());
+                        console.print("Het aflever adres wordt:", Color.ORANGE);
                         displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
 //userCart.setDeliveryAdress(user.getBillingAdress());
                         //cartController.updateCart(userCart);

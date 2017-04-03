@@ -1,7 +1,7 @@
 package main.java.model;
 
 public enum UserType {
-	EMPLOYEE,CUSTOMER; /* @Jurjen +admin? */
+	EMPLOYEE,CUSTOMER, ALL; /* @Jurjen +admin? */
 
 
 }

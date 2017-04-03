@@ -20,7 +20,7 @@ public class CustomerMenu {
     Cart userCart;
 
     public void runMenu() {
-        userCart = controller.getCart();
+        userCart = controller.getCartfromDB();
         controller.displayCart(userCart);
         console.println(Formatter.LINE
                         + "\nSelecteer een optie:"
@@ -53,12 +53,12 @@ public class CustomerMenu {
                             validResponse = false;
                             break;
                         }
-                        controller.saveCart(userCart);
+//                      controller.saveCart(userCart);
                         controller.runEditCartMenu();
                         break;
                 case "3":
                         console.println("Naar kassa", Color.ORANGE);
-                        controller.saveCart(userCart);
+//                       controller.saveCart(userCart);
                         controller.runCheckOutMenu();			
                         break;
                 case "4":
