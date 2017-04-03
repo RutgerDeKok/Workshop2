@@ -33,7 +33,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 	private List<Product> filteredProducts;
 
 
-	public void runEmployeeProductMenu() {
+	public void runMenu() {
 		String response;
 		boolean validResponse;
 		
@@ -84,7 +84,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 				console.println("Filter " + filterCategory.getNL(), Color.YELLOW);
 				
 				productController.filterProductenByCat(filterCategory);
-				runEmployeeProductMenu();
+				runMenu();
 
 				break;
 			case "5":

@@ -119,17 +119,21 @@ public class EmployeeAccountsMenu implements DisplayUsers, DisplayAdress {
 		user.setEmail(email);
 
 		// Adress
+		Adress userAdress = user.getBillingAdress();
+		console.println("Huidig adres", Color.ORANGE);
+		displayAdress(console, userAdress, user.getEmail());
+		
+		
 		String response = console.printResponse("Wilt u het adres toevoegen of aanpassen? [J/N]", "J", Color.ORANGE);
 		if (response.toUpperCase().equals("J")) {
 
-			Adress userAdress = user.getBillingAdress();
-			console.println("Huidig adres", Color.ORANGE);
-			displayAdress(console, userAdress, user.getEmail());
+			
 			console.println("Adres Aanpassen", Color.ORANGE);
 			userAdress = (editAdress(console, user.getBillingAdress()));
 			user.setBillingAdress(userAdress);
 			console.println("Het aangepast adres:", Color.ORANGE);
 			displayAdress(console, user.getBillingAdress(), user.getEmail());
+			
 		}
 
 		// Gebruiker Type
@@ -152,6 +156,7 @@ public class EmployeeAccountsMenu implements DisplayUsers, DisplayAdress {
 		user.setPassHash(hash);
 		
 		console.println("\nGebruiker succesvol aangepast\n", Color.yellow);
+		
 
 		return user;
 

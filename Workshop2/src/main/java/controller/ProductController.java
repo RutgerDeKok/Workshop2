@@ -49,7 +49,9 @@ public class ProductController {
 	public void updateProduct(Product updatedProduct) {
 		updatedProduct = empProdMenu.createUpdateProduct(updatedProduct);
 		dao.saveOrUpdate(updatedProduct);
-		runEmployeeProductMenuUpdateFromDB();
+		empProdMenu.runMenu();
+		
+//		runEmployeeProductMenuUpdateFromDB();
 	}
 
 	public void deleteProductP(Product p) {
@@ -60,7 +62,7 @@ public class ProductController {
 	public void runEmployeeProductMenuUpdateFromDB() {
 			products = getAllProducts();
 			filteredProducts = new ArrayList<>(products);
-		empProdMenu.runEmployeeProductMenu();
+		empProdMenu.runMenu();
 
 	}
 
