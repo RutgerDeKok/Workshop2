@@ -25,7 +25,9 @@ public class UserController {
 	@Autowired
 	private CartController cartController;
 
-	
+	public void updateUserAccount(UserAccount user) {
+            dao.saveOrUpdate(user);
+        }
 
 	public void createUserAccount() {
 		

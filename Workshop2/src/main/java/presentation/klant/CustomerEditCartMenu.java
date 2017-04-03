@@ -47,7 +47,9 @@ public class CustomerEditCartMenu implements DisplayCart{
 				+ "\n 0:      Terug naar hoofdmenu"
 				+ "\n[x]: Toets x om door te gaan naar kassa\n"  // "" = enter
 				+ Formatter.LINE,Color.CYAN);
-		boolean validResponse;
+		
+                // Deze logica moet nog nagekeken worden, hij print nu bijv altijd ongeldige invoer bij 'x' 
+                boolean validResponse;
 		do {
 			validResponse = true;
 			int num=-1;

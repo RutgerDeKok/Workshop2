@@ -69,12 +69,16 @@ public class CustomerAddProductMenu implements DisplayCart {
 				+ "\nWat is het id van het product wat u toe wil voegen???"
 				+ "\nVoor 'x' in om te annuleren"
                                         + "\n"+Formatter.LINE, "1", Color.CYAN);
-                
+                if (productId.equalsIgnoreCase("x")) {
+                    customerMenu.runMenu();
+                }
                 //voeg amount toe
                 String amount = console.printResponse(Formatter.LINE
 				+ "\nHoeveel wilt u daarvan???"
 				+ "\n"+Formatter.LINE, "1", Color.CYAN);
-                
+                if (amount.equalsIgnoreCase("x")) {
+                    customerMenu.runMenu();
+                }
                 //voeg suborder en cart toe aan database.. nog niet met elkaar verbonden
                 int id = Integer.parseInt(productId);                
                 long prodId = displayAndProductIds.get(id);

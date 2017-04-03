@@ -20,8 +20,10 @@ import main.java.controller.CartController;
 import main.java.presentation.DisplayCart;
 import main.java.controller.MainController;
 import main.java.controller.OrderController;
+import main.java.controller.UserController;
 import main.java.infrastructure.ColorConsole;
 import main.java.infrastructure.Formatter;
+import main.java.model.Adress;
 import main.java.model.Cart;
 import main.java.model.CartSubOrder;
 import main.java.model.FinalSubOrder;
@@ -44,6 +46,10 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
 	@Autowired
 	private CartController cartController;
         @Autowired
+        OrderController orderController;
+        @Autowired
+        UserController userController;
+        @Autowired
         CustomerProductMenu customerProductMenu;
         @Autowired
         CustomerEditCartMenu customerEditCartMenu;
@@ -55,8 +61,6 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
         CustomerProfileMenu customerProfileMenu;
         @Autowired
         CreateAdressMenu createAdressMenu;
-        @Autowired
-        OrderController orderController;
         @Autowired
         CustomerMenu customerMenu;
 
@@ -119,7 +123,11 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
 				break;
 			case "n":
 				console.println("Ooh,, jammer", Color.ORANGE);
-                                user.setBillingAdress(editAdress(console, user.getBillingAdress()));
+                                Adress newAdress = editAdress(console, user.getBillingAdress());
+                                System.out.println(newAdress.toString());
+                                user.setBillingAdress(newAdress);
+                                System.out.println(user.getBillingAdress().toString());
+                                userController.updateUserAccount(user);
 				customerEditCartMenu.runMenu();
 				break;
 			default:
