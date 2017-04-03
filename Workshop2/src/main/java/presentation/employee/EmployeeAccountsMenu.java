@@ -69,7 +69,7 @@ public class EmployeeAccountsMenu implements DisplayUsers, DisplayAdress {
 				break;
 			case "2":
 				console.println("toevoegen", Color.ORANGE);
-				userController.createUserAccount();
+				userController.createNewUserForEmployee();;
 
 				break;
 			case "3":

@@ -35,7 +35,7 @@ public class UserController {
 		dao.saveOrUpdate(user);
 	}
 
-	public void createUserAccount() {
+	public void createCustomerAccount() {
 
 		// get Klant object back (adress can remain null at first)
 		UserAccount user = menu.createUserAccount();
@@ -54,7 +54,7 @@ public class UserController {
 		return dao.findAll(UserAccount.class);
 	}
 
-	public void createUser() {
+	public void createNewUserForEmployee() {
 
 		UserAccount user = empAccMenu.createUpdateUser(new UserAccount());
 		dao.create(user);
@@ -105,5 +105,10 @@ public class UserController {
 		return filteredUsers;
 
 	}
+
+//	public void createNewUserForEmployee() {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 }

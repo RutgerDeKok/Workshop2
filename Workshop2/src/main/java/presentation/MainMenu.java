@@ -51,7 +51,7 @@ public class MainMenu {
 				break;
 			case "2":
 				console.println("U gaat een Klant Account aanmaken",Color.ORANGE);
-				userController.createUserAccount();
+				userController.createCustomerAccount();
 				break;
 			default:
 				console.println("Ongeldige invoer, probeer opnieuw.",Color.magenta);
