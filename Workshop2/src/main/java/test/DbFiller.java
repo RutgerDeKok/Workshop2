@@ -101,13 +101,16 @@ public class DbFiller {
             cartSubOrder.setProduct(product);
             cartSubOrder.setQuantity(i);
             cartSubOrder.setSubTotal(BigDecimal.ONE, i);
+            System.out.println("CHECK SUBORDER TOTAL:" + cartSubOrder.getTotalPrice());
             em.persist(cartSubOrder);
             Cart cart = new Cart();
-            cart.addSubOrder(cartSubOrder);
+            cart.setId(user.getId());
             cart.setUser(user);
             cart.setDeliveryAdress(adress);
+            cart.addSubOrder(cartSubOrder);            
             cart.calculateTotalPrice();
-            em.persist(cart);
+            System.out.println("CHECK CART TOTAL:" + cart.getTotalPrice());
+            em.merge(cart);
             FinalSubOrder subOrder = new FinalSubOrder(cartSubOrder);
             Order order = new Order();
             order.addSubOrder(subOrder);                

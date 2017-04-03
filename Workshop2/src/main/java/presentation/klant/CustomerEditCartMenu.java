@@ -45,12 +45,12 @@ public class CustomerEditCartMenu implements DisplayCart{
 		console.println(Formatter.LINE
 				+ "\n 1 - "+(size+1)+":  Selecteer een order regel om aan te passen"
 				+ "\n 0:      Terug naar hoofdmenu"
-				+ "\n[enter]: Toets enter om door te gaan naar kassa\n"  // "" = enter
+				+ "\n[x]: Toets x om door te gaan naar kassa\n"  // "" = enter
 				+ Formatter.LINE,Color.CYAN);
 		boolean validResponse;
 		do {
 			validResponse = true;
-			int num=0;
+			int num=-1;
 			String response = console.printResponse("Maak uw keuze: \n", "", Color.CYAN);
 				try{
 				num = Integer.parseInt(response);
@@ -59,12 +59,12 @@ public class CustomerEditCartMenu implements DisplayCart{
 					validResponse = false;
 				}
 			
-			if(response == ""){
+			if(response.equals("x")) {
 				console.println("Door naar Kassa", Color.ORANGE);
 				validResponse = true;
                                 customerCheckOutMenu.runMenu();
                                 
-			}else if(response == "0"){
+			}else if(num == 0){
 				console.println("Terug naar bestel menu", Color.ORANGE);
 				validResponse = true;
                                 customerMenu.runMenu();

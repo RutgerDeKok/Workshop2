@@ -22,7 +22,7 @@ public class CartSubOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne//(cascade=CascadeType.PERSIST)
 	@Fetch(FetchMode.JOIN)
 	private Product product;
 	@Column(length = 10, nullable = false)
@@ -81,7 +81,7 @@ public class CartSubOrder {
 
       
 	public void setSubTotal(BigDecimal price, int quantity) { 
-		subTotal =(price.multiply(new BigDecimal(quantity)));
+		subTotal = price.multiply(new BigDecimal(quantity));
 		subTotal.setScale(2);
 	}
         

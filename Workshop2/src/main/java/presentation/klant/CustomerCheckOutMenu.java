@@ -28,10 +28,11 @@ import main.java.model.FinalSubOrder;
 import main.java.model.Order;
 import main.java.model.UserAccount;
 import main.java.presentation.CreateMenus.CreateAdressMenu;
+import main.java.presentation.DisplayAdress;
 import main.java.presentation.MainMenu;
 
 @Component
-public class CustomerCheckOutMenu implements DisplayCart{
+public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
     
     
     @Autowired
@@ -71,7 +72,9 @@ public class CustomerCheckOutMenu implements DisplayCart{
 
                 //dit is de profielpagina. hier kun je een adres maken en wordt
                                 // adres ook getoond
-                                customerProfileMenu.showAdressDetails();
+                // alleen adres ophalen als de user een adres heeft, anders aanmaken
+                displayAdress(console,user.getBillingAdress(),user.getEmail());
+                                //customerProfileMenu.showAdressDetails();
 		console.println(Formatter.LINE +
 				"Zijn deze gegevens correct?[y/n]", 
                                 Color.CYAN);
@@ -116,6 +119,7 @@ public class CustomerCheckOutMenu implements DisplayCart{
 				break;
 			case "n":
 				console.println("Ooh,, jammer", Color.ORANGE);
+                                user.setBillingAdress(editAdress(console, user.getBillingAdress()));
 				customerEditCartMenu.runMenu();
 				break;
 			default:
