@@ -81,7 +81,7 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
         displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
                         //customerProfileMenu.showAdressDetails();
         console.println(Formatter.LINE +
-                        "Zijn deze gegevens correct?[y/n]", 
+                        "Wilt u de order naar dit adres versturen?[y/n]", 
                         Color.CYAN);
 
         console.println("\n 0: uitloggen", Color.PINK);
@@ -115,16 +115,26 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
                     // HIER controleren of Cart wel een adres heeft
                     console.print("Ooh.. jammer.", Color.ORANGE);
                     displayAdress(console,user.getBillingAdress(),user.getEmail());
-                    String input = console.printResponse("Zijn dit dan de juiste?", "n", Color.yellow);
+                    String input = console.printResponse("Wilt u de order bezorgen naar uw factuuradres?", "n", Color.yellow);
                     if (input.equalsIgnoreCase("y")) {
-                        userCart.setDeliveryAdress(user.getBillingAdress());
-                        cartController.updateCart(userCart);
+                        controller.copyAdress(userCart.getDeliveryAdress(), user.getBillingAdress());
+                        displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
+//userCart.setDeliveryAdress(user.getBillingAdress());
+                        //cartController.updateCart(userCart);
+                        //.setCurrentCart(userCart);
+                        userController.updateUserAccount(user);
                         customerEditCartMenu.runMenu();
                         break;
                     } else if (input.equalsIgnoreCase("n")) {
-                        Adress newAdress = editAdress(console, userCart.getDeliveryAdress());
-                        userCart.setDeliveryAdress(newAdress);
-                        cartController.updateCart(userCart);
+                        console.println("Hieronder kunt u een nieuw afleveradres aanmaken.", Color.YELLOW);
+                        //controller.copyAdress(userCart.getDeliveryAdress(), editAdress(console, userCart.getDeliveryAdress()));
+                        editAdress(console, userCart.getDeliveryAdress());
+                        displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
+                        //userCart.setDeliveryAdress(newAdress);
+                        //userCart.setDeliveryAdress(editAdress(console, userCart.getDeliveryAdress());
+                        //cartController.updateCart(userCart);
+                        //cartController.setCurrentCart(userCart);
+                        userController.updateUserAccount(user);
                         customerEditCartMenu.runMenu();
                     } else {
                         console.print("Ongeldige invoer, probeer opnieuw.", Color.RED);

@@ -12,15 +12,19 @@ import org.springframework.stereotype.Component;
 
 import main.java.controller.CartController;
 import main.java.controller.CartSubOrderController;
+import main.java.controller.MainController;
 import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
 import main.java.infrastructure.ColorConsole;
+import main.java.model.UserAccount;
+import main.java.presentation.DisplayAdress;
 import main.java.presentation.DisplayCart;
 
 
 @Component
-public class CustomerEditCartMenu implements DisplayCart{
-    
+public class CustomerEditCartMenu implements DisplayCart, DisplayAdress{
+        @Autowired
+        private MainController mainController;
 	@Autowired
 	private ColorConsole console;
 	@Autowired
@@ -36,10 +40,9 @@ public class CustomerEditCartMenu implements DisplayCart{
         private CartSubOrderController cartSubOrderController;
 	
 	public void runMenu() {
-
-		userCart = cartController.getCurrentCart();
-		// cart inhoud laten zien
-		displayCart(console,userCart);
+                UserAccount user = mainController.getCurrentUser();
+        long userId = user.getId();
+        userCart = cartController.getCart(userId);
 		int size = userCart.getSubOrders().size();
 
 		console.println(Formatter.LINE

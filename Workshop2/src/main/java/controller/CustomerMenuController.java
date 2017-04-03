@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.time.LocalDate;
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.infrastructure.ColorConsole;
+import main.java.model.Adress;
 import main.java.model.Cart;
 import main.java.model.CartSubOrder;
 import main.java.model.FinalSubOrder;
@@ -119,5 +120,16 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
         order.setSaledate(LocalDate.now());                                
         orderDao.create(order);
         console.println("Uw bestelling is geplaatst, gefeliciteerd!", Color.RED);
+    }
+    
+    public void copyAdress(Adress targetAdress, Adress refAdress) {
+        targetAdress.setCity(refAdress.getCity());
+        targetAdress.setFamilyName(refAdress.getFamilyName());
+        targetAdress.setFirstName(refAdress.getFirstName());
+        targetAdress.setInsertion(refAdress.getInsertion());
+        targetAdress.setNumAddition(refAdress.getNumAddition());
+        targetAdress.setNumber(refAdress.getNumber());
+        targetAdress.setStreet(refAdress.getStreet());
+        targetAdress.setZipCode(refAdress.getZipCode());
     }
 }
