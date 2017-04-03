@@ -89,7 +89,11 @@ public class EmployeeProductMenu implements DisplayProducts{
 				break;
 			case "5":
 				console.println("Filteren op merk", Color.ORANGE);
-				// productController.();
+                                console.println("type uw merk in : ", Color.ORANGE);
+                                String merkInvoer = selectMerk();
+                                console.println("uw merk is :"+ merkInvoer, Color.CYAN);
+				 productController.filterProductenByBrand(merkInvoer);
+                                 runEmployeeProductMenu();
 				break;
 			default:
 				console.println("Ongeldige invoer, probeer opnieuw.", Color.magenta);
@@ -192,7 +196,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 		
 		console.println(
 				"Selecteer de catogorie van het product 1: Hard-Medium 2: Zacht-Schimmel"
-				+"\n3: blauw 4: room 5: geit 6: alles/overige ",
+				+"\n3: blauw 4: room 5: geit 6: alles / overig ",
 				Color.ORANGE);
 
 		int categorieNum = 0;
@@ -218,6 +222,11 @@ public class EmployeeProductMenu implements DisplayProducts{
 
 		return cat;
 	}
+
+    private String selectMerk() {
+        String merk = console.printResponse("voer merk in: ", "", Color.yellow);
+        return merk;
+    }
 	
 
 
