@@ -61,7 +61,8 @@ public class UserController {
 	public void updateUser(UserAccount updatedUser) {
 		updatedUser = empAccMenu.createUpdateUser(updatedUser);
 		dao.saveOrUpdate(updatedUser);
-		runEmployeeAccountsMenuUpdateFromDB();
+		empAccMenu.runMenu();
+//		runEmployeeAccountsMenuUpdateFromDB();
 	}
 
 	public boolean checkEmailAvailable(String email) {
