@@ -11,7 +11,7 @@ import main.java.daos.UserAccountDao;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
 import main.java.presentation.CreateMenus.CreateUserAccountMenu;
-import main.java.presentation.EmployeeAccountsMenu;
+import main.java.presentation.employee.EmployeeAccountsMenu;
 import main.java.presentation.MainMenu;
 
 @Component

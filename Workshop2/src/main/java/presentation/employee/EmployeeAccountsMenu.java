@@ -1,5 +1,5 @@
 
-package main.java.presentation;
+package main.java.presentation.employee;
 
 import main.java.infrastructure.ColorConsole;
 import java.awt.Color;
@@ -16,6 +16,8 @@ import main.java.infrastructure.Formatter;
 import main.java.model.Adress;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
+import main.java.presentation.DisplayAdress;
+import main.java.presentation.DisplayUsers;
 
 @Component
 public class EmployeeAccountsMenu implements DisplayUsers, DisplayAdress {

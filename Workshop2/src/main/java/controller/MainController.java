@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
 import main.java.presentation.InlogMenu;
-import main.java.presentation.MainEmployeeMenu;
 import main.java.presentation.MainMenu;
+import main.java.presentation.employee.MainEmployeeMenu;
 import main.java.presentation.klant.CustomerMenu;
 
 @Component
