@@ -165,7 +165,7 @@ public class EmployeeAccountsMenu implements DisplayUsers, DisplayAdress {
 
 
 	public UserType selectType(UserType type) {
-		console.println("Selecteer het type gebruiker 1: Medewrker 2: Klant" + " 3:  alles/anders", Color.ORANGE);
+		console.println("Selecteer het type gebruiker 1: Medewerker 2: Klant" + " 3:  alles/anders", Color.ORANGE);
 
 		int typeNum = 0;
 		boolean badResponse = false;

@@ -93,7 +93,7 @@ public class EmployeeProductMenu implements DisplayProducts{
                                 String merkInvoer = selectMerk();
                                 console.println("uw merk is :"+ merkInvoer, Color.CYAN);
 				 productController.filterProductenByBrand(merkInvoer);
-                                 runEmployeeProductMenu();
+                 runMenu();
 				break;
 			default:
 				console.println("Ongeldige invoer, probeer opnieuw.", Color.magenta);
