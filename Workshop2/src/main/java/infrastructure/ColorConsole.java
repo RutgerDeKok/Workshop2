@@ -147,7 +147,7 @@ public class ColorConsole {
 
 		// loop that checks for a response with a 30 second timeout
 		hasResponded = false;
-		int timeout = 120;  // 120 x 250 milliseconds  = 30 sec
+		int timeout = 320;  // 320 x 250 milliseconds  = 30 sec
 		while (!hasResponded && (timeout > 0)) {
 			timeout--;
 			try {
@@ -189,7 +189,7 @@ public class ColorConsole {
 
 		// loop that checks for a response with a 30 second timeout
 		hasResponded = false;
-		int timeout = 120;  // 120 x 250 milliseconds  = 30 sec
+		int timeout = 320;  // 320 x 250 milliseconds  = 30 sec
 		while (!hasResponded && (timeout > 0)) {
 			timeout--;
 			try {
@@ -235,7 +235,7 @@ public class ColorConsole {
 
 		// loop that checks for a response with a 30 second timeout
 		hasResponded = false;
-		int timeout = 120;  // 120 x 250 milliseconds  = 30 sec
+		int timeout = 320;  // 320 x 250 milliseconds  = 30 sec
 		while (!hasResponded && (timeout > 0)) {
 			timeout--;
 			try {
