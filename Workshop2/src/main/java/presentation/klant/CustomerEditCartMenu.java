@@ -62,7 +62,7 @@ public class CustomerEditCartMenu implements DisplayCart{
 				}
 			
 			if(response.equals("x")) {
-				console.println("Door naar Kassa", Color.ORANGE);
+				console.println("Door naar kassa", Color.ORANGE);
 				validResponse = true;
                                 customerCheckOutMenu.runMenu();
                                 

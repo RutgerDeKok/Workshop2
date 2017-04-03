@@ -5,9 +5,14 @@
  */
 package main.java.controller;
 
+import java.awt.Color;
+import java.time.LocalDate;
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.infrastructure.ColorConsole;
 import main.java.model.Cart;
+import main.java.model.CartSubOrder;
+import main.java.model.FinalSubOrder;
+import main.java.model.Order;
 import main.java.model.UserAccount;
 import main.java.presentation.DisplayCart;
 import main.java.presentation.DisplayOrders;
@@ -46,7 +51,9 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
     @Autowired
     CustomerProfileMenu profileMenu;
     @Autowired
-    private GenericDaoJpaImpl<Cart, Long> cartDao;    
+    private GenericDaoJpaImpl<Cart, Long> cartDao;   
+    @Autowired
+    private GenericDaoJpaImpl<Order, Long> orderDao;
     Cart userCart;
     
     public UserAccount getCurrentUser() {
@@ -96,5 +103,21 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
 
     public void runProfileMenu() {
         profileMenu.runMenu();
+    }
+
+    public void completeOrder(UserAccount user) {
+        Order order = new Order();
+        order.setUser(user);
+        for (CartSubOrder cso : userCart.getSubOrders()) {
+            FinalSubOrder fso = new FinalSubOrder(cso);
+            order.addSubOrder(fso);
+        }
+        // TO DO: display and confirm/edit Adress
+        // Gaat er nu automatisch vanuit dat userBillingAdress == orderDeliveryAdress
+        order.setDeliveryAdress(user.getBillingAdress());
+        order.calculateTotalPrice();
+        order.setSaledate(LocalDate.now());                                
+        orderDao.create(order);
+        console.println("Uw bestelling is geplaatst, gefeliciteerd!", Color.RED);
     }
 }
