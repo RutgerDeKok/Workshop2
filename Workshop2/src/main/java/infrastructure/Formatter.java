@@ -60,7 +60,8 @@ public class Formatter {
 	public static String padString(int padnum, int alignLR, String inputString) {
 
 		StringBuilder sb = new StringBuilder();
-		System.out.println("inputString = "+inputString);
+		//System.out.println("inputString = "+inputString);
+
 		if (inputString == null) {
 			inputString = "";
 		}

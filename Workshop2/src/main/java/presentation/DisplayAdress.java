@@ -1,16 +1,12 @@
+
 package main.java.presentation;
 
 import main.java.infrastructure.ColorConsole;
 import java.awt.Color;
-import java.math.BigDecimal;
-import java.util.List;
-
 import main.java.infrastructure.Formatter;
 import main.java.infrastructure.Kleur;
 import main.java.infrastructure.Validator;
 import main.java.model.Adress;
-import main.java.model.Cart;
-import main.java.model.CartSubOrder;
 
 public interface DisplayAdress {
 
@@ -115,3 +111,4 @@ public interface DisplayAdress {
 	}
 
 }
+

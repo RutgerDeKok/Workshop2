@@ -47,7 +47,9 @@ public interface DisplayCart {
 		
 		// Footer van tabel
                 if (subOrders.isEmpty()) {
-                    console.println("----------------------------------------------------------------", Color.RED);
+           
+                    console.println("", Color.CYAN);
+                    console.println("----------------------------------------------------------------------------", Color.RED);
                     console.println(Formatter.padString(padnums,allignLR,"  ","  ",
 				"                 ","      ", "        ", "            Totaal:  " + totaal),Color.GREEN);
                 

@@ -18,6 +18,9 @@ public class ProductService {
     ProductRepository productRepository;
     Product product;
     
+    @Autowired
+    GenericDao<Product, Long> dao;
+    
     
 //    public List<Product> getAllProducts(){
 //        List<Product> list = new ArrayList<>();
@@ -26,18 +29,22 @@ public class ProductService {
 //    }
     
     public Product getProduct(Long id){
-        return productRepository.findOne(id);
+        return dao.read(Product.class, id);   
     }
     
     public void updateProduct(Long id, Product product){
-         productRepository.save(product);
+         dao.saveOrUpdate(product);
     }
     
-     public void deleteProduct(Long id){
-         productRepository.delete(id);
+     public void deleteProduct(Product product){
+         dao.delete(product);
     }
      
       public void createProduct(Product product){
-         productRepository.save(product);
+         dao.create(product);
+    }
+
+    public void deleteProduct(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

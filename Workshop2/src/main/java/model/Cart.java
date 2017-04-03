@@ -3,6 +3,7 @@ package main.java.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Cart {
 	private UserAccount user;
 	@OneToOne
 	private Adress deliveryAdress;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "cart_id")
 	private List<CartSubOrder> subOrders = new ArrayList<>();
@@ -81,8 +82,22 @@ public class Cart {
 	 * vervangen worden door een functie die de totaalprijs berekent
 	 */
 	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+            System.out.println("CHECK SUBTOTALPRICE IN CART" + totalPrice);
+            System.out.println("CHECK TOTALPRICE IN CART1: " + this.totalPrice);
+            if (this.totalPrice == null) {
+                this.totalPrice = new BigDecimal(0);
+            }
+            this.totalPrice.add(totalPrice);
+            System.out.println("CHECK TOTALPRICE IN CART2: " + this.totalPrice);
 	}
+        
+        public void calculateTotalPrice() {
+            for (CartSubOrder cso : subOrders) {
+                BigDecimal subTotal = cso.getTotalPrice();
+                System.out.println("CHECK SUBTOTALPRICE IN CALCULATE" + subTotal);
+                setTotalPrice(subTotal);
+            }
+        }
 
 	protected void emptyCart() {
 		subOrders.clear();

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.daos.UserAccountDao;
-import main.java.model.Adress;
 import main.java.model.UserAccount;
 import main.java.model.UserType;
 import main.java.presentation.CreateMenus.CreateUserAccountMenu;
@@ -23,7 +22,7 @@ public class UserController {
 	@Autowired
 	private CreateUserAccountMenu menu;
 	@Autowired
-	EmployeeAccountsMenu empAccMenu;
+	private EmployeeAccountsMenu empAccMenu;
 	@Autowired
 	private UserAccountDao dao;
 	@Autowired
@@ -31,6 +30,10 @@ public class UserController {
 
 	private List<UserAccount> users;
 	private List<UserAccount> filteredUsers; // filter by UserType
+
+	public void updateUserAccount(UserAccount user) {
+		dao.saveOrUpdate(user);
+	}
 
 	public void createUserAccount() {
 
@@ -62,7 +65,7 @@ public class UserController {
 		updatedUser = empAccMenu.createUpdateUser(updatedUser);
 		dao.saveOrUpdate(updatedUser);
 		empAccMenu.runMenu();
-//		runEmployeeAccountsMenuUpdateFromDB();
+		// runEmployeeAccountsMenuUpdateFromDB();
 	}
 
 	public boolean checkEmailAvailable(String email) {
@@ -95,16 +98,12 @@ public class UserController {
 				filteredUsers.add(user);
 			}
 		}
+
 	}
 
 	public List<UserAccount> getFilteredUsers() {
 		return filteredUsers;
-	}
 
-//	public UserAccount createEmptyAdressForUSer(UserAccount user) {
-//		user.setBillingAdress(new Adress());
-//		dao.saveOrUpdate(user);
-//		return user;
-//	}
+	}
 
 }

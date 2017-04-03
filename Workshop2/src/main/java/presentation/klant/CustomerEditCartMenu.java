@@ -11,57 +11,77 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import main.java.controller.CartController;
+import main.java.controller.CartSubOrderController;
+import main.java.controller.MainController;
 import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
 import main.java.infrastructure.ColorConsole;
+import main.java.model.UserAccount;
+import main.java.presentation.DisplayAdress;
 import main.java.presentation.DisplayCart;
 
 
 @Component
-public class CustomerEditCartMenu implements DisplayCart{
-    
+public class CustomerEditCartMenu implements DisplayCart, DisplayAdress{
+        @Autowired
+        private MainController mainController;
 	@Autowired
 	private ColorConsole console;
 	@Autowired
 	private CartController cartController;
 	private Cart userCart;
+        @Autowired
+        private CustomerCheckOutMenu customerCheckOutMenu;
+        @Autowired
+        private CustomerMenu customerMenu;
+        @Autowired
+        CustomerProductMenu customerProductMenu;
+        @Autowired
+        private CartSubOrderController cartSubOrderController;
 	
 	public void runMenu() {
-
-		userCart = cartController.getCurrentCart();
-		// cart inhoud laten zien
-		displayCart(console,userCart);
+                UserAccount user = mainController.getCurrentUser();
+        long userId = user.getId();
+        userCart = cartController.getCart(userId);
 		int size = userCart.getSubOrders().size();
 
 		console.println(Formatter.LINE
-				+ "\n 1 - "+size+":  Selecteer een order regel om aan te passen"
-				+ "\n 0:      Terug naar bestel menu"
-				+ "\n[enter]: Toets enter om door te gaan naar kassa\n"  // "" = enter
+				+ "\n 1 - "+(size+1)+":  Selecteer een order regel om aan te passen"
+				+ "\n 0:      Terug naar hoofdmenu"
+				+ "\n[x]: Toets x om door te gaan naar kassa\n"  // "" = enter
 				+ Formatter.LINE,Color.CYAN);
-		boolean validResponse;
+		
+                // Deze logica moet nog nagekeken worden, hij print nu bijv altijd ongeldige invoer bij 'x' 
+                boolean validResponse;
 		do {
 			validResponse = true;
-			int num=0;
+			int num=-1;
 			String response = console.printResponse("Maak uw keuze: \n", "", Color.CYAN);
-				
-			
-			if(response == ""){
-				console.println("Door naar Kassa", Color.ORANGE);
-				validResponse = true;
-			}else if(response == "0"){
-				console.println("Terug naar bestel menu", Color.ORANGE);
-				validResponse = true;
-			}else 
 				try{
 				num = Integer.parseInt(response);
 				}catch(Exception e){
 					console.println("Ongeldige invoer", Color.RED);
 					validResponse = false;
 				}
+			
+			if(response.equals("x")) {
+				console.println("Door naar kassa", Color.ORANGE);
+				validResponse = true;
+                                customerCheckOutMenu.runMenu();
+                                
+			}else if(num == 0){
+				console.println("Terug naar bestel menu", Color.ORANGE);
+				validResponse = true;
+                                customerMenu.runMenu();
+                                
+			}else 
+				
 			if(0<num&&num<=size){
 				validResponse = true;
 				console.println("Order regel "+num+" aanpassen", Color.ORANGE);
-				EditSubOrder(num-1)	; // sub orders are stored in a list (0 to size-1)			
+                                Long longNum = Long.parseLong("" + num);
+				cartSubOrderController.deleteCartSubOrder(longNum);
+                                customerProductMenu.runMenu();
 			}else{
 				console.println("Ongeldige invoer", Color.RED);
 				validResponse = false;
@@ -70,10 +90,4 @@ public class CustomerEditCartMenu implements DisplayCart{
 		} while (!validResponse);
 		
 	}
-
-	private void EditSubOrder(int i) {
-		// TODO Auto-generated method stub
-		
-	}
-    
 }

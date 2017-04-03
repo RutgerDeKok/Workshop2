@@ -1,9 +1,11 @@
 package main.java.model;
 
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import main.java.infrastructure.ColorConsole;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Entity
@@ -25,7 +29,7 @@ public class Order {
 	private long id;
 	@ManyToOne
 	private /* @Jurjen final */ UserAccount user;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL) // nog niet helemaal duidelijk welk type nodig is
 	@JoinColumn(name = "order_id")
 	private /* @Jurjen final */ List<FinalSubOrder> subOrders = new ArrayList<>();
 	private /* @Jurjen final */ LocalDate orderDate;
@@ -130,7 +134,21 @@ public class Order {
         Niet nodig, totaalprijs kan berekend of doorgegeven worden ipv handmatige setTotalPrice
         */
 	public void setTotalPrice(BigDecimal totalPrice) {
-		this.totalPrice = totalPrice;
+            System.out.println("CHECK SUBTOTALPRICE IN CART" + totalPrice);
+            System.out.println("CHECK TOTALPRICE IN ORDER1: " + this.totalPrice);
+            if (this.totalPrice == null) {
+                this.totalPrice = new BigDecimal(0);
+            }
+            this.totalPrice.add(totalPrice);
+	    System.out.println("CHECK TOTALPRICE IN ORDER2: " + this.totalPrice);
 	}
+        
+        public void calculateTotalPrice() {
+            for (FinalSubOrder fso : subOrders) {
+                BigDecimal subTotal = fso.getSubTotal();
+                System.out.println("CHECK SUBTOTALPRICE IN CALCULATE" + subTotal);
+                setTotalPrice(subTotal);
+            }
+        }
 
 }

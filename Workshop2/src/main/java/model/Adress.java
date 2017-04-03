@@ -108,6 +108,13 @@ public class Adress {
 	public void setCity(String city) {
 		this.city = city;
 	}
+        
+        @Override
+        public String toString() {
+            return firstName + " " + insertion + " " + familyName + "\n" 
+                 + street + " " + number + " " + numAddition + "\n"
+                 + zipCode + " " + city;
+        }
 
 }
 

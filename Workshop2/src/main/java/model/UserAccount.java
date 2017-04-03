@@ -23,7 +23,7 @@ public class UserAccount {
 	@Column(name = "type")
 	@Enumerated(EnumType.STRING) // komt in de tabel als string, alternatief is ORDINAL, komt als index (int)
 	private UserType UserType;  //Enum
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade=CascadeType.ALL)
 	private Adress billingAdress;
 	
 	
