@@ -195,8 +195,7 @@ public class EmployeeProductMenu implements DisplayProducts{
 	public ProductCategory selectCategory(ProductCategory cat){
 		
 		console.println(
-				"Selecteer de catogorie van het product 1: Hard-Medium 2: Zacht-Schimmel"
-				+"\n3: blauw 4: room 5: geit 6: alles / overig ",
+				"Selecteer de catogorie van het product \n1: Hard-Medium,  2: Zacht-Schimmel,  3: blauw, \n4: room,  5: geit,  6: alles / overig ",
 				Color.ORANGE);
 
 		int categorieNum = 0;
