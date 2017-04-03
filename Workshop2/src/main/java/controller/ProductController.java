@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import java.awt.Color;
 import main.java.daos.GenericDao;
 import main.java.model.Product;
 import main.java.model.ProductCategory;
@@ -81,6 +82,16 @@ public class ProductController {
 	public List<Product> getFilteredProducts() {
 		return filteredProducts;
 	}
+
+    public void filterProductenByBrand(String merk) {
+        System.out.println(merk);
+        filteredProducts.clear();
+		for(Product prod: products){
+			if(    prod.getBrand().equals(merk)     ){
+				filteredProducts.add(prod);
+			}
+		}
+    }
 
 
 }
