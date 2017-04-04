@@ -11,7 +11,6 @@ package main.java.presentation.klant;
  */
 
 import java.awt.Color;
-import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,11 +23,7 @@ import main.java.controller.OrderController;
 import main.java.controller.UserController;
 import main.java.infrastructure.ColorConsole;
 import main.java.infrastructure.Formatter;
-import main.java.model.Adress;
 import main.java.model.Cart;
-import main.java.model.CartSubOrder;
-import main.java.model.FinalSubOrder;
-import main.java.model.Order;
 import main.java.model.UserAccount;
 import main.java.presentation.CreateMenus.CreateAdressMenu;
 import main.java.presentation.DisplayAdress;
@@ -68,10 +63,7 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
     private Cart userCart;
     
     public void runMenu(){
-        // met de db checken of er iets in de opgeslagen cart van de user zit
-        UserAccount user = mainController.getCurrentUser();
-        long userId = user.getId();
-//        userCart = cartController.getCart(userId);
+        UserAccount user = controller.getCurrentUser();
         userCart = controller.getUserCart();
         // cart inhoud laten zien
         displayCart(console,userCart);
@@ -79,15 +71,22 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
         //dit is de profielpagina. hier kun je een adres maken en wordt
                         // adres ook getoond
         // alleen adres ophalen als de cart een adres heeft, anders aanmaken
-        console.println("Uw bestaande aflever adres: ", Color.CYAN);
-        displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
-                        //customerProfileMenu.showAdressDetails();
-        console.println(Formatter.LINE +
-                        "Wilt u de order naar dit adres versturen?[y/n]", 
-                        Color.CYAN);
-
-        console.println("\n 0: uitloggen", Color.PINK);
-        console.println(Formatter.LINE+"\n", Color.CYAN);
+        if (userCart.getDeliveryAdress() == null) {
+            console.println("Er is geen afleveradres bij ons bekend. \nHieronder kunt u een nieuw afleveradres aanmaken.", Color.YELLOW);
+            editAdress(console, userCart.getDeliveryAdress());
+            controller.saveCart(userCart);
+            controller.persistCart(userCart);
+            runMenu();
+        } else {
+            console.println("Uw bestaande aflever adres: ", Color.CYAN);
+            displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
+                            //customerProfileMenu.showAdressDetails();
+            console.println(Formatter.LINE +
+                            "\nWilt u de order naar dit adres versturen?[y/n]", 
+                            Color.CYAN);
+        }
+            console.println("\n 0: uitloggen", Color.PINK);
+            console.println(Formatter.LINE+"\n", Color.CYAN);
 
         boolean validResponse;
 
@@ -108,37 +107,39 @@ public class CustomerCheckOutMenu implements DisplayCart, DisplayAdress {
                     //voor cart-->order en hoe het domein dat hendelt):
                     //1)alle suborders --> finalsuborders
                     //2)cart --> order   
-                    
-                    
+                    console.println("Uw bestelling is geplaatst, gefeliciteerd!", Color.RED);                    
                     console.println("U keert nu terug naar het hoofdmenu.", Color.GREEN);
                     customerMenu.runMenu();
                     break;
                 case "n":
                     // HIER controleren of Cart wel een adres heeft
                     console.print("Ooh.. jammer.", Color.ORANGE);
-                    String input = console.printResponse("Wilt u de order bezorgen naar uw factuuradres?", "n", Color.yellow);
                     displayAdress(console,user.getBillingAdress(),user.getEmail());
-                    
+                    String input = console.printResponse("Wilt u de order bezorgen naar uw factuuradres?", "n", Color.yellow);
                     if (input.equalsIgnoreCase("y")) {
                         controller.copyAdress(userCart.getDeliveryAdress(), user.getBillingAdress());
+                        controller.saveCart(userCart);
+                        controller.persistCart(userCart);
                         console.print("Het aflever adres wordt:", Color.ORANGE);
                         displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
-//userCart.setDeliveryAdress(user.getBillingAdress());
+                        //userCart.setDeliveryAdress(user.getBillingAdress());
                         //cartController.updateCart(userCart);
                         //.setCurrentCart(userCart);
-                        userController.updateUserAccount(user);
+                        //userController.updateUserAccount(user);
                         customerEditCartMenu.runMenu();
                         break;
                     } else if (input.equalsIgnoreCase("n")) {
                         console.println("Hieronder kunt u een nieuw afleveradres aanmaken.", Color.YELLOW);
                         //controller.copyAdress(userCart.getDeliveryAdress(), editAdress(console, userCart.getDeliveryAdress()));
                         editAdress(console, userCart.getDeliveryAdress());
-                        displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
+                        controller.saveCart(userCart);
+                        controller.persistCart(userCart);
+                        //displayAdress(console, userCart.getDeliveryAdress(), user.getEmail());
                         //userCart.setDeliveryAdress(newAdress);
                         //userCart.setDeliveryAdress(editAdress(console, userCart.getDeliveryAdress());
                         //cartController.updateCart(userCart);
                         //cartController.setCurrentCart(userCart);
-                        userController.updateUserAccount(user);
+                        //userController.updateUserAccount(user);
                         customerEditCartMenu.runMenu();
                     } else {
                         console.print("Ongeldige invoer, probeer opnieuw.", Color.RED);

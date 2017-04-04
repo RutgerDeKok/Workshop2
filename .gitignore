@@ -1,3 +1,4 @@
 *.class
 target/
 src/main/resources/META-INF/
+/Workshop2/nbproject/
