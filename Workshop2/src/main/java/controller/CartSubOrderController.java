@@ -24,8 +24,8 @@ public class CartSubOrderController {
     cartSubOrderService.createCartSubOrder(cartSubOrder);
     }
       
-    public void updateCartSubOrder(Long id, CartSubOrder cartSubOrder){
-    cartSubOrderService.updateCartSubOrder(id, cartSubOrder);
+    public void updateCartSubOrder(CartSubOrder cartSubOrder){
+    cartSubOrderService.updateCartSubOrder(cartSubOrder);
     }
      
     public void deleteCartSubOrder(Long id){

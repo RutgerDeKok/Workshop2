@@ -95,7 +95,7 @@ public class CustomerProductMenu implements DisplayCart, DisplayProducts {
 				break;
 			case "9":
 				console.println("Naar Kassa / Winkelwagen wijzigen", Color.ORANGE);
-				if(userCart.getSubOrders().size()==0){
+				if(userCart.getSubOrders().isEmpty()){
 					console.println("Uw winkelwagen is nog leeg", Color.magenta);
 					validResponse = false;
 					break;

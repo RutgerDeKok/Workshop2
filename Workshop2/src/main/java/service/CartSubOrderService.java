@@ -27,7 +27,7 @@ public class CartSubOrderService {
         return (CartSubOrder) genericDaoJpaImpl.read(CartSubOrder.class, id);
     }
     
-    public void updateCartSubOrder(Long id, CartSubOrder cartSubOrder){
+    public void updateCartSubOrder(CartSubOrder cartSubOrder){
              genericDaoJpaImpl.saveOrUpdate(cartSubOrder);
     }
     

@@ -23,8 +23,9 @@ public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(t);
+                entityManager.flush();
 		entityManager.getTransaction().commit();
-		entityManager.clear();
+		entityManager.clear();                
 		return t;
 	}
 
@@ -43,6 +44,7 @@ public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		T result = entityManager.merge(t);
+                entityManager.flush();
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 		return result;
@@ -54,6 +56,7 @@ public class GenericDaoJpaImpl<T, PK extends Serializable> implements GenericDao
 		entityManager.getTransaction().begin();
 		t = entityManager.merge(t);
 		entityManager.remove(t);
+                entityManager.flush();
 		entityManager.getTransaction().commit();
 		entityManager.clear();
 	}
