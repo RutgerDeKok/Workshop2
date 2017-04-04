@@ -134,19 +134,15 @@ public class Order {
         Niet nodig, totaalprijs kan berekend of doorgegeven worden ipv handmatige setTotalPrice
         */
 	public void setTotalPrice(BigDecimal totalPrice) {
-            System.out.println("CHECK SUBTOTALPRICE IN CART" + totalPrice);
-            System.out.println("CHECK TOTALPRICE IN ORDER1: " + this.totalPrice);
             if (this.totalPrice == null) {
                 this.totalPrice = new BigDecimal(0);
             }
-            this.totalPrice.add(totalPrice);
-	    System.out.println("CHECK TOTALPRICE IN ORDER2: " + this.totalPrice);
-	}
+            this.totalPrice = this.totalPrice.add(totalPrice);
+        }
         
         public void calculateTotalPrice() {
             for (FinalSubOrder fso : subOrders) {
                 BigDecimal subTotal = fso.getSubTotal();
-                System.out.println("CHECK SUBTOTALPRICE IN CALCULATE" + subTotal);
                 setTotalPrice(subTotal);
             }
         }

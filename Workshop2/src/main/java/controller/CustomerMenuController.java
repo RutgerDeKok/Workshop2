@@ -84,8 +84,7 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
     
     // temporary save
     public void saveCart(Cart currentCart) {
-    	System.out.println("saveCart menu objecten vergelijk"+ currentCart +" en " +userCart);
-        userCart = currentCart;
+    	userCart = currentCart;
     }
     
     public void runMainMenu() {
@@ -124,8 +123,7 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
         order.setDeliveryAdress(user.getBillingAdress());
         order.calculateTotalPrice();
         order.setSaledate(LocalDate.now());                                
-        orderDao.create(order);
-        console.println("Uw bestelling is geplaatst, gefeliciteerd!", Color.RED);
+        orderDao.create(order);        
     }
     
     public void copyAdress(Adress targetAdress, Adress refAdress) {
