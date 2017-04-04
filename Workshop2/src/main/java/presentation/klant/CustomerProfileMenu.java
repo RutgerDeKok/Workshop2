@@ -12,6 +12,7 @@ import main.java.controller.AdressController;
 import main.java.controller.CartController;
 import main.java.controller.CartSubOrderController;
 import main.java.controller.MainController;
+import main.java.controller.UserController;
 import main.java.infrastructure.ColorConsole;
 import main.java.infrastructure.Formatter;
 import main.java.model.Cart;
@@ -20,8 +21,8 @@ import main.java.presentation.MainMenu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import main.java.model.Adress;
-import main.java.model.ProductCategory;
 import main.java.model.UserAccount;
+import main.java.presentation.DisplayAdress;
 
 /**
  *
@@ -29,7 +30,7 @@ import main.java.model.UserAccount;
  */
 
 @Component
-public class CustomerProfileMenu {
+public class CustomerProfileMenu implements DisplayAdress {
     
     
     
@@ -54,6 +55,8 @@ public class CustomerProfileMenu {
         AdressController adressController;
         @Autowired
         MainMenu mainMenu;
+        @Autowired
+        UserController userController;
         UserAccount user;
         
     public void runMenu(){
@@ -83,9 +86,13 @@ public class CustomerProfileMenu {
 				mainMenu.runStartMenu();
 				break;
 			case "y":
-				console.println("U voegt een adress toe", Color.ORANGE);
+				console.println("U voegt een adres toe", Color.ORANGE);
                                 //hij slaat combinatie user-adres nog niet op
-                                user.setBillingAdress(createAdressMenu.createAdress());
+                                //user.setBillingAdress(createAdressMenu.createAdress());
+                                user.setBillingAdress(editAdress(console, user.getBillingAdress()));
+                                System.out.println("TEST ADRES DIRECT VAN USER: " + user.getBillingAdress().toString());
+                                userController.updateUserAccount(user);
+                                System.out.println("TEST ADRES UIT DB: " + mainController.getCurrentUser().getBillingAdress().toString());
 				break;
 			case "n":
 				console.println("U kiest ervoor om geen adres door te geven. "
@@ -132,8 +139,12 @@ public class CustomerProfileMenu {
 				break;
 			case "1":
 				console.println("U gaat uw gegevens wijzigen", Color.ORANGE);
-                                adressController.updateAdress(user.getId(), createAdressMenu.createAdress());
-                                runMenu();
+                                //adressController.updateAdress(user.getId(), createAdressMenu.createAdress());
+                                user.setBillingAdress(editAdress(console, user.getBillingAdress()));
+                                System.out.println("TEST ADRES DIRECT VAN USER: " + user.getBillingAdress().toString());
+                                userController.updateUserAccount(user);
+                                System.out.println("TEST ADRES UIT DB: " + mainController.getCurrentUser().getBillingAdress().toString());
+				runMenu();
 				break;
                         case "2":
 				console.println("U gaat terug naar het hoofdnmenu", Color.ORANGE);
@@ -164,13 +175,14 @@ public class CustomerProfileMenu {
 				+ "\n"+Formatter.LINE
 				+ "\nEmail: " + email 
 				+ "\nSoort gebruiker: " + userType 
-				+ "\nuw gebruikersId: " +  id  
+				+ "\nUw gebruikersId: " +  id  
 				, Color.CYAN);
 		console.println(Formatter.LINE+"\n", Color.CYAN);
     }
     
     public void showAdressDetails(){
         user  = mainController.getCurrentUser();
+        System.out.println("TEST ADRES DIRECT VAN USER: " + user.getBillingAdress().toString());
         Adress adress = adressController.getAdress(Long.parseLong("" + user.getId()));
         String city = adress.getCity();
         String familyName = adress.getFamilyName();

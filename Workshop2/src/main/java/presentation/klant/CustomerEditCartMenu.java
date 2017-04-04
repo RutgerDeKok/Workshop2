@@ -79,8 +79,7 @@ public class CustomerEditCartMenu implements DisplayCart, DisplayAdress{
 			if(0<num&&num<=size){
 				validResponse = true;
 				console.println("Order regel "+num+" aanpassen", Color.ORANGE);
-                                Long longNum = Long.parseLong("" + num);
-				cartSubOrderController.deleteCartSubOrder(longNum);
+                                cartSubOrderController.deleteCartSubOrder(userCart.getSubOrders().get(num).getId());
                                 customerProductMenu.runMenu();
 			}else{
 				console.println("Ongeldige invoer", Color.RED);

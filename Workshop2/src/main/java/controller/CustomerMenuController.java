@@ -7,6 +7,7 @@ package main.java.controller;
 
 import java.awt.Color;
 import java.time.LocalDate;
+import java.util.List;
 import main.java.daos.GenericDaoJpaImpl;
 import main.java.infrastructure.ColorConsole;
 import main.java.model.Adress;
@@ -56,9 +57,9 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
     @Autowired
     private GenericDaoJpaImpl<Order, Long> orderDao;
     Cart userCart;
-    
+    List<CartSubOrder> subOrders;        
 
-	public UserAccount getCurrentUser() {
+    public UserAccount getCurrentUser() {
         return mainController.getCurrentUser();
     }
     
@@ -118,22 +119,30 @@ public class CustomerMenuController implements DisplayCart, DisplayOrders, Displ
             FinalSubOrder fso = new FinalSubOrder(cso);
             order.addSubOrder(fso);
         }
-        // TO DO: display and confirm/edit Adress
-        // Gaat er nu automatisch vanuit dat userBillingAdress == orderDeliveryAdress
-        order.setDeliveryAdress(user.getBillingAdress());
+        order.setDeliveryAdress(userCart.getDeliveryAdress());
         order.calculateTotalPrice();
         order.setSaledate(LocalDate.now());                                
-        orderDao.create(order);        
+        orderDao.create(order);
+        userCart.setSubOrders(subOrders);
+        saveCart(userCart);
+        persistCart(userCart);
     }
     
     public void copyAdress(Adress targetAdress, Adress refAdress) {
-        targetAdress.setCity(refAdress.getCity());
-        targetAdress.setFamilyName(refAdress.getFamilyName());
-        targetAdress.setFirstName(refAdress.getFirstName());
-        targetAdress.setInsertion(refAdress.getInsertion());
-        targetAdress.setNumAddition(refAdress.getNumAddition());
-        targetAdress.setNumber(refAdress.getNumber());
-        targetAdress.setStreet(refAdress.getStreet());
-        targetAdress.setZipCode(refAdress.getZipCode());
+        if (targetAdress == null) {
+            targetAdress = new Adress();
+        } 
+        try {
+            targetAdress.setCity(refAdress.getCity());
+            targetAdress.setFamilyName(refAdress.getFamilyName());
+            targetAdress.setFirstName(refAdress.getFirstName());
+            targetAdress.setInsertion(refAdress.getInsertion());
+            targetAdress.setNumAddition(refAdress.getNumAddition());
+            targetAdress.setNumber(refAdress.getNumber());
+            targetAdress.setStreet(refAdress.getStreet());
+            targetAdress.setZipCode(refAdress.getZipCode());    
+        } catch (NullPointerException e) {
+            console.println("Referentie adres bestaat niet.", Color.RED);
+        }
     }
 }

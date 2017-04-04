@@ -24,7 +24,7 @@ public class Cart {
 	private long id;
 	@OneToOne
 	private UserAccount user;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Adress deliveryAdress;
 	@OneToMany(cascade=CascadeType.ALL)
 	@Fetch(FetchMode.JOIN)
